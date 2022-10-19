@@ -4,6 +4,61 @@
 
 `<insert database schema design here>`
 
+<details open><summary>GET /students/:id</summary>
+
+```javascript
+{
+firstName: "John",
+lastName: "Smith"
+}
+```
+
+</details>
+
+<details><summary>GET /students/:id</summary>
+
+```javascript
+{
+firstName: "John",
+lastName: "Smith"
+}
+```
+
+</details>
+
+<details><summary>GET /students/:id</summary>
+
+```javascript
+{
+firstName: "John",
+lastName: "Smith"
+}
+```
+
+</details>
+
+<details><summary>GET /students/:id</summary>
+
+```javascript
+{
+firstName: "John",
+lastName: "Smith"
+}
+```
+
+</details>
+
+<details><summary>GET /students/:id</summary>
+
+```javascript
+{
+firstName: "John",
+lastName: "Smith"
+}
+```
+
+</details>
+
 ## API Documentation
 
 ## USER AUTHENTICATION/AUTHORIZATION
