@@ -1,6 +1,6 @@
 # AirBnB clone API
 
-`<insert database schema design here>`
+![image](https://user-images.githubusercontent.com/8968171/196823084-aa18733b-7f5b-4b20-8408-ec6c6b7a86cf.png)
 
 ## currentUser
 
