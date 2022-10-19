@@ -1,106 +1,10 @@
-# `<name of application here>`
-
-## Database Schema Design
+# AirBnB clone API
 
 `<insert database schema design here>`
 
-<details open><summary>GET /students/:id</summary>
+## currentUser
 
-```javascript
-{
-firstName: "John",
-lastName: "Smith"
-}
-```
-
-</details>
-
-<details><summary>GET /students/:id</summary>
-
-```javascript
-{
-firstName: "John",
-lastName: "Smith"
-}
-```
-
-</details>
-
-<details><summary>GET /students/:id</summary>
-
-```javascript
-{
-firstName: "John",
-lastName: "Smith"
-}
-```
-
-</details>
-
-<details><summary>GET /students/:id</summary>
-
-```javascript
-{
-firstName: "John",
-lastName: "Smith"
-}
-```
-
-</details>
-
-<details><summary>GET /students/:id</summary>
-
-```javascript
-{
-firstName: "John",
-lastName: "Smith"
-}
-```
-
-</details>
-
-## API Documentation
-
-## USER AUTHENTICATION/AUTHORIZATION
-
-### All endpoints that require authentication
-
-All endpoints that require a current user to be logged in.
-
-* Request: endpoints that require authentication
-* Error Response: Require authentication
-  * Status Code: 401
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Authentication required",
-      "statusCode": 401
-    }
-    ```
-
-### All endpoints that require proper authorization
-
-All endpoints that require authentication and the current user does not have the
-correct role(s) or permission(s).
-
-* Request: endpoints that require proper authorization
-* Error Response: Require proper authorization
-  * Status Code: 403
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Forbidden",
-      "statusCode": 403
-    }
-    ```
-
-### Get the Current User
+<details><summary>GET /api/currentUser</summary>
 
 Returns the information about the current user that is logged in.
 
@@ -126,7 +30,9 @@ Returns the information about the current user that is logged in.
     }
     ```
 
-### Log In a User
+</details>
+
+<details><summary>POST /api/login</summary>
 
 Logs in a current user with valid credentials and returns the current user's
 information.
@@ -193,8 +99,10 @@ information.
     }
     ```
 
-### Sign Up a User
+</details>
 
+
+<details><summary>POST /api/signup</summary>
 Creates a new user, logs them in as the current user, and returns the current
 user's information.
 
@@ -284,9 +192,12 @@ user's information.
     }
     ```
 
-## SPOTS
+</details>
 
-### Get all Spots
+
+## spots
+
+<details><summary>GET /api/spots</summary>
 
 Returns all the spots.
 
@@ -325,6 +236,88 @@ Returns all the spots.
       ]
     }
     ```
+
+
+</details>
+
+
+<details><summary>GET /api/spots?key0=value0&key1=value1</summary>
+
+Return spots filtered by query parameters.
+
+* Require Authentication: false
+* Request
+  * Method: ?
+  * URL: ?
+  * Query Parameters
+    * page: integer, minimum: 0, maximum: 10, default: 0
+    * size: integer, minimum: 0, maximum: 20, default: 20
+    * minLat: decimal, optional
+    * maxLat: decimal, optional
+    * minLng: decimal, optional
+    * maxLng: decimal, optional
+    * minPrice: decimal, optional, minimum: 0
+    * maxPrice: decimal, optional, minimum: 0
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "Spots":[
+        {
+          "id": 1,
+          "ownerId": 1,
+          "address": "123 Disney Lane",
+          "city": "San Francisco",
+          "state": "California",
+          "country": "United States of America",
+          "lat": 37.7645358,
+          "lng": -122.4730327,
+          "name": "App Academy",
+          "description": "Place where web developers are created",
+          "price": 123,
+          "createdAt": "2021-11-19 20:39:36",
+          "updatedAt": "2021-11-19 20:39:36",
+          "previewImage": "image url"
+        }
+      ],
+      "page": 2,
+      "size": 25
+    }
+    ```
+
+* Error Response: Query parameter validation errors
+  * Status Code: 400
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Validation Error",
+      "statusCode": 400,
+      "errors": {
+        "page": "Page must be greater than or equal to 0",
+        "size": "Size must be greater than or equal to 0",
+        "maxLat": "Maximum latitude is invalid",
+        "minLat": "Minimum latitude is invalid",
+        "minLng": "Maximum longitude is invalid",
+        "maxLng": "Minimum longitude is invalid",
+        "minPrice": "Maximum price must be greater than or equal to 0",
+        "maxPrice": "Minimum price must be greater than or equal to 0"
+      }
+    }
+    ```
+
+</details>
+
+
+<details><summary>GET /api/currentUser/spots</summary>
 
 ### Get all Spots owned by the Current User
 
@@ -365,6 +358,10 @@ Returns all the spots owned (created) by the current user.
       ]
     }
     ```
+
+</details>
+
+<details><summary>GET /api/spots/:spotId</summary>
 
 ### Get details of a Spot from an id
 
@@ -431,6 +428,11 @@ Returns the details of a spot specified by its id.
       "statusCode": 404
     }
     ```
+
+</details>
+
+
+<details><summary>POST /api/spots</summary>
 
 ### Create a Spot
 
@@ -506,6 +508,11 @@ Creates and returns a new spot.
     }
     ```
 
+
+</details>
+
+<details><summary>POST /api/spots/:spotId/images</summary>
+
 ### Add an Image to a Spot based on the Spot's id
 
 Create and return a new image for a spot specified by id.
@@ -552,6 +559,10 @@ Create and return a new image for a spot specified by id.
       "statusCode": 404
     }
     ```
+
+</details>
+
+<details><summary>PUT /api/spots/:spotId</summary>
 
 ### Edit a Spot
 
@@ -641,6 +652,11 @@ Updates and returns an existing spot.
     }
     ```
 
+</details>
+
+
+<details><summary>DELETE /api/spots/:spotId</summary>
+
 ### Delete a Spot
 
 Deletes an existing spot.
@@ -678,7 +694,11 @@ Deletes an existing spot.
     }
     ```
 
-## REVIEWS
+</details>
+
+## reviews
+
+<details><summary>GET /api/currentUser/reviews</summary>
 
 ### Get all Reviews of the Current User
 
@@ -736,6 +756,10 @@ Returns all the reviews written by the current user.
     }
     ```
 
+</details>
+
+<details><summary>GET /api/spots/:spotId/reviews</summary>
+
 ### Get all Reviews by a Spot's id
 
 Returns all the reviews that belong to a spot specified by id.
@@ -791,6 +815,10 @@ Returns all the reviews that belong to a spot specified by id.
       "statusCode": 404
     }
     ```
+
+</details>
+
+<details><summary>POST /api/spots/:spotId/reviews</summary>
 
 ### Create a Review for a Spot based on the Spot's id
 
@@ -872,6 +900,10 @@ Create and return a new review for a spot specified by id.
     }
     ```
 
+</details>
+
+<details><summary>POST /api/reviews/:reviewId/images</summary>
+
 ### Add an Image to a Review based on the Review's id
 
 Create and return a new image for a review specified by id.
@@ -930,6 +962,11 @@ Create and return a new image for a review specified by id.
       "statusCode": 403
     }
     ```
+
+</details>
+
+
+<details><summary>PUT /api/reviews/:reviewId</summary>
 
 ### Edit a Review
 
@@ -999,6 +1036,13 @@ Update and return an existing review.
     }
     ```
 
+
+</details>
+
+
+
+<details><summary>DELETE /api/reviews/:reviewId</summary>
+
 ### Delete a Review
 
 Delete an existing review.
@@ -1036,7 +1080,15 @@ Delete an existing review.
     }
     ```
 
-## BOOKINGS
+
+</details>
+
+
+
+
+## bookings
+
+<details><summary>GET /api/currentUser/bookings</summary>
 
 ### Get all of the Current User's Bookings
 
@@ -1082,6 +1134,12 @@ Return all the bookings that the current user has made.
       ]
     }
     ```
+
+
+</details>
+
+
+<details><summary>GET /api/spots/:spotId/bookings</summary>
 
 ### Get all Bookings for a Spot based on the Spot's id
 
@@ -1150,6 +1208,14 @@ Return all the bookings for a spot specified by id.
       "statusCode": 404
     }
     ```
+
+
+</details>
+
+
+
+
+<details><summary>POST /api/spots/:spotId/bookings</summary>
 
 ### Create a Booking from a Spot based on the Spot's id
 
@@ -1232,6 +1298,11 @@ Create and return a new booking from a spot specified by id.
       }
     }
     ```
+
+
+</details>
+
+<details><summary>PUT /api/spots/:spotId/bookings</summary>
 
 ### Edit a Booking
 
@@ -1330,6 +1401,11 @@ Update and return an existing booking.
     }
     ```
 
+</details>
+
+<details><summary>DELETE /api/bookings/:bookingId</summary>
+
+
 ### Delete a Booking
 
 Delete an existing booking.
@@ -1381,7 +1457,12 @@ Delete an existing booking.
     }
     ```
 
-## IMAGES
+
+</details>
+
+## images
+
+<details><summary>DELETE /api/images/:imageId</summary>
 
 ### Delete a Spot Image
 
@@ -1457,75 +1538,40 @@ Delete an existing image for a Review.
     }
     ```
 
-## Add Query Filters to Get All Spots
+</details>
 
-Return spots filtered by query parameters.
+## Error responses
 
-* Require Authentication: false
-* Request
-  * Method: ?
-  * URL: ?
-  * Query Parameters
-    * page: integer, minimum: 0, maximum: 10, default: 0
-    * size: integer, minimum: 0, maximum: 20, default: 20
-    * minLat: decimal, optional
-    * maxLat: decimal, optional
-    * minLng: decimal, optional
-    * maxLng: decimal, optional
-    * minPrice: decimal, optional, minimum: 0
-    * maxPrice: decimal, optional, minimum: 0
-  * Body: none
+<details><summary>User not logged in</summary>
 
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+</br>
 
-    ```json
-    {
-      "Spots":[
-        {
-          "id": 1,
-          "ownerId": 1,
-          "address": "123 Disney Lane",
-          "city": "San Francisco",
-          "state": "California",
-          "country": "United States of America",
-          "lat": 37.7645358,
-          "lng": -122.4730327,
-          "name": "App Academy",
-          "description": "Place where web developers are created",
-          "price": 123,
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
-        }
-      ],
-      "page": 2,
-      "size": 25
-    }
-    ```
+```js
+Status: 401
+Headers:
+- Content-Type: application/json
+Body:
+{
+  "message": "Authentication required",
+  "statusCode": 401
+}
+```
 
-* Error Response: Query parameter validation errors
-  * Status Code: 400
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+</details>
 
-    ```json
-    {
-      "message": "Validation Error",
-      "statusCode": 400,
-      "errors": {
-        "page": "Page must be greater than or equal to 0",
-        "size": "Size must be greater than or equal to 0",
-        "maxLat": "Maximum latitude is invalid",
-        "minLat": "Minimum latitude is invalid",
-        "minLng": "Maximum longitude is invalid",
-        "maxLng": "Minimum longitude is invalid",
-        "minPrice": "Maximum price must be greater than or equal to 0",
-        "maxPrice": "Minimum price must be greater than or equal to 0"
-      }
-    }
-    ```
+<details><summary>User lacks authorization</summary>
+
+</br>
+
+```js
+Status: 403
+Headers:
+- Content-Type: application/json
+Body:
+{
+  "message": "Forbidden",
+  "statusCode": 403
+}
+```
+
+</details>
