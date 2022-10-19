@@ -1,6 +1,6 @@
 # AirBnB clone API
 
-![image](https://user-images.githubusercontent.com/8968171/196824313-c126fe15-6b72-4c4e-8e94-e05e4935c3cf.png)
+![image](https://user-images.githubusercontent.com/8968171/196825364-569e0006-0cc8-49cb-ba76-86b4fd123291.png)
 
 ## currentUser
 
