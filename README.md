@@ -6,191 +6,156 @@
 
 <details><summary>GET /api/currentUser</summary>
 
-Returns the information about the current user that is logged in.
+Returns information about the currently logged-in user.
 
-* Require Authentication: true
-* Request
-  * Method: ?
-  * URL: ?
-  * Body: none
-
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "id": 1,
-      "firstName": "John",
-      "lastName": "Smith",
-      "email": "john.smith@gmail.com",
-      "username": "JohnSmith"
-    }
-    ```
+```js
+Status: 200
+Headers:
+- Content-Type: application/json
+Body:
+{
+  "id": 1,
+  "firstName": "John",
+  "lastName": "Smith",
+  "email": "john.smith@gmail.com",
+  "username": "JohnSmith"
+}
+```
 
 </details>
 
 <details><summary>POST /api/login</summary>
 
-Logs in a current user with valid credentials and returns the current user's
-information.
+Logs in the user and returns information about them.
 
-* Require Authentication: false
-* Request
-  * Method: ?
-  * URL: ?
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+Request
 
-    ```json
-    {
-      "credential": "john.smith@gmail.com",
-      "password": "secret password"
-    }
-    ```
+```js
+Headers:
+- Content-Type: application/json
+Body:
+{
+  "credential": "john.smith@gmail.com",
+  "password": "secret password"
+}
+```
 
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+Successful response
 
-    ```json
-    {
-      "id": 1,
-      "firstName": "John",
-      "lastName": "Smith",
-      "email": "john.smith@gmail.com",
-      "username": "JohnSmith",
-      "token": ""
-    }
-    ```
+```js
+Status: 200
+Headers:
+- Content-Type: application/json
+Body:
+{
+  "id": 1,
+  "firstName": "John",
+  "lastName": "Smith",
+  "email": "john.smith@gmail.com",
+  "username": "JohnSmith",
+  "token": ""
+}
+```
 
-* Error Response: Invalid credentials
-  * Status Code: 401
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+Error responses
 
-    ```json
-    {
-      "message": "Invalid credentials",
-      "statusCode": 401
-    }
-    ```
+```js
+Status: 401
+Headers:
+- Content-Type: application/json
+Body:
+{
+  "message": "Invalid credentials",
+  "statusCode": 401
+}
+```
 
-* Error response: Body validation errors
-  * Status Code: 400
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Validation error",
-      "statusCode": 400,
-      "errors": {
-        "credential": "Email or username is required",
-        "password": "Password is required"
-      }
-    }
-    ```
+```js
+Status: 400
+Headers:
+- Content-Type: application/json
+Body:
+{
+  "message": "Validation error",
+  "statusCode": 400,
+  "errors": {
+    "credential": "Email or username is required",
+    "password": "Password is required"
+  }
+}
+```
 
 </details>
 
 
 <details><summary>POST /api/signup</summary>
-Creates a new user, logs them in as the current user, and returns the current
-user's information.
 
-* Require Authentication: false
-* Request
-  * Method: ?
-  * URL: ?
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+Creates a new user, logs them in, and returns their information.
 
-    ```json
-    {
-      "firstName": "John",
-      "lastName": "Smith",
-      "email": "john.smith@gmail.com",
-      "username": "JohnSmith",
-      "password": "secret password"
-    }
-    ```
+Request
 
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+```js
+Headers:
+- Content-Type: application/json
+Body:
+{
+  "firstName": "John",
+  "lastName": "Smith",
+  "email": "john.smith@gmail.com",
+  "username": "JohnSmith",
+  "password": "secret password"
+}
+```
 
-    ```json
-    {
-      "id": 1,
-      "firstName": "John",
-      "lastName": "Smith",
-      "email": "john.smith@gmail.com",
-      "username": "JohnSmith",
-      "token": ""
-    }
-    ```
+Successful response
 
-* Error response: User already exists with the specified email
-  * Status Code: 403
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+```js
+Status: 200
+Headers:
+- Content-Type: application/json
+Body:
+{
+  "id": 1,
+  "firstName": "John",
+  "lastName": "Smith",
+  "email": "john.smith@gmail.com",
+  "username": "JohnSmith",
+  "token": ""
+}
+```
 
-    ```json
-    {
-      "message": "User already exists",
-      "statusCode": 403,
-      "errors": {
-        "email": "User with that email already exists"
-      }
-    }
-    ```
+Error responses
 
-* Error response: User already exists with the specified username
-  * Status Code: 403
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+```js
+Status: 403
+Headers:
+- Content-Type: application/json
+Body:
+{
+  "message": "User already exists",
+  "statusCode": 403,
+  "errors": {
+    "email": "User with that email already exists"
+  }
+}
+```
 
-    ```json
-    {
-      "message": "User already exists",
-      "statusCode": 403,
-      "errors": {
-        "username": "User with that username already exists"
-      }
-    }
-    ```
-
-* Error response: Body validation errors
-  * Status Code: 400
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Validation error",
-      "statusCode": 400,
-      "errors": {
-        "email": "Invalid email",
-        "username": "Username is required",
-        "firstName": "First Name is required",
-        "lastName": "Last Name is required"
-      }
-    }
-    ```
+```js
+Status: 400
+Headers:
+- Content-Type: application/json
+Body:
+{
+  "message": "Validation error",
+  "statusCode": 400,
+  "errors": {
+    "email": "Invalid email",
+    "username": "Username is required",
+    "firstName": "First Name is required",
+    "lastName": "Last Name is required"
+  }
+}
+```
 
 </details>
 

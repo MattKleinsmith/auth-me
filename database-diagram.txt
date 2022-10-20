@@ -5,6 +5,8 @@ Table users {
   email varchar
   username varchar
   passwordHash varchar
+  createdAt timestamp
+  updatedAt timestamp
 }
 
 Table spots {
@@ -14,13 +16,14 @@ Table spots {
   city varchar
   state varchar
   country varchar
-  lat double_precision
-  lng double_precision
+  lat "double precision"
+  lng "double precision"
   name varchar
   description varchar
   price real
-  avgRating real
   previewImage varchar
+  createdAt timestamp
+  updatedAt timestamp
 }
 
 Table reviews {
@@ -29,6 +32,8 @@ Table reviews {
   spotId integer
   review varchar
   stars integer
+  createdAt timestamp
+  updatedAt timestamp
 }
 
 Table bookings {
@@ -37,6 +42,8 @@ Table bookings {
   userId integer
   startDate timestamp
   endDate timestamp
+  createdAt timestamp
+  updatedAt timestamp
 }
 
 Table images {
@@ -45,6 +52,8 @@ Table images {
   reviewId integer
   url varchar
   preview boolean
+  createdAt timestamp
+  updatedAt timestamp
 }
 
 Ref: users.id < spots.ownerId
