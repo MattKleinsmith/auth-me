@@ -1,8 +1,6 @@
 # AirBnB clone API
 
-![image](https://user-images.githubusercontent.com/8968171/196825364-569e0006-0cc8-49cb-ba76-86b4fd123291.png)
-
-Each table also has a createdAt and updatedAt timestamp column. I have omitted these columns from the diagram to reduce clutter.
+![image](https://user-images.githubusercontent.com/8968171/197023927-bfe01fc1-3053-45fe-892a-636d42c8ccc4.png)
 
 ## currentUser
 
