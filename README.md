@@ -6,6 +6,8 @@
 
 <details><summary>Get current user: GET /api/currentUser</summary>
 
+<br>
+
 Response
 
 ```js
@@ -22,9 +24,13 @@ Body:
 }
 ```
 
+<br>
+
 </details>
 
 <details><summary>Log in: POST /api/login</summary>
+
+<br>
 
 Request
 
@@ -83,10 +89,14 @@ Body:
 }
 ```
 
+<br>
+
 </details>
 
 
 <details><summary>Sign up and log in: POST /api/signup</summary>
+
+<br>
 
 Request
 
@@ -153,12 +163,16 @@ Body:
 }
 ```
 
+<br>
+
 </details>
 
 
 ## spots
 
 <details><summary>Get all spots: GET /api/spots</summary>
+
+<br>
 
 Response
 
@@ -189,6 +203,8 @@ Body:
   ]
 }
 ```
+
+<br>
 
 </details>
 
@@ -261,10 +277,14 @@ Body:
 }
 ```
 
+<br>
+
 </details>
 
 
 <details><summary>Get a user's spots: GET /api/currentUser/spots</summary>
+
+<br>
 
 Response
 
@@ -296,9 +316,13 @@ Body:
 }
 ```
 
+<br>
+
 </details>
 
 <details><summary>Get a spot: GET /api/spots/:spotId</summary>
+
+<br>
 
 Successful response
 
@@ -356,9 +380,13 @@ Body:
 }
 ```
 
+<br>
+
 </details>
 
 <details><summary>Create a spot: POST /api/spots</summary>
+
+<br>
 
 Request
 
@@ -427,9 +455,13 @@ Body:
 }
 ```
 
+<br>
+
 </details>
 
 <details><summary>Add an image to a spot: POST /api/spots/:spotId/images</summary>
+
+<br>
 
 Request
 
@@ -470,9 +502,13 @@ Body:
 }
 ```
 
+<br>
+
 </details>
 
 <details><summary>Update a spot: PUT /api/spots/:spotId</summary>
+
+<br>
 
 Request
 
@@ -552,10 +588,14 @@ Body:
 }
 ```
 
+<br>
+
 </details>
 
 
 <details><summary>Delete a spot: DELETE /api/spots/:spotId</summary>
+
+<br>
 
 Successful response
 
@@ -583,11 +623,15 @@ Body:
 }
 ```
 
+<br>
+
 </details>
 
 ## reviews
 
 <details><summary>Get a user's reviews: GET /api/currentUser/reviews</summary>
+
+<br>
 
 Response
 
@@ -635,9 +679,13 @@ Body:
 }
 ```
 
+<br>
+
 </details>
 
 <details><summary>Get a spot's reviews: GET /api/spots/:spotId/reviews</summary>
+
+<br>
 
 Successful response
 
@@ -685,9 +733,13 @@ Body:
 }
 ```
 
+<br>
+
 </details>
 
 <details><summary>Add a review to a spot: POST /api/spots/:spotId/reviews</summary>
+
+<br>
 
 Request
 
@@ -758,6 +810,8 @@ Body:
 }
 ```
 
+<br>
+
 </details>
 
 <details><summary>Add an image to a review: POST /api/reviews/:reviewId/images</summary>
@@ -814,6 +868,8 @@ Body:
   "statusCode": 403
 }
 ```
+
+<br>
 
 </details>
 
@@ -882,6 +938,8 @@ Body:
   }
 ```
 
+<br>
+
 </details>
 
 <details><summary>Delete a review: DELETE /api/reviews/:reviewId</summary>
@@ -916,11 +974,15 @@ Body:
 }
 ```
 
+<br>
+
 </details>
 
 ## bookings
 
 <details><summary>Get user's bookings: GET /api/currentUser/bookings</summary>
+
+<br>
 
 Response
 
@@ -957,9 +1019,13 @@ Body:
 }
 ```
 
+<br>
+
 </details>
 
 <details><summary>Get a spot's bookings: GET /api/spots/:spotId/bookings</summary>
+
+<br>
 
 Response to non-owner
 
@@ -1019,9 +1085,13 @@ Body:
 }
 ```
 
+<br>
+
 </details>
 
 <details><summary>Create a booking: POST /api/spots/:spotId/bookings</summary>
+
+<br>
 
 Request
 
@@ -1095,9 +1165,13 @@ Body:
 }
 ```
 
+<br>
+
 </details>
 
 <details><summary>Update a booking: PUT /api/spots/:spotId/bookings</summary>
+
+<br>
 
 Request
 
@@ -1182,6 +1256,8 @@ Body:
 }
 ```
 
+<br>
+
 </details>
 
 <details><summary>Delete a booking: DELETE /api/bookings/:bookingId</summary>
@@ -1227,6 +1303,8 @@ Body:
 }
 ```
 
+<br>
+
 </details>
 
 ## images
@@ -1263,6 +1341,8 @@ Body:
 }
 ```
 
+<br>
+
 </details>
 
 ## Error responses
@@ -1282,6 +1362,8 @@ Body:
 }
 ```
 
+<br>
+
 </details>
 
 <details><summary>User lacks authorization</summary>
@@ -1298,5 +1380,7 @@ Body:
   "statusCode": 403
 }
 ```
+
+<br>
 
 </details>
