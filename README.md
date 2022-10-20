@@ -2,6 +2,8 @@
 
 ![image](https://user-images.githubusercontent.com/8968171/196825364-569e0006-0cc8-49cb-ba76-86b4fd123291.png)
 
+Each table also has a createdAt and updatedAt timestamp column. I have omitted these columns from the diagram to reduce clutter.
+
 ## currentUser
 
 <details><summary>GET /api/currentUser</summary>
