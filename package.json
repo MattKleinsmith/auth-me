@@ -1,0 +1,28 @@
+{
+  "name": "auth-me",
+  "version": "1.0.0",
+  "description": "![image](https://user-images.githubusercontent.com/8968171/197027823-e61c7725-4f9b-4f77-b4b8-c314bd4a89a5.png)",
+  "main": "index.js",
+  "dependencies": {
+    "pg": "^8.8.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "install": "npm --prefix backend install backend",
+    "dev:backend": "npm install --prefix backend start",
+    "sequelize": "npm run --prefix backend sequelize",
+    "sequelize-cli": "npm run --prefix backend sequelize-cli",
+    "start": "npm start --prefix backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MattKleinsmith/auth-me.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MattKleinsmith/auth-me/issues"
+  },
+  "homepage": "https://github.com/MattKleinsmith/auth-me#readme"
+}
