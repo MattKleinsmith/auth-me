@@ -6,25 +6,14 @@ const { Spot, Review, SpotImage, sequelize } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
+const jwt = require('jsonwebtoken');
+
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-
-    // Doesn't work, because Sequelize doesn't include spots without ratings, nor spots without preview images.
-    // const spots = await Spot.findAll({
-    //     attributes: [
-    //         "id", "ownerId", "address", "city", "state", "country", "lat", "lng",
-    //         "name", "description", "price", "createdAt", "updatedAt",
-    //         [sequelize.col('SpotImages.url'), "previewImg"],
-    //         [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating']
-    //     ],
-    //     include: [
-    //         { model: SpotImage, attributes: [], where: { preview: true } },
-    //         { model: Review, attributes: [] }
-    //     ]
-    // });
-
-    const spots = await Spot.findAll({ include: [SpotImage, Review] });
+async function getSpots(currentUserId) {
+    const options = { include: [SpotImage, Review], where: {} };
+    if (currentUserId) options.where.ownerId = currentUserId;
+    const spots = await Spot.findAll(options);
 
     for (let i = 0; i < spots.length; i++) {
         const spot = spots[i].toJSON();
@@ -46,8 +35,16 @@ router.get('/', async (req, res) => {
         delete spot.SpotImages;
         delete spot.Reviews;
     }
+    return spots;
+}
 
-    res.json(spots);
+router.get('/current', async (req, res) => {
+    const currentUserId = jwt.decode(req.cookies.token).data.id;
+    res.json(await getSpots(currentUserId));
+})
+
+router.get('/', async (req, res) => {
+    res.json(await getSpots());
 })
 
 module.exports = router;
