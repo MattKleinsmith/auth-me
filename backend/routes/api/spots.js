@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { setTokenCookie, requireAuth } = require('../../utils/auth');
+const { setTokenCookie, requireAuthentication, respondWith403 } = require('../../utils/auth');
 const { Spot, Review, SpotImage, User, sequelize } = require('../../db/models');
 
 const { check, validationResult } = require('express-validator');
@@ -48,37 +48,6 @@ router.get('/', async (req, res) => {
     res.json(await getSpots());
 });
 
-router.get('/:spotId', async (req, res) => {
-    const options = {
-        include: [{
-            model: SpotImage,
-            attributes: ['id', 'url', 'preview']
-        }, {
-            model: User,
-            attributes: ['id', 'firstName', 'lastName']
-        }, Review], where: {}
-    };
-    let spot = await Spot.findByPk(req.params.spotId, options);
-    if (spot) {
-        spot = spot.toJSON();
-
-        spot.numReviews = spot.Reviews.length;
-        spot.avgStarRating = spot.Reviews.reduce((sum, review) => sum + review.stars, 0) / spot.Reviews.length;
-        delete spot.Reviews;
-
-        spot.Owner = spot.User;
-        delete spot.User;
-
-        res.json(spot);
-    }
-    else {
-        res.status(404).json({
-            "message": "Spot couldn't be found",
-            "statusCode": 404
-        });
-    }
-});
-
 const validateSpotCreation = [
     check('address')
         .exists({ checkFalsy: true })
@@ -111,7 +80,7 @@ const validateSpotCreation = [
         .withMessage('Price per day is required'),
 ];
 
-router.post('/', requireAuth, validateSpotCreation, async (req, res) => {
+router.post('/', requireAuthentication, validateSpotCreation, async (req, res) => {
     const errorObjects = validationResult(req);
     if (errorObjects.isEmpty()) {
         const { address, city, state, country, lat, lng, name, description, price } = req.body;
@@ -130,5 +99,50 @@ router.post('/', requireAuth, validateSpotCreation, async (req, res) => {
         });
     }
 });
+
+router.get('/:spotId', async (req, res, next) => {
+    const options = {
+        include: [{
+            model: SpotImage,
+            attributes: ['id', 'url', 'preview']
+        }, {
+            model: User,
+            attributes: ['id', 'firstName', 'lastName']
+        }, Review], where: {}
+    };
+    let spot = await Spot.findByPk(req.params.spotId, options);
+    if (!spot) return respondWithSpot404();
+
+    spot = spot.toJSON();
+    spot.numReviews = spot.Reviews.length;
+    spot.avgStarRating = spot.Reviews.reduce((sum, review) => sum + review.stars, 0) / spot.Reviews.length;
+    delete spot.Reviews;
+
+    spot.Owner = spot.User;
+    delete spot.User;
+
+    res.json(spot);
+});
+
+router.post('/:spotId/images', requireAuthentication, async (req, res, next) => {
+    const { url, preview } = req.body;
+    const spot = await Spot.findByPk(req.params.spotId);
+
+    if (!spot) return respondWithSpot404(res);
+    if (req.user.id !== spot.ownerId) return respondWith403(res);
+
+    let image = await SpotImage.create({ spotId: spot.id, url, preview });
+    image = image.toJSON();
+    delete image.createdAt;
+    delete image.updatedAt;
+    res.json(image);
+});
+
+function respondWithSpot404(res) {
+    res.status(404).json({
+        "message": "Spot couldn't be found",
+        "statusCode": 404
+    });
+}
 
 module.exports = router;
