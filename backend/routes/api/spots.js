@@ -102,7 +102,7 @@ router.post('/', requireAuthentication, validateSpot, async (req, res) => {
 
 router.put('/:spotId', requireAuthentication, validateSpot, async (req, res) => {
     let spot = await Spot.findByPk(req.params.spotId);
-    if (!spot) return respondWithSpot404();
+    if (!spot) return respondWithSpot404(res);
     if (req.user.id !== spot.ownerId) return respondWith403(res);
 
     const errorObjects = validationResult(req);
