@@ -48,7 +48,7 @@ router.get('/', async (req, res) => {
     res.json(await getSpots());
 });
 
-const validateSpotCreation = [
+const validateSpot = [
     check('address')
         .exists({ checkFalsy: true })
         .withMessage('Street address is required'),
@@ -80,7 +80,7 @@ const validateSpotCreation = [
         .withMessage('Price per day is required'),
 ];
 
-router.post('/', requireAuthentication, validateSpotCreation, async (req, res) => {
+router.post('/', requireAuthentication, validateSpot, async (req, res) => {
     const errorObjects = validationResult(req);
     if (errorObjects.isEmpty()) {
         const { address, city, state, country, lat, lng, name, description, price } = req.body;
@@ -98,6 +98,29 @@ router.post('/', requireAuthentication, validateSpotCreation, async (req, res) =
             errors
         });
     }
+});
+
+router.put('/:spotId', requireAuthentication, validateSpot, async (req, res) => {
+    let spot = await Spot.findByPk(req.params.spotId);
+    if (!spot) return respondWithSpot404();
+    if (req.user.id !== spot.ownerId) return respondWith403(res);
+
+    const errorObjects = validationResult(req);
+    if (!errorObjects.isEmpty()) {
+        const errors = errorObjects.array().reduce((errors, errObj) => {
+            errors[errObj.param] = errObj.msg;
+            return errors;
+        }, {});
+        return res.status(400).json({
+            message: "Validation Error",
+            statusCode: 400,
+            errors
+        });
+    }
+
+    const { address, city, state, country, lat, lng, name, description, price } = req.body;
+    spot = await spot.update({ ownerId: req.user.id, address, city, state, country, lat, lng, name, description, price });
+    res.status(200).json(spot);
 });
 
 router.get('/:spotId', async (req, res, next) => {
