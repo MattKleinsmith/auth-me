@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken');
 
 const router = express.Router();
 
-async function getSpots(args) {
+async function getSpots(args = {}) {
     const options = { include: [SpotImage, Review], where: {} };
     if (args.currentUserId) options.where.ownerId = args.currentUserId;
     if (args.id) options.where.id = args.id;
