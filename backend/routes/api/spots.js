@@ -1,7 +1,8 @@
 const express = require('express');
 
 const { setTokenCookie, requireAuthentication, respondWith403, respondWithSuccessfulDelete } = require('../../utils/auth');
-const { Spot, Review, SpotImage, User, sequelize } = require('../../db/models');
+const { Spot, Review, SpotImage, User, sequelize, ReviewImage } = require('../../db/models');
+const { getReviews } = require('../../utils');
 
 const { check, validationResult } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -9,6 +10,27 @@ const { handleValidationErrors } = require('../../utils/validation');
 const jwt = require('jsonwebtoken');
 
 const router = express.Router();
+
+async function restoreSpot(req, res, next) {
+    const spot = await Spot.findByPk(req.params.spotId);
+    if (spot) {
+        req.spot = spot;
+        return next();
+    }
+    respondWithSpot404(res);
+}
+
+function respondWithSpot404(res) {
+    res.status(404).json({
+        "message": "Spot couldn't be found",
+        "statusCode": 404
+    });
+}
+
+async function requireSpotOwnership(req, res, next) {
+    if (req.user.id === req.spot.ownerId) return next();
+    respondWith403(res);
+}
 
 async function getSpots(currentUserId) {
     const options = {
@@ -78,12 +100,11 @@ const validateSpot = [
         .withMessage('Price per day is required'),
 ];
 
-router.post('/', requireAuthentication, validateSpot, async (req, res) => {
+async function validatePost(req, res, createCb) {
     const errorObjects = validationResult(req);
     if (errorObjects.isEmpty()) {
-        const { address, city, state, country, lat, lng, name, description, price } = req.body;
-        const spot = await Spot.create({ ownerId: req.user.id, address, city, state, country, lat, lng, name, description, price });
-        res.status(201).json(spot);
+        const record = await createCb(req);
+        res.status(201).json(record);
     }
     else {
         const errors = errorObjects.array().reduce((errors, errObj) => {
@@ -96,9 +117,16 @@ router.post('/', requireAuthentication, validateSpot, async (req, res) => {
             errors
         });
     }
+}
+
+router.post('/', requireAuthentication, validateSpot, async (req, res) => {
+    validatePost(req, res, async (req) => {
+        const { address, city, state, country, lat, lng, name, description, price } = req.body;
+        return await Spot.create({ ownerId: req.user.id, address, city, state, country, lat, lng, name, description, price });
+    })
 });
 
-router.put('/:spotId', requireAuthentication, restoreSpot, requireOwnership, validateSpot, async (req, res) => {
+router.put('/:spotId', requireAuthentication, restoreSpot, requireSpotOwnership, validateSpot, async (req, res) => {
     const errorObjects = validationResult(req);
     if (!errorObjects.isEmpty()) {
         const errors = errorObjects.array().reduce((errors, errObj) => {
@@ -144,7 +172,7 @@ router.get('/:spotId', async (req, res) => {
     res.json(spot);
 });
 
-router.post('/:spotId/images', requireAuthentication, restoreSpot, requireOwnership, async (req, res) => {
+router.post('/:spotId/images', requireAuthentication, restoreSpot, requireSpotOwnership, async (req, res) => {
     const { url, preview } = req.body;
     const spot = req.spot;
 
@@ -155,30 +183,60 @@ router.post('/:spotId/images', requireAuthentication, restoreSpot, requireOwners
     res.json(image);
 });
 
-router.delete('/:spotId', requireAuthentication, restoreSpot, requireOwnership, async (req, res) => {
+router.delete('/:spotId', requireAuthentication, restoreSpot, requireSpotOwnership, async (req, res) => {
     await req.spot.destroy();
     respondWithSuccessfulDelete(res);
 });
 
-async function restoreSpot(req, res, next) {
-    const spot = await Spot.findByPk(req.params.spotId);
-    if (spot) {
-        req.spot = spot;
-        return next();
+router.get('/:spotId/reviews', async (req, res) => {
+    const options = {
+        include: [
+            {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName']
+            },
+            {
+                model: ReviewImage,
+                attributes: ['id', 'url']
+            },
+        ],
+        where: { spotId: req.params.spotId }
+    };
+    const reviews = await Review.findAll(options);
+    for (let i = 0; i < reviews.length; i++) {
+        // TODO: Setup PG locally to find the right Sequelize syntax to avoid this loop
+        const review = reviews[i].toJSON();
+        if (review.Spot) {
+            reviews[i] = review;
+            review.Spot.previewImage = review.Spot.SpotImages[0].url;
+            delete review.Spot.SpotImages;
+        }
     }
-    respondWithSpot404(res);
-}
+    res.json({ Reviews: reviews });
+});
 
-function respondWithSpot404(res) {
-    res.status(404).json({
-        "message": "Spot couldn't be found",
-        "statusCode": 404
-    });
-}
+const validateReview = [
+    check('review')
+        .exists({ checkFalsy: true })
+        .withMessage('Review text is required'),
+    check('stars')
+        .isIn([1, 2, 3, 4, 5])
+        .withMessage('Stars must be an integer from 1 to 5')
+];
 
-async function requireOwnership(req, res, next) {
-    if (req.user.id === req.spot.ownerId) return next();
-    respondWith403(res);
-}
+router.post('/:spotId/reviews', requireAuthentication, restoreSpot, validateReview, async (req, res) => {
+    const oldReview = await Review.findOne({ where: { userId: req.user.id, spotId: req.params.spotId } });
+    if (oldReview) {
+        return res.status(403).json({
+            "message": "User already has a review for this spot",
+            "statusCode": 403
+        })
+    }
+
+    validatePost(req, res, async (req) => {
+        const { review, stars } = req.body;
+        return await Review.create({ userId: req.user.id, spotId: req.params.spotId, review, stars });
+    })
+})
 
 module.exports = router;

@@ -1,6 +1,7 @@
 const express = require('express');
 
 const { setTokenCookie, requireAuthentication } = require('../../utils/auth');
+const { getReviews } = require('../../utils');
 const { Review, Spot, User, SpotImage, sequelize, ReviewImage } = require('../../db/models');
 
 const { check } = require('express-validator');
@@ -20,10 +21,9 @@ router.get('/current', requireAuthentication, async (req, res) => {
             },
             {
                 model: Spot,
-                attributes: [
-                    "id", "ownerId", "address", "city", "state",
-                    "country", "lat", "lng", "name", "price"
-                ],
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt']
+                },
                 include: {
                     model: SpotImage,
                     attributes: ['url'],
@@ -35,7 +35,7 @@ router.get('/current', requireAuthentication, async (req, res) => {
                 attributes: ['id', 'url']
             },
         ],
-        where: { userId: req.user.id },
+        where: { userId: req.user.id }
     };
     const reviews = await Review.findAll(options);
     for (let i = 0; i < reviews.length; i++) {
