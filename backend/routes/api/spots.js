@@ -32,7 +32,7 @@ async function getSpots() {
                 required: false
             },
         ],
-        group: 'Spot.id',
+        group: ['Spot.id', [sequelize.col('SpotImages.url'), 'previewImage']],
     }
     return await Spot.findAll(options);
 }
