@@ -10,15 +10,14 @@ const jwt = require('jsonwebtoken');
 
 const router = express.Router();
 
-async function getSpots() {
+async function getSpots(currentUserId) {
     const options = {
-        attributes: [
-            'id', 'ownerId', 'address', 'city', 'state', 'country',
-            'lat', 'lng', 'name', 'description', 'price',
-            'createdAt', 'updatedAt',
-            [sequelize.col('SpotImages.url'), 'previewImage'],
-            [sequelize.fn('ROUND', sequelize.fn('AVG', sequelize.col('stars')), 1), 'avgRating']
-        ],
+        attributes: {
+            include: [
+                [sequelize.col('SpotImages.url'), 'previewImage'],
+                [sequelize.fn('ROUND', sequelize.fn('AVG', sequelize.col('stars')), 1), 'avgRating']
+            ]
+        },
         include: [
             {
                 model: SpotImage,
@@ -33,7 +32,9 @@ async function getSpots() {
             },
         ],
         group: ['Spot.id', [sequelize.col('SpotImages.url'), 'previewImage']],
+        where: {}
     }
+    if (currentUserId !== undefined) options.where.ownerId = currentUserId;
     return await Spot.findAll(options);
 }
 
@@ -134,7 +135,7 @@ router.get('/:spotId', async (req, res, next) => {
             Review]
     };
     let spot = await Spot.findByPk(req.params.spotId, options);
-    if (!spot) return respondWithSpot404();
+    if (!spot) return respondWithSpot404(res);
 
     spot = spot.toJSON();
     spot.numReviews = spot.Reviews.length;
