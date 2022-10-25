@@ -41,9 +41,11 @@ router.get('/current', requireAuthentication, async (req, res) => {
     for (let i = 0; i < reviews.length; i++) {
         // TODO: Setup PG locally to find the right Sequelize syntax to avoid this loop
         const review = reviews[i].toJSON();
-        reviews[i] = review;
-        review.Spot.previewImage = review.Spot.SpotImages[0].url;
-        delete review.Spot.SpotImages;
+        if (review.Spot) {
+            reviews[i] = review;
+            review.Spot.previewImage = review.Spot.SpotImages[0].url;
+            delete review.Spot.SpotImages;
+        }
     }
     res.json({ Reviews: reviews });
 });
