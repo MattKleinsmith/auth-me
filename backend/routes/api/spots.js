@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken');
 
 const router = express.Router();
 
-async function getSpots() {
+async function getSpots(currentUserId) {
     const options = {
         attributes: {
             include: [
@@ -32,7 +32,9 @@ async function getSpots() {
             },
         ],
         group: ['Spot.id', [sequelize.col('SpotImages.url'), 'previewImage']],
+        where: {}
     }
+    if (currentUserId !== undefined) options.where.ownerId = currentUserId;
     return await Spot.findAll(options);
 }
 
