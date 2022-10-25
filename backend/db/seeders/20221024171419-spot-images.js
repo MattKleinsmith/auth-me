@@ -24,6 +24,11 @@ module.exports = {
         url: "no-preview-good-review-image-url2",
         preview: false
       },
+      {
+        spotId: 2,
+        url: "no-preview-good-review-image-url23",
+        preview: false
+      }
     ], {});
   },
   down: async (queryInterface, Sequelize) => {
