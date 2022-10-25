@@ -6,6 +6,9 @@ const { Review, Spot, User, SpotImage, sequelize, ReviewImage } = require('../..
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
+const { environment } = require('../../config');
+const isProduction = environment === 'production';
+
 const router = express.Router();
 
 router.get('/current', requireAuthentication, async (req, res) => {
@@ -19,12 +22,11 @@ router.get('/current', requireAuthentication, async (req, res) => {
                 model: Spot,
                 attributes: [
                     "id", "ownerId", "address", "city", "state",
-                    "country", "lat", "lng", "name", "price",
-                    [sequelize.literal("`Spot->SpotImages`.`url`"), "previewImage"]
+                    "country", "lat", "lng", "name", "price"
                 ],
                 include: {
                     model: SpotImage,
-                    attributes: [],
+                    attributes: ['url'],
                     where: { preview: true }
                 },
             },
@@ -36,6 +38,13 @@ router.get('/current', requireAuthentication, async (req, res) => {
         where: { userId: req.user.id },
     };
     const reviews = await Review.findAll(options);
+    for (let i = 0; i < reviews.length; i++) {
+        // TODO: Setup PG locally to find the right Sequelize syntax to avoid this loop
+        const review = reviews[i].toJSON();
+        reviews[i] = review;
+        review.Spot.previewImage = review.Spot.SpotImages[0].url;
+        delete review.Spot.SpotImages;
+    }
     res.json({ Reviews: reviews });
 });
 
