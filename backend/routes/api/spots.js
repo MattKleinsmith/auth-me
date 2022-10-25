@@ -135,7 +135,7 @@ router.get('/:spotId', async (req, res, next) => {
             Review]
     };
     let spot = await Spot.findByPk(req.params.spotId, options);
-    if (!spot) return respondWithSpot404();
+    if (!spot) return respondWithSpot404(res);
 
     spot = spot.toJSON();
     spot.numReviews = spot.Reviews.length;
