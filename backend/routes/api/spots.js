@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { setTokenCookie, requireAuthentication, respondWith403 } = require('../../utils/auth');
+const { setTokenCookie, requireAuthentication, respondWith403, respondWithSuccessfulDelete } = require('../../utils/auth');
 const { Spot, Review, SpotImage, User, sequelize } = require('../../db/models');
 
 const { check, validationResult } = require('express-validator');
@@ -98,11 +98,7 @@ router.post('/', requireAuthentication, validateSpot, async (req, res) => {
     }
 });
 
-router.put('/:spotId', requireAuthentication, validateSpot, async (req, res) => {
-    let spot = await Spot.findByPk(req.params.spotId);
-    if (!spot) return respondWithSpot404(res);
-    if (req.user.id !== spot.ownerId) return respondWith403(res);
-
+router.put('/:spotId', requireAuthentication, restoreSpot, requireOwnership, validateSpot, async (req, res) => {
     const errorObjects = validationResult(req);
     if (!errorObjects.isEmpty()) {
         const errors = errorObjects.array().reduce((errors, errObj) => {
@@ -117,11 +113,11 @@ router.put('/:spotId', requireAuthentication, validateSpot, async (req, res) => 
     }
 
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
-    spot = await spot.update({ ownerId: req.user.id, address, city, state, country, lat, lng, name, description, price });
+    const spot = await req.spot.update({ ownerId: req.user.id, address, city, state, country, lat, lng, name, description, price });
     res.status(200).json(spot);
 });
 
-router.get('/:spotId', async (req, res, next) => {
+router.get('/:spotId', async (req, res) => {
     const options = {
         include: [
             {
@@ -148,12 +144,9 @@ router.get('/:spotId', async (req, res, next) => {
     res.json(spot);
 });
 
-router.post('/:spotId/images', requireAuthentication, async (req, res, next) => {
+router.post('/:spotId/images', requireAuthentication, restoreSpot, requireOwnership, async (req, res) => {
     const { url, preview } = req.body;
-    const spot = await Spot.findByPk(req.params.spotId);
-
-    if (!spot) return respondWithSpot404(res);
-    if (req.user.id !== spot.ownerId) return respondWith403(res);
+    const spot = req.spot;
 
     let image = await SpotImage.create({ spotId: spot.id, url, preview });
     image = image.toJSON();
@@ -162,11 +155,30 @@ router.post('/:spotId/images', requireAuthentication, async (req, res, next) => 
     res.json(image);
 });
 
+router.delete('/:spotId', requireAuthentication, restoreSpot, requireOwnership, async (req, res) => {
+    await req.spot.destroy();
+    respondWithSuccessfulDelete(res);
+});
+
+async function restoreSpot(req, res, next) {
+    const spot = await Spot.findByPk(req.params.spotId);
+    if (spot) {
+        req.spot = spot;
+        return next();
+    }
+    respondWithSpot404(res);
+}
+
 function respondWithSpot404(res) {
     res.status(404).json({
         "message": "Spot couldn't be found",
         "statusCode": 404
     });
+}
+
+async function requireOwnership(req, res, next) {
+    if (req.user.id === req.spot.ownerId) return next();
+    respondWith403(res);
 }
 
 module.exports = router;

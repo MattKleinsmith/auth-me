@@ -69,4 +69,11 @@ function respondWith403(res) {
     });
 }
 
-module.exports = { setTokenCookie, restoreUser, requireAuthentication, respondWith403 };
+function respondWithSuccessfulDelete(res) {
+    res.status(200).json({
+        "message": "Successfully deleted",
+        "statusCode": 200
+    });
+}
+
+module.exports = { setTokenCookie, restoreUser, requireAuthentication, respondWith403, respondWithSuccessfulDelete };
