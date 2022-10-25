@@ -100,12 +100,11 @@ const validateSpot = [
         .withMessage('Price per day is required'),
 ];
 
-router.post('/', requireAuthentication, validateSpot, async (req, res) => {
+async function validatePost(req, res, createCb) {
     const errorObjects = validationResult(req);
     if (errorObjects.isEmpty()) {
-        const { address, city, state, country, lat, lng, name, description, price } = req.body;
-        const spot = await Spot.create({ ownerId: req.user.id, address, city, state, country, lat, lng, name, description, price });
-        res.status(201).json(spot);
+        const record = await createCb(req);
+        res.status(201).json(record);
     }
     else {
         const errors = errorObjects.array().reduce((errors, errObj) => {
@@ -118,6 +117,13 @@ router.post('/', requireAuthentication, validateSpot, async (req, res) => {
             errors
         });
     }
+}
+
+router.post('/', requireAuthentication, validateSpot, async (req, res) => {
+    validatePost(req, res, async (req) => {
+        const { address, city, state, country, lat, lng, name, description, price } = req.body;
+        return await Spot.create({ ownerId: req.user.id, address, city, state, country, lat, lng, name, description, price });
+    })
 });
 
 router.put('/:spotId', requireAuthentication, restoreSpot, requireSpotOwnership, validateSpot, async (req, res) => {
@@ -208,5 +214,29 @@ router.get('/:spotId/reviews', async (req, res) => {
     }
     res.json({ Reviews: reviews });
 });
+
+const validateReview = [
+    check('review')
+        .exists({ checkFalsy: true })
+        .withMessage('Review text is required'),
+    check('stars')
+        .isIn([1, 2, 3, 4, 5])
+        .withMessage('Stars must be an integer from 1 to 5')
+];
+
+router.post('/:spotId/reviews', requireAuthentication, restoreSpot, validateReview, async (req, res) => {
+    const oldReview = await Review.findOne({ where: { userId: req.user.id, spotId: req.params.spotId } });
+    if (oldReview) {
+        return res.status(403).json({
+            "message": "User already has a review for this spot",
+            "statusCode": 403
+        })
+    }
+
+    validatePost(req, res, async (req) => {
+        const { review, stars } = req.body;
+        return await Review.create({ userId: req.user.id, spotId: req.params.spotId, review, stars });
+    })
+})
 
 module.exports = router;
