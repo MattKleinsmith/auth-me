@@ -32,7 +32,7 @@ async function getSpots() {
                 required: false
             },
         ],
-        group: 'Spot.id',
+        group: ['Spot.id', [sequelize.col('SpotImages.url'), 'previewImage']],
     }
     return await Spot.findAll(options);
 }
@@ -43,13 +43,6 @@ router.get('/', async (req, res) => {
 
 router.get('/current', async (req, res) => {
     res.json({ Spots: await getSpots(req.user.id) });
-});
-
-router.delete('/testing/:imageId', async (req, res) => {
-    console.log("hello");
-    const image = await SpotImage.findByPk(req.params.imageId);
-    image.destroy();
-    res.send("destroyed image");
 });
 
 const validateSpot = [
