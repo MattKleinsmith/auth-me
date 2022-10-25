@@ -1,7 +1,7 @@
 const express = require('express');
 
 const { setTokenCookie, requireAuthentication, respondWith403, respondWithSuccessfulDelete } = require('../../utils/auth');
-const { Spot, Review, SpotImage, User, sequelize } = require('../../db/models');
+const { Spot, Review, SpotImage, User, sequelize, ReviewImage } = require('../../db/models');
 const { getReviews } = require('../../utils');
 
 const { check, validationResult } = require('express-validator');
@@ -182,8 +182,31 @@ router.delete('/:spotId', requireAuthentication, restoreSpot, requireSpotOwnersh
     respondWithSuccessfulDelete(res);
 });
 
-router.get('/:spotId/reviews', (req, res) => {
-    getReviews(res, { spotId: req.params.spotId });
+router.get('/:spotId/reviews', async (req, res) => {
+    const options = {
+        include: [
+            {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName']
+            },
+            {
+                model: ReviewImage,
+                attributes: ['id', 'url']
+            },
+        ],
+        where: { spotId: req.params.spotId }
+    };
+    const reviews = await Review.findAll(options);
+    for (let i = 0; i < reviews.length; i++) {
+        // TODO: Setup PG locally to find the right Sequelize syntax to avoid this loop
+        const review = reviews[i].toJSON();
+        if (review.Spot) {
+            reviews[i] = review;
+            review.Spot.previewImage = review.Spot.SpotImages[0].url;
+            delete review.Spot.SpotImages;
+        }
+    }
+    res.json({ Reviews: reviews });
 });
 
 module.exports = router;
