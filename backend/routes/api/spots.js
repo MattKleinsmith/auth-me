@@ -10,42 +10,46 @@ const jwt = require('jsonwebtoken');
 
 const router = express.Router();
 
-async function getSpots(args = {}) {
-    const options = { include: [SpotImage, Review], where: {} };
-    if (args.currentUserId) options.where.ownerId = args.currentUserId;
-    if (args.id) options.where.id = args.id;
-    const spots = await Spot.findAll(options);
-
-    for (let i = 0; i < spots.length; i++) {
-        const spot = spots[i].toJSON();
-        spots[i] = spot;
-
-        spot.previewUrl = null;
-        spot.avgReview = null;
-
-        for (const spotImage of spot.SpotImages) {
-            if (spotImage.preview) {
-                spot.previewUrl = spotImage.url;
-                break;
-            }
-        }
-
-        if (spot.Reviews.length > 0) {
-            spot.avgReview = spot.Reviews.reduce((sum, review) => sum + review.stars, 0) / spot.Reviews.length;
-        }
-
-        delete spot.SpotImages;
-        delete spot.Reviews;
+async function getSpots() {
+    const options = {
+        attributes: [
+            'id', 'ownerId', 'address', 'city', 'state', 'country',
+            'lat', 'lng', 'name', 'description', 'price',
+            'createdAt', 'updatedAt',
+            [sequelize.col('SpotImages.url'), 'previewImage'],
+            [sequelize.fn('ROUND', sequelize.fn('AVG', sequelize.col('stars')), 1), 'avgRating']
+        ],
+        include: [
+            {
+                model: SpotImage,
+                where: { preview: true },
+                attributes: [],
+                required: false,
+            },
+            {
+                model: Review,
+                attributes: [],
+                required: false
+            },
+        ],
+        group: 'Spot.id',
     }
-    return spots;
+    return await Spot.findAll(options);
 }
 
-router.get('/current', async (req, res) => {
-    res.json(await getSpots({ currentUserId: req.user.id }));
+router.get('/', async (req, res) => {
+    res.json({ Spots: await getSpots() });
 });
 
-router.get('/', async (req, res) => {
-    res.json(await getSpots());
+router.get('/current', async (req, res) => {
+    res.json({ Spots: await getSpots(req.user.id) });
+});
+
+router.delete('/testing/:imageId', async (req, res) => {
+    console.log("hello");
+    const image = await SpotImage.findByPk(req.params.imageId);
+    image.destroy();
+    res.send("destroyed image");
 });
 
 const validateSpot = [
@@ -125,13 +129,16 @@ router.put('/:spotId', requireAuthentication, validateSpot, async (req, res) => 
 
 router.get('/:spotId', async (req, res, next) => {
     const options = {
-        include: [{
-            model: SpotImage,
-            attributes: ['id', 'url', 'preview']
-        }, {
-            model: User,
-            attributes: ['id', 'firstName', 'lastName']
-        }, Review], where: {}
+        include: [
+            {
+                model: SpotImage,
+                attributes: ['id', 'url', 'preview']
+            },
+            {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName']
+            },
+            Review]
     };
     let spot = await Spot.findByPk(req.params.spotId, options);
     if (!spot) return respondWithSpot404();
