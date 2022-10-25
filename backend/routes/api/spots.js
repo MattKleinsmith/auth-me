@@ -12,13 +12,12 @@ const router = express.Router();
 
 async function getSpots() {
     const options = {
-        attributes: [
-            'id', 'ownerId', 'address', 'city', 'state', 'country',
-            'lat', 'lng', 'name', 'description', 'price',
-            'createdAt', 'updatedAt',
-            [sequelize.col('SpotImages.url'), 'previewImage'],
-            [sequelize.fn('ROUND', sequelize.fn('AVG', sequelize.col('stars')), 1), 'avgRating']
-        ],
+        attributes: {
+            include: [
+                [sequelize.col('SpotImages.url'), 'previewImage'],
+                [sequelize.fn('ROUND', sequelize.fn('AVG', sequelize.col('stars')), 1), 'avgRating']
+            ]
+        },
         include: [
             {
                 model: SpotImage,
