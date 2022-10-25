@@ -30,8 +30,19 @@ module.exports = {
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP")
       }
     });
+
+    await queryInterface.addConstraint('SpotImages', {
+      fields: ['spotId', 'preview'],
+      type: 'unique',
+      name: 'at-most-one-preview-per-spot',
+      where: {
+        preview: true
+      }
+    });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('SpotImages');
+
+    await queryInterface.removeConstraint('SpotImages', 'at-most-one-preview-per-spot')
   }
 };
