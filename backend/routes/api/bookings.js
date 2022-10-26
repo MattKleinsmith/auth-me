@@ -39,7 +39,7 @@ router.get('/current', requireAuthentication, async (req, res) => {
         const booking = bookings[i].toJSON();
         if (booking.Spot) {
             bookings[i] = booking;
-            booking.Spot.previewImage = booking.Spot.SpotImages[0].url;
+            booking.Spot.previewImage = booking.Spot.SpotImages.length ? booking.Spot.SpotImages[0].url : null;
             delete booking.Spot.SpotImages;
         }
     }
