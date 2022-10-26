@@ -31,7 +31,7 @@ async function requireSpotOwnership(req, res, next) {
 
 async function getSpots(req, filterByCurrentUser = false) {
     const options = {
-        include: [Review, { model: SpotImage, where: { preview: true } }],
+        include: [Review, { model: SpotImage, where: { preview: true }, required: false }],
         where: {}
     }
 
@@ -44,7 +44,6 @@ async function getSpots(req, filterByCurrentUser = false) {
         req.query.size = size;
         options.limit = size;
         options.offset = (page - 1) * size;
-        console.log(size, (page - 1) * size);
 
         if (minLat && maxLat) options.where.lat = { [Op.between]: [+minLat, +maxLat] };
         else if (minLat) options.where.lat = { [Op.gte]: +minLat };
@@ -60,7 +59,6 @@ async function getSpots(req, filterByCurrentUser = false) {
     }
 
     const spots = await Spot.findAll(options);
-
     for (let i = 0; i < spots.length; i++) {
         const spot = spots[i].toJSON();
         spots[i] = spot;
@@ -68,7 +66,7 @@ async function getSpots(req, filterByCurrentUser = false) {
         spot.previewImage = spot.SpotImages.length ? spot.SpotImages[0].url : null;
         delete spot.SpotImages;
 
-        spot.avgRating = spot.Reviews.reduce((sum, review) => sum + review.stars, 0) / spot.Reviews.length;
+        spot.avgRating = (spot.Reviews.reduce((sum, review) => sum + review.stars, 0) / spot.Reviews.length).toFixed(1);
         delete spot.Reviews;
     }
 
