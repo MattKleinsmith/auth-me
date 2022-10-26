@@ -4,7 +4,7 @@ const { requireAuthentication, respondWith403, respondWithSuccessfulDelete } = r
 const { Spot, Review, SpotImage, User, sequelize, ReviewImage, Booking } = require('../../db/models');
 
 const { validateSpot, validateReview, validateBooking, validateSpotQuery, analyzeErrors } = require('../api/validators.js');
-const { OptimisticLockError, Op } = require('sequelize');
+const { Op } = require('sequelize');
 
 const router = express.Router();
 
@@ -66,7 +66,8 @@ async function getSpots(req, filterByCurrentUser = false) {
         spot.previewImage = spot.SpotImages.length ? spot.SpotImages[0].url : null;
         delete spot.SpotImages;
 
-        spot.avgRating = (spot.Reviews.reduce((sum, review) => sum + review.stars, 0) / spot.Reviews.length).toFixed(1);
+        const avgRating = (spot.Reviews.reduce((sum, review) => sum + review.stars, 0) / spot.Reviews.length).toFixed(1);
+        spot.avgRating = spot.Reviews.length ? avgRating : null;
         delete spot.Reviews;
     }
 
@@ -143,7 +144,7 @@ router.delete('/:spotId', requireAuthentication, restoreSpot, requireSpotOwnersh
     respondWithSuccessfulDelete(res);
 });
 
-router.get('/:spotId/reviews', async (req, res) => {
+router.get('/:spotId/reviews', restoreSpot, async (req, res) => {
     const options = {
         include: [
             {
