@@ -73,6 +73,16 @@ const validateSignup = [
         .withMessage('Password must be 6 characters or more.'),
 ];
 
+const validateLogin = [
+    check('credential')
+        .exists({ checkFalsy: true })
+        .notEmpty()
+        .withMessage('Email or username is required'),
+    check('password')
+        .exists({ checkFalsy: true })
+        .withMessage('Password is required')
+];
+
 const validateSpot = [
     check('address')
         .exists({ checkFalsy: true })
@@ -203,8 +213,9 @@ const validateBooking = [
 
 module.exports = {
     analyzeErrors,
-    validateReview,
     validateSpot,
+    validateLogin,
+    validateReview,
     validateSignup,
     validateBooking,
     validateSpotQuery
