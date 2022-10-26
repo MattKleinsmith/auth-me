@@ -1,6 +1,7 @@
 const { check, validationResult } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { Booking } = require('../../db/models');
+const { Booking, sequelize } = require('../../db/models');
+const { Op } = require("sequelize");
 
 async function analyzeErrors(req, res, validHandler) {
     const errorObjects = validationResult(req);
@@ -99,7 +100,14 @@ const validateBooking = [
             }
         })
         .custom(async (endDate, { req }) => {
-            const bookings = await Booking.findAll({ where: { spotId: req.params.spotId } });
+            const options = { where: {} };
+            if (req.booking) {
+                options.where.id = { [Op.not]: req.booking.id };
+                options.spotId = req.booking.spotId;
+            } else {
+                options.spotId = req.params.spotId;
+            }
+            const bookings = await Booking.findAll(options);
             for (const booking of bookings) {
                 if (new Date(endDate) >= new Date(booking.startDate) && new Date(endDate) <= new Date(booking.endDate)) {
                     req.message = "Sorry, this spot is already booked for the specified dates";
@@ -111,7 +119,14 @@ const validateBooking = [
         }),
     check('startDate')
         .custom(async (startDate, { req }) => {
-            const bookings = await Booking.findAll({ where: { spotId: req.params.spotId } });
+            const options = { where: {} };
+            if (req.booking) {
+                options.where.id = { [Op.not]: req.booking.id };
+                options.spotId = req.booking.spotId;
+            } else {
+                options.spotId = req.params.spotId;
+            }
+            const bookings = await Booking.findAll(options);
             for (const booking of bookings) {
                 if (new Date(startDate) >= new Date(booking.startDate) && new Date(startDate) <= new Date(booking.endDate)) {
                     req.message = "Sorry, this spot is already booked for the specified dates";

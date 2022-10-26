@@ -4,29 +4,32 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('Bookings', [
+      // Forbidden: Not owned
       {
         spotId: 1,
         userId: 2,
         startDate: "2021-11-19",
         endDate: "2021-11-20"
       },
+      // Forbidden: Can't change past bookings
       {
         spotId: 1,
-        userId: 2,
+        userId: 1,
         startDate: "2021-12-19",
         endDate: "2021-12-20",
       },
+      // Use these to cause overlaps
       {
-        spotId: 2,
+        spotId: 1,
         userId: 1,
-        startDate: "2021-12-23",
-        endDate: "2021-12-24",
+        startDate: "2025-12-1",
+        endDate: "2025-12-10",
       },
       {
-        spotId: 3,
-        userId: 2,
-        startDate: "2021-12-23",
-        endDate: "2021-12-24",
+        spotId: 1,
+        userId: 1,
+        startDate: "2025-12-20",
+        endDate: "2025-12-26",
       }
     ], {});
   },
