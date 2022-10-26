@@ -3,7 +3,7 @@ const express = require('express');
 const { requireAuthentication, respondWith403, respondWithSuccessfulDelete } = require('../../utils/auth');
 const { Spot, Review, SpotImage, User, sequelize, ReviewImage, Booking } = require('../../db/models');
 
-const { validateSpot, validateReview, analyzeErrors } = require('../api/validators.js');
+const { validateSpot, validateReview, validateBooking, analyzeErrors } = require('../api/validators.js');
 
 const router = express.Router();
 
@@ -200,6 +200,15 @@ router.get('/:spotId/bookings', requireAuthentication, restoreSpot, async (req, 
         }
         res.json({ Bookings: bookings });
     }
+});
+
+router.post('/:spotId/bookings', requireAuthentication, restoreSpot, validateBooking, async (req, res) => {
+    if (req.user.id === req.spot.ownerId) return respondWith403(res);  // Don't let owner book
+    analyzeErrors(req, res, async () => {
+        const { startDate, endDate } = req.body;
+        const record = await Booking.create({ userId: req.user.id, spotId: req.params.spotId, startDate, endDate });
+        res.status(201).json(record);
+    });
 });
 
 module.exports = router;

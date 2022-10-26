@@ -1,5 +1,6 @@
 const { check, validationResult } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+const { Booking } = require('../../db/models');
 
 async function analyzeErrors(req, res, validHandler) {
     const errorObjects = validationResult(req);
@@ -11,9 +12,9 @@ async function analyzeErrors(req, res, validHandler) {
             errors[errObj.param] = errObj.msg;
             return errors;
         }, {});
-        res.status(400).json({
-            message: "Validation Error",
-            statusCode: 400,
+        res.status(req.status || 400).json({
+            message: req.message || "Validation Error",
+            statusCode: req.status || 400,
             errors
         });
     }
@@ -88,9 +89,44 @@ const validateReview = [
         .withMessage('Stars must be an integer from 1 to 5')
 ];
 
+const validateBooking = [
+    check('endDate')
+        .custom((endDate, { req }) => {
+            if (new Date(endDate) < new Date(req.body.startDate)) {
+                throw new Error('endDate cannot be on or before startDate');
+            } else {
+                return endDate;
+            }
+        })
+        .custom(async (endDate, { req }) => {
+            const bookings = await Booking.findAll({ where: { spotId: req.params.spotId } });
+            for (const booking of bookings) {
+                if (new Date(endDate) >= new Date(booking.startDate) && new Date(endDate) <= new Date(booking.endDate)) {
+                    req.message = "Sorry, this spot is already booked for the specified dates";
+                    req.status = 403;
+                    throw new Error("End date conflicts with an existing booking");
+                }
+            }
+            return endDate;
+        }),
+    check('startDate')
+        .custom(async (startDate, { req }) => {
+            const bookings = await Booking.findAll({ where: { spotId: req.params.spotId } });
+            for (const booking of bookings) {
+                if (new Date(startDate) >= new Date(booking.startDate) && new Date(startDate) <= new Date(booking.endDate)) {
+                    req.message = "Sorry, this spot is already booked for the specified dates";
+                    req.status = 403;
+                    throw new Error("Start date conflicts with an existing booking");
+                }
+            }
+            return startDate;
+        })
+];
+
 module.exports = {
     analyzeErrors,
     validateReview,
     validateSpot,
-    validateSignup
+    validateSignup,
+    validateBooking
 }
