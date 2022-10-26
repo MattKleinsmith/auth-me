@@ -28,13 +28,19 @@ module.exports = {
         spotId: 2,
         url: "no-preview-good-review-image-url23",
         preview: false
+      },
+      // Not owned by User 1
+      {
+        spotId: 3,
+        url: "no-preview-good-review-image-url23",
+        preview: false
       }
     ], {});
   },
   down: async (queryInterface, Sequelize) => {
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete('SpotImages', {
-      spotId: { [Op.in]: [1, 2] }
+      spotId: { [Op.in]: [1, 2, 3] }
     }, {});
   }
 };
