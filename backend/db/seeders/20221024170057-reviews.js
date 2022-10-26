@@ -15,7 +15,14 @@ module.exports = {
         spotId: 1,
         "review": "This was a good spot!",
         "stars": 5
+      },
+      {
+        userId: 3,
+        spotId: 1,
+        "review": "This was a good spot! asdsada",
+        "stars": 5
       }
+
     ], {});
   },
 
