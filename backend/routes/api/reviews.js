@@ -1,5 +1,5 @@
 const express = require('express');
-const { requireAuthentication, respondWith403 } = require('../../utils/auth');
+const { requireAuthentication, respondWith403, respondWithSuccessfulDelete } = require('../../utils/auth');
 const { Review, Spot, User, SpotImage, sequelize, ReviewImage } = require('../../db/models');
 const { validateReview, analyzeErrors } = require('../api/validators.js');
 
@@ -21,8 +21,19 @@ async function restoreReview(req, res, next) {
     respondWithReview404(res);
 }
 
-router.put('/:reviewId', requireAuthentication, restoreReview, validateReview, async (req, res) => {
-    if (req.review.userId !== req.user.id) return respondWith403(res);
+function requireReviewOwnership(req, res, next) {
+    if (req.review.userId === req.user.id) return next();
+    respondWith403(res);
+}
+
+// ---------------------------------------------------------------
+
+router.delete('/:reviewId', requireAuthentication, restoreReview, requireReviewOwnership, async (req, res) => {
+    await req.review.destroy();
+    respondWithSuccessfulDelete(res);
+});
+
+router.put('/:reviewId', requireAuthentication, restoreReview, requireReviewOwnership, validateReview, async (req, res) => {
     analyzeErrors(req, res, async () => {
         const { review, stars } = req.body;
         const changes = {};
@@ -30,7 +41,7 @@ router.put('/:reviewId', requireAuthentication, restoreReview, validateReview, a
         if (stars !== undefined) changes.stars = stars;
         const record = await req.review.update(changes);
         res.status(201).json(record);
-    })
+    });
 });
 
 router.post('/:reviewId/images', requireAuthentication, restoreReview, async (req, res) => {
