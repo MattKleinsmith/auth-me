@@ -1,7 +1,7 @@
 const { check, validationResult } = require('express-validator');
 const { query } = require('express-validator/check');
 const { handleValidationErrors } = require('../../utils/validation');
-const { Booking, sequelize } = require('../../db/models');
+const { Booking, sequelize, User } = require('../../db/models');
 const { Op } = require("sequelize");
 
 async function analyzeErrors(req, res, validHandler) {
@@ -24,22 +24,46 @@ async function analyzeErrors(req, res, validHandler) {
 
 const validateSignup = [
     check('email')
+        .custom(async (email, { req }) => {
+            const user = await User.findOne({ where: { email } });
+            if (user) {
+                req.message = "User already exists"
+                req.status = 403;
+                throw new Error('User with that email already exists');
+            } else {
+                return email;
+            }
+        })
         .exists({ checkFalsy: true })
         .isEmail()
-        .withMessage('Please provide a valid email.'),
+        .withMessage('Invalid email'),
     check('username')
+        .custom(async (username, { req }) => {
+            const user = await User.findOne({ where: { username } });
+            if (user) {
+                req.message = "User already exists"
+                req.status = 403;
+                throw new Error('User with that username already exists');
+            } else {
+                return username;
+            }
+        })
         .exists({ checkFalsy: true })
+        .withMessage('Username is required')
         .isLength({ min: 4 })
-        .withMessage('Please provide a username with at least 4 characters.'),
-    check('username')
+        .withMessage('Please provide a username with at least 4 characters.')
         .not()
         .isEmail()
         .withMessage('Username cannot be an email.'),
     check('firstName')
+        .exists()
+        .withMessage("First Name is required")
         .not()
         .isEmail()
         .withMessage('First name cannot be an email.'),
     check('lastName')
+        .exists()
+        .withMessage("Last Name is required")
         .not()
         .isEmail()
         .withMessage('Last name cannot be an email.'),
@@ -47,7 +71,6 @@ const validateSignup = [
         .exists({ checkFalsy: true })
         .isLength({ min: 6 })
         .withMessage('Password must be 6 characters or more.'),
-    handleValidationErrors
 ];
 
 const validateSpot = [
