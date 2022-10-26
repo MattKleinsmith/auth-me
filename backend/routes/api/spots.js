@@ -1,7 +1,7 @@
 const express = require('express');
 
 const { requireAuthentication, respondWith403, respondWithSuccessfulDelete } = require('../../utils/auth');
-const { Spot, Review, SpotImage, User, sequelize, ReviewImage } = require('../../db/models');
+const { Spot, Review, SpotImage, User, sequelize, ReviewImage, Booking } = require('../../db/models');
 
 const { validateSpot, validateReview, analyzeErrors } = require('../api/validators.js');
 
@@ -165,5 +165,41 @@ router.post('/:spotId/reviews', requireAuthentication, restoreSpot, validateRevi
         res.status(201).json(record);
     })
 })
+
+router.get('/:spotId/bookings', requireAuthentication, restoreSpot, async (req, res) => {
+    const isOwner = req.user.id === req.spot.ownerId;
+
+    if (isOwner) {
+        const options = {
+            where: { spotId: req.params.spotId },
+            include: { model: Spot, include: { model: User, attributes: ['id', 'firstName', 'lastName'] } }
+        };
+        const bookings = await Booking.findAll(options);
+        for (let i = 0; i < bookings.length; i++) {
+            const booking = bookings[i].toJSON();
+            if (booking.Spot) {
+                bookings[i] = booking;
+                booking.User = booking.Spot.User;
+                delete booking.Spot;
+            }
+        }
+        res.json({ Bookings: bookings });
+    } else {
+        const options = {
+            where: { spotId: req.params.spotId },
+            attributes: ['spotId', 'startDate', 'endDate']
+        };
+        const bookings = await Booking.findAll(options);
+        for (let i = 0; i < bookings.length; i++) {
+            const booking = bookings[i].toJSON();
+            if (booking.Spot) {
+                bookings[i] = booking;
+                booking.User = booking.Spot.User;
+                delete booking.Spot;
+            }
+        }
+        res.json({ Bookings: bookings });
+    }
+});
 
 module.exports = router;
