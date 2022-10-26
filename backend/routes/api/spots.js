@@ -80,7 +80,7 @@ router.get('/', validateSpotQuery, async (req, res) => {
     })
 });
 
-router.get('/current', async (req, res) => {
+router.get('/current', requireAuthentication, async (req, res) => {
     res.json({ Spots: await getSpots(req, true) });
 });
 
