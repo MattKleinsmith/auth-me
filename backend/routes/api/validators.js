@@ -1,4 +1,5 @@
 const { check, validationResult } = require('express-validator');
+const { query } = require('express-validator/check');
 const { handleValidationErrors } = require('../../utils/validation');
 const { Booking, sequelize } = require('../../db/models');
 const { Op } = require("sequelize");
@@ -81,6 +82,45 @@ const validateSpot = [
         .withMessage('Price per day is required'),
 ];
 
+const validateSpotQuery = [
+    query('page')
+        .optional()
+        .isInt({ min: 1 })
+        .withMessage("Page must be greater than or equal to 1")
+        .isInt({ max: 10 })
+        .withMessage("Page must be less than or equal to 10"),
+    query('size')
+        .optional()
+        .isInt({ min: 1 })
+        .withMessage("Size must be greater than or equal to 1")
+        .isInt({ max: 10 })
+        .withMessage("Size must be less than or equal to 20"),
+    query('minLat')
+        .optional()
+        .isFloat()
+        .withMessage("Minimum latitude is invalid"),
+    query('maxLat')
+        .optional()
+        .isFloat()
+        .withMessage("Maximum latitude is invalid"),
+    query('minLng')
+        .optional()
+        .isFloat()
+        .withMessage("Minimum longitude is invalid"),
+    query('maxLng')
+        .optional()
+        .isFloat()
+        .withMessage("Maximum longitude is invalid"),
+    query('minPrice')
+        .optional()
+        .isFloat({ min: 0 })
+        .withMessage("Minimum price must be greater than or equal to 0"),
+    query('maxPrice')
+        .optional()
+        .isFloat({ min: 0 })
+        .withMessage("Maximum price must be greater than or equal to 0"),
+];
+
 const validateReview = [
     check('review')
         .exists({ checkFalsy: true })
@@ -143,5 +183,6 @@ module.exports = {
     validateReview,
     validateSpot,
     validateSignup,
-    validateBooking
+    validateBooking,
+    validateSpotQuery
 }

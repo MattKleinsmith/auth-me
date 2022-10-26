@@ -3,7 +3,8 @@ const express = require('express');
 const { requireAuthentication, respondWith403, respondWithSuccessfulDelete } = require('../../utils/auth');
 const { Spot, Review, SpotImage, User, sequelize, ReviewImage, Booking } = require('../../db/models');
 
-const { validateSpot, validateReview, validateBooking, analyzeErrors } = require('../api/validators.js');
+const { validateSpot, validateReview, validateBooking, validateSpotQuery, analyzeErrors } = require('../api/validators.js');
+const { OptimisticLockError, Op } = require('sequelize');
 
 const router = express.Router();
 
@@ -28,40 +29,60 @@ async function requireSpotOwnership(req, res, next) {
     respondWith403(res);
 }
 
-async function getSpots(currentUserId) {
+async function getSpots(req, filterByCurrentUser = false) {
     const options = {
-        attributes: {
-            include: [
-                [sequelize.col('SpotImages.url'), 'previewImage'],
-                [sequelize.fn('ROUND', sequelize.fn('AVG', sequelize.col('stars')), 1), 'avgRating']
-            ]
-        },
-        include: [
-            {
-                model: SpotImage,
-                where: { preview: true },
-                attributes: [],
-                required: false,
-            },
-            {
-                model: Review,
-                attributes: [],
-                required: false
-            },
-        ],
-        group: ['Spot.id', [sequelize.col('SpotImages.url'), 'previewImage']],
+        include: [Review, { model: SpotImage, where: { preview: true } }],
         where: {}
     }
-    if (currentUserId !== undefined) options.where.ownerId = currentUserId;
-    return await Spot.findAll(options);
+
+    if (filterByCurrentUser) options.where.ownerId = req.user.id;
+    else {
+        let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+        page = page ? +page : 1;
+        size = size ? +size : 20;
+        req.query.page = page;
+        req.query.size = size;
+        options.limit = size;
+        options.offset = (page - 1) * size;
+        console.log(size, (page - 1) * size);
+
+        if (minLat && maxLat) options.where.lat = { [Op.between]: [+minLat, +maxLat] };
+        else if (minLat) options.where.lat = { [Op.gte]: +minLat };
+        else if (maxLat) options.where.lat = { [Op.lte]: +maxLat };
+
+        if (minLng && maxLng) options.where.lng = { [Op.between]: [+minLng, +maxLng] };
+        else if (minLng) options.where.lng = { [Op.gte]: +minLng };
+        else if (maxLng) options.where.lng = { [Op.lte]: +maxLng };
+
+        if (minPrice && maxPrice) options.where.price = { [Op.between]: [+minPrice, +maxPrice] };
+        else if (minPrice) options.where.price = { [Op.gte]: +minPrice };
+        else if (maxPrice) options.where.price = { [Op.lte]: +maxPrice };
+    }
+
+    const spots = await Spot.findAll(options);
+
+    for (let i = 0; i < spots.length; i++) {
+        const spot = spots[i].toJSON();
+        spots[i] = spot;
+
+        spot.previewImage = spot.SpotImages.length ? spot.SpotImages[0].url : null;
+        delete spot.SpotImages;
+
+        spot.avgRating = spot.Reviews.reduce((sum, review) => sum + review.stars, 0) / spot.Reviews.length;
+        delete spot.Reviews;
+    }
+
+    return spots;
 }
 
-router.get('/', async (req, res) => {
-    res.json({ Spots: await getSpots() });
+router.get('/', validateSpotQuery, async (req, res) => {
+    analyzeErrors(req, res, async () => {
+        res.json({ Spots: await getSpots(req), page: req.query.page, size: req.query.size });
+    })
 });
 
 router.get('/current', async (req, res) => {
-    res.json({ Spots: await getSpots(req.user.id) });
+    res.json({ Spots: await getSpots(req, true) });
 });
 
 router.post('/', requireAuthentication, validateSpot, async (req, res) => {
@@ -91,7 +112,8 @@ router.get('/:spotId', async (req, res) => {
                 model: User,
                 attributes: ['id', 'firstName', 'lastName']
             },
-            Review]
+            Review
+        ]
     };
     let spot = await Spot.findByPk(req.params.spotId, options);
     if (!spot) return respondWithSpot404(res);
