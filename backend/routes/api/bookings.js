@@ -62,4 +62,17 @@ router.put('/:bookingId', requireAuthentication, restoreBooking, validateBooking
     });
 });
 
+router.delete('/:bookingId', requireAuthentication, restoreBooking, async (req, res) => {
+    if (req.user.id !== req.booking.userId) return respondWith403(res);
+    if (new Date() > new Date(req.booking.startDate)) {
+        return res.status(403).json(
+            {
+                "message": "Bookings that have been started can't be deleted",
+                "statusCode": 403
+            });
+    }
+    await req.booking.destroy();
+    respondWithSuccessfulDelete(res);
+});
+
 module.exports = router;
