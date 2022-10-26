@@ -75,7 +75,7 @@ router.post('/', requireAuthentication, validateSpot, async (req, res) => {
 router.put('/:spotId', requireAuthentication, restoreSpot, requireSpotOwnership, validateSpot, async (req, res) => {
     analyzeErrors(req, res, async () => {
         const { address, city, state, country, lat, lng, name, description, price } = req.body;
-        const spot = await req.spot.update({ ownerId: req.user.id, address, city, state, country, lat, lng, name, description, price });
+        const spot = await req.spot.update({ address, city, state, country, lat, lng, name, description, price });
         res.status(200).json(spot);
     })
 });
