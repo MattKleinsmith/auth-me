@@ -1,13 +1,9 @@
 const express = require('express');
 
-const { setTokenCookie, requireAuthentication, respondWith403, respondWithSuccessfulDelete } = require('../../utils/auth');
+const { requireAuthentication, respondWith403, respondWithSuccessfulDelete } = require('../../utils/auth');
 const { Spot, Review, SpotImage, User, sequelize, ReviewImage } = require('../../db/models');
-const { getReviews } = require('../../utils');
 
-const { check, validationResult } = require('express-validator');
-const { handleValidationErrors } = require('../../utils/validation');
-
-const jwt = require('jsonwebtoken');
+const { validateSpot, validateReview, analyzeErrors } = require('../api/validators.js');
 
 const router = express.Router();
 
@@ -68,81 +64,20 @@ router.get('/current', async (req, res) => {
     res.json({ Spots: await getSpots(req.user.id) });
 });
 
-const validateSpot = [
-    check('address')
-        .exists({ checkFalsy: true })
-        .withMessage('Street address is required'),
-    check('city')
-        .exists({ checkFalsy: true })
-        .withMessage('City is required'),
-    check('state')
-        .exists({ checkFalsy: true })
-        .withMessage('State is required'),
-    check('country')
-        .exists({ checkFalsy: true })
-        .withMessage('Country is required'),
-    check('lat')
-        .exists({ checkFalsy: true })
-        .withMessage('Latitude is not valid'),
-    check('lng')
-        .exists({ checkFalsy: true })
-        .withMessage('Longitude is required'),
-    check('name')
-        .exists({ checkFalsy: true })
-        .withMessage('Name is required')
-        .isLength({ max: 49 })
-        .withMessage('Name must be less than 50 characters'),
-    check('description')
-        .exists({ checkFalsy: true })
-        .withMessage('Description is required'),
-    check('price')
-        .exists({ checkFalsy: true })
-        .withMessage('Price per day is required'),
-];
-
-async function validatePost(req, res, createCb) {
-    const errorObjects = validationResult(req);
-    if (errorObjects.isEmpty()) {
-        const record = await createCb(req);
-        res.status(201).json(record);
-    }
-    else {
-        const errors = errorObjects.array().reduce((errors, errObj) => {
-            errors[errObj.param] = errObj.msg;
-            return errors;
-        }, {});
-        res.status(400).json({
-            message: "Validation Error",
-            statusCode: 400,
-            errors
-        });
-    }
-}
-
 router.post('/', requireAuthentication, validateSpot, async (req, res) => {
-    validatePost(req, res, async (req) => {
+    analyzeErrors(req, res, async () => {
         const { address, city, state, country, lat, lng, name, description, price } = req.body;
-        return await Spot.create({ ownerId: req.user.id, address, city, state, country, lat, lng, name, description, price });
+        const record = await Spot.create({ ownerId: req.user.id, address, city, state, country, lat, lng, name, description, price });
+        res.status(201).json(record);
     })
 });
 
 router.put('/:spotId', requireAuthentication, restoreSpot, requireSpotOwnership, validateSpot, async (req, res) => {
-    const errorObjects = validationResult(req);
-    if (!errorObjects.isEmpty()) {
-        const errors = errorObjects.array().reduce((errors, errObj) => {
-            errors[errObj.param] = errObj.msg;
-            return errors;
-        }, {});
-        return res.status(400).json({
-            message: "Validation Error",
-            statusCode: 400,
-            errors
-        });
-    }
-
-    const { address, city, state, country, lat, lng, name, description, price } = req.body;
-    const spot = await req.spot.update({ ownerId: req.user.id, address, city, state, country, lat, lng, name, description, price });
-    res.status(200).json(spot);
+    analyzeErrors(req, res, async () => {
+        const { address, city, state, country, lat, lng, name, description, price } = req.body;
+        const spot = await req.spot.update({ ownerId: req.user.id, address, city, state, country, lat, lng, name, description, price });
+        res.status(200).json(spot);
+    })
 });
 
 router.get('/:spotId', async (req, res) => {
@@ -215,15 +150,6 @@ router.get('/:spotId/reviews', async (req, res) => {
     res.json({ Reviews: reviews });
 });
 
-const validateReview = [
-    check('review')
-        .exists({ checkFalsy: true })
-        .withMessage('Review text is required'),
-    check('stars')
-        .isIn([1, 2, 3, 4, 5])
-        .withMessage('Stars must be an integer from 1 to 5')
-];
-
 router.post('/:spotId/reviews', requireAuthentication, restoreSpot, validateReview, async (req, res) => {
     const oldReview = await Review.findOne({ where: { userId: req.user.id, spotId: req.params.spotId } });
     if (oldReview) {
@@ -233,9 +159,10 @@ router.post('/:spotId/reviews', requireAuthentication, restoreSpot, validateRevi
         })
     }
 
-    validatePost(req, res, async (req) => {
+    analyzeErrors(req, res, async () => {
         const { review, stars } = req.body;
-        return await Review.create({ userId: req.user.id, spotId: req.params.spotId, review, stars });
+        const record = await Review.create({ userId: req.user.id, spotId: req.params.spotId, review, stars });
+        res.status(201).json(record);
     })
 })
 

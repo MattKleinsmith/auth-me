@@ -1,26 +1,40 @@
 const express = require('express');
-
-const { setTokenCookie, requireAuthentication, respondWith403 } = require('../../utils/auth');
-const { getReviews } = require('../../utils');
+const { requireAuthentication, respondWith403 } = require('../../utils/auth');
 const { Review, Spot, User, SpotImage, sequelize, ReviewImage } = require('../../db/models');
-
-const { check } = require('express-validator');
-const { handleValidationErrors } = require('../../utils/validation');
-
-const { environment } = require('../../config');
-const isProduction = environment === 'production';
+const { validateReview, analyzeErrors } = require('../api/validators.js');
 
 const router = express.Router();
 
-router.post('/:reviewId/images', requireAuthentication, async (req, res) => {
-    const reviewRecord = await Review.findOne({ where: { id: req.params.reviewId } });
-    if (!reviewRecord) {
-        return res.status(404).json({
-            "message": "Review couldn't be found",
-            "statusCode": 404
-        });
+function respondWithReview404(res) {
+    res.status(404).json({
+        "message": "Review couldn't be found",
+        "statusCode": 404
+    });
+}
+
+async function restoreReview(req, res, next) {
+    const review = await Review.findByPk(req.params.reviewId);
+    if (review) {
+        req.review = review;
+        return next();
     }
-    if (reviewRecord.userId != req.user.id) {
+    respondWithReview404(res);
+}
+
+router.put('/:reviewId', requireAuthentication, restoreReview, validateReview, async (req, res) => {
+    if (req.review.userId !== req.user.id) return respondWith403(res);
+    analyzeErrors(req, res, async () => {
+        const { review, stars } = req.body;
+        const changes = {};
+        if (review !== undefined) changes.review = review;
+        if (stars !== undefined) changes.stars = stars;
+        const record = await req.review.update(changes);
+        res.status(201).json(record);
+    })
+});
+
+router.post('/:reviewId/images', requireAuthentication, restoreReview, async (req, res) => {
+    if (req.review.userId != req.user.id) {
         return respondWith403(res);
     }
     const imageCount = await ReviewImage.count({ where: { reviewId: req.params.reviewId } });
