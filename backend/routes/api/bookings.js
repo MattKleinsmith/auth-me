@@ -28,7 +28,7 @@ router.get('/current', requireAuthentication, async (req, res) => {
             {
                 model: Spot,
                 attributes: { exclude: ['createdAt', 'updatedAt'] },
-                include: { model: SpotImage, attributes: ['url'], where: { preview: true } },
+                include: { model: SpotImage, attributes: ['url'], where: { preview: true }, required: false },
             },
         ],
         where: { userId: req.user.id }
@@ -57,7 +57,7 @@ router.put('/:bookingId', requireAuthentication, restoreBooking, validateBooking
     }
     analyzeErrors(req, res, async () => {
         const { startDate, endDate } = req.body;
-        const record = await req.booking.update({ startDate, endDate });
+        const record = await req.booking.update({ id: req.booking.id, startDate, endDate });
         res.status(200).json(record);
     });
 });
