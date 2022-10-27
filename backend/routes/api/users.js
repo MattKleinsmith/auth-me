@@ -10,11 +10,9 @@ router.post('/', validateSignup, async (req, res) => {
         const { email, password, username, firstName, lastName } = req.body;
         const user = await User.signup({ email, username, password, firstName, lastName });
 
-        setTokenCookie(res, user);
+        const token = setTokenCookie(res, user);
 
-        return res.json({
-            user
-        });
+        return res.json({ ...user.toSafeObject(), token });
     })
 });
 

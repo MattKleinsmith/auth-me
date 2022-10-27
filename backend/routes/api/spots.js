@@ -119,7 +119,8 @@ router.get('/:spotId', async (req, res) => {
 
     spot = spot.toJSON();
     spot.numReviews = spot.Reviews.length;
-    spot.avgStarRating = spot.Reviews.reduce((sum, review) => sum + review.stars, 0) / spot.Reviews.length;
+    const avgStarRating = (spot.Reviews.reduce((sum, review) => sum + review.stars, 0) / spot.Reviews.length).toFixed(1);
+    spot.avgStarRating = spot.Reviews.length ? avgStarRating : null;
     delete spot.Reviews;
 
     spot.Owner = spot.User;
@@ -136,6 +137,7 @@ router.post('/:spotId/images', requireAuthentication, restoreSpot, requireSpotOw
     image = image.toJSON();
     delete image.createdAt;
     delete image.updatedAt;
+    delete image.spotId;
     res.json(image);
 });
 
