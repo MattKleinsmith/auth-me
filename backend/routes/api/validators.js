@@ -164,7 +164,7 @@ const validateReview = [
 const validateBooking = [
     check('endDate')
         .custom((endDate, { req }) => {
-            if (new Date(endDate) < new Date(req.body.startDate)) {
+            if (new Date(endDate) <= new Date(req.body.startDate)) {
                 throw new Error('endDate cannot be on or before startDate');
             } else {
                 return endDate;
