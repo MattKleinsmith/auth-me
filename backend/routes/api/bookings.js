@@ -41,6 +41,7 @@ router.get('/current', requireAuthentication, async (req, res) => {
             bookings[i] = booking;
             booking.Spot.previewImage = booking.Spot.SpotImages.length ? booking.Spot.SpotImages[0].url : null;
             delete booking.Spot.SpotImages;
+            delete booking.Spot.description;
         }
     }
     res.json({ Bookings: bookings });
