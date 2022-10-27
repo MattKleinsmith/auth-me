@@ -57,6 +57,8 @@ router.post('/:reviewId/images', requireAuthentication, restoreReview, async (re
     }
 
     const imageRecord = await ReviewImage.create({ reviewId: req.params.reviewId, url: req.body.url });
+    delete imageRecord.dataValues.createdAt;
+    delete imageRecord.dataValues.updatedAt;
     res.json(imageRecord);
 });
 

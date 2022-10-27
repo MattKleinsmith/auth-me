@@ -22,11 +22,9 @@ router.post('/', validateLogin, async (req, res, next) => {
             })
         }
 
-        setTokenCookie(res, user);
+        const token = setTokenCookie(res, user);
 
-        return res.json({
-            user
-        });
+        return res.json({ ...user.toJSON(), token });
     })
 });
 
