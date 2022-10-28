@@ -40,7 +40,7 @@ router.put('/:reviewId', requireAuthentication, restoreReview, requireReviewOwne
         if (review !== undefined) changes.review = review;
         if (stars !== undefined) changes.stars = stars;
         const record = await req.review.update(changes);
-        res.status(201).json(record);
+        res.status(200).json(record);
     });
 });
 
