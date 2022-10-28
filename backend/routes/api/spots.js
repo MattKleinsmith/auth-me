@@ -230,7 +230,7 @@ router.post('/:spotId/bookings', requireAuthentication, restoreSpot, validateBoo
     analyzeErrors(req, res, async () => {
         const { startDate, endDate } = req.body;
         const record = await Booking.create({ userId: req.user.id, spotId: req.params.spotId, startDate, endDate });
-        res.status(201).json(record);
+        res.status(200).json(record);
     });
 });
 
