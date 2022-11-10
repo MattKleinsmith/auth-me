@@ -1,6 +1,5 @@
 const { check, validationResult } = require('express-validator');
 const { query } = require('express-validator/check');
-const { handleValidationErrors } = require('../../utils/validation');
 const { Booking, sequelize, User } = require('../../db/models');
 const { Op } = require("sequelize");
 
