@@ -9,9 +9,13 @@ export async function csrfFetch(url, options = {}) {
             options.headers['Content-Type'] || 'application/json';
         options.headers['XSRF-Token'] = Cookies.get('XSRF-TOKEN');
     }
-    const res = await window.fetch(url, options);
+    const res = await fetch(url, options);
 
-    if (res.status >= 400) throw res;
+    if (res.status >= 400) {
+        const errors = await res.json();
+        console.log(errors);
+        throw errors;
+    }
 
     return res;
 }
