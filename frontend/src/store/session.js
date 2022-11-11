@@ -28,6 +28,12 @@ export const login = credentials => async dispatch => {
     return response;
 };
 
+export const logout = () => async (dispatch) => {
+    const response = await csrfFetch('/api/session', { method: 'DELETE', });
+    dispatch(setUser(null));
+    return response;
+};
+
 export const signup = user => async (dispatch) => {
     const response = await csrfFetch("/api/users", {
         method: "POST",
