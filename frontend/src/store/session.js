@@ -1,38 +1,28 @@
-import { csrfFetch } from "./csrf";
+import { csrfFetch } from './csrf';
 
-const SET_USER = 'session/SET_USER';
+const SET_USER = 'session/setUser';
 
-const login = user => ({
-    type: SET_USER,
-    user
-});
+const setUser = user => { return { type: SET_USER, user } };
 
-export const logout = () => ({
-    type: SET_USER,
-    user: null
-});
-
-export const postSession = (payload) => async dispatch => {
-    const response = await csrfFetch(`/api/session`, {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+export const login = credentials => async dispatch => {
+    const response = await csrfFetch('/api/session', {
+        method: 'POST',
+        body: JSON.stringify(credentials),
     });
 
     if (response.ok) {
-        const user = await response.json();
-        dispatch(login(user));
-        return user;
+        const data = await response.json();
+        dispatch(setUser(data));
     }
 };
 
-const sessionReducer = (state = { user: null }, action) => {
+export default sessionReducer = (state = { user: null }, action) => {
+    const newState = { ...state };
     switch (action.type) {
         case SET_USER:
-            return { ...state, user: action.user };
+            newState.user = action.user;
+            return newState;
         default:
             return state;
     }
-}
-
-export default sessionReducer;
+};
