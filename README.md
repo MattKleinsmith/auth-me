@@ -1,6 +1,10 @@
+<a name="readme-top"></a>
+
 ## BedNoBreakfast
 
-BedNoBreakfast is a web application clone of AirBnB, which provides an online marketplace for lodging. It can be found here: https://matt-kleinsmith-auth-me.herokuapp.com/
+BedNoBreakfast is a web application clone of AirBnB, which provides an online marketplace for lodging.
+
+Here is a demo: https://matt-kleinsmith-auth-me.herokuapp.com/
 
 It was built using this stack:
 
@@ -17,10 +21,25 @@ It was built using this stack:
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)<br/>
 ![Heroku](https://img.shields.io/badge/heroku⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)
 
-# Features
+### Features
 
-# Road map
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-# Getting started
+### Roadmap
 
-# Contact
+- [ ] Structure wiki
+- [ ] Create kanban cards
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Getting started
+
+From within the project folder: <code>sh ./setup.sh</code>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Contact
+
+https://www.linkedin.com/in/matthewkleinsmith/
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
