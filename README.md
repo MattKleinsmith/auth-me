@@ -29,6 +29,7 @@ It was built using this stack:
 
 - [ ] Structure wiki
 - [ ] Create kanban cards
+- [ ] Reformat API docs
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
