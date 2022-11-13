@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
+import { setLoginModal } from "../../store/ui";
 
 function LoginForm() {
     const dispatch = useDispatch();
@@ -12,9 +13,8 @@ function LoginForm() {
         e.preventDefault();
         setErrors([]);
         return dispatch(sessionActions.login({ credential, password }))
-            .catch(error => {
-                setErrors([error])
-            });
+            .then(() => dispatch(setLoginModal(false)))
+            .catch(error => setErrors([error]));
     };
 
     return (

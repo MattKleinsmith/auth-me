@@ -35,11 +35,9 @@ function ProfileButton({ user }) {
     let menu;
     if (user) {
         menu = <>
-            <li>{user.username}</li>
-            <li>{user.email}</li>
-            <li>
-                <button onClick={logout}>Log Out</button>
-            </li>
+            <div>{user.username}</div>
+            <div>{user.email}</div>
+            <button onClick={logout}>Log Out</button>
         </>
     } else {
         menu = <>
@@ -51,13 +49,13 @@ function ProfileButton({ user }) {
     return (
         <div className="profileButtonWrapper">
             <button onClick={openMenu} className="profileButton">
-                <i className="fa-solid fa-bars"></i>
+                <i className="fa-solid fa-bars" />
                 <i className="fas fa-user-circle" />
             </button>
             {showMenu && (
-                <ul className="profile-dropdown">
+                <div className="profile-dropdown">
                     {menu}
-                </ul>
+                </div>
             )}
             {ui.showLoginModal && <LoginFormModal />}
             {ui.showSignupModal && <SignupFormModal />}

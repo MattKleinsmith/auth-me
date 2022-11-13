@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
+import { setSignupModal } from "../../store/ui";
 import './SignupForm.css';
 
 export default function SignupForm() {
@@ -22,6 +23,7 @@ export default function SignupForm() {
         if (password === confirmPassword) {
             setErrors([]);
             return dispatch(sessionActions.signup({ email, username, password, lastName, firstName }))
+                .then(() => dispatch(setSignupModal(false)))
                 .catch(errors => setErrors(Object.values(errors.errors)));
         }
         return setErrors(['Confirm Password field must be the same as the Password field']);
