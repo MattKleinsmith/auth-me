@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
@@ -26,7 +26,7 @@ function Navigation({ isLoaded }) {
     return (
         <>
             <div className="header">
-                <NavLink exact to="/"><i class="fa-regular fa-bed"></i></NavLink>
+                <Link exact to="/" style={{ textDecoration: 'none' }} className="leftHeader"><img height="32px" src="./logo.png" /><span id="logo" >BedNoBreakfast</span></Link>
                 <span>{isLoaded && sessionLinks}</span>
             </div>
         </>

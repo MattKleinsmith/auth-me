@@ -1,6 +1,18 @@
 .header {
     display: flex;
     justify-content: space-between;
-    padding-left: 80px;
-    padding-right: 80px;
+    padding-left: 70px;
+    padding-right: 90px;
+}
+
+#logo {
+    font-family: 'Poppins', sans-serif;
+    color: #ff385c;
+    font-size: 20px;
+    padding-top: 2.5px;
+}
+
+.leftHeader {
+    display: flex;
+    gap: 4px;
 }
