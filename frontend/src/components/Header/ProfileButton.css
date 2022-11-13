@@ -1,8 +1,14 @@
+.profileButtonWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+
 .profileButton {
     display: flex;
     gap: 10px;
     border-radius: 50px;
-    border: 1px solid rgb(194, 194, 194);
+    border: 1px solid rgb(213, 213, 213);
     background-color: white;
 
     padding-top: 6px;
@@ -10,6 +16,10 @@
 
     padding-left: 12.5px;
     padding-right: 7.5px;
+
+    width: 75px;
+
+    align-self: flex-end;
 }
 
 .fa-solid.fa-bars {
