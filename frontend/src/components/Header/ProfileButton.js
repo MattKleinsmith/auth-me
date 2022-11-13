@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as sessionActions from '../../store/session';
+import "./ProfileButton.css";
+import LoginFormModal from '../LoginFormModal';
+import SignupFormModal from '../SignupFormModal';
 
 function ProfileButton({ user }) {
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
+    const ui = useSelector(state => state.ui);
 
     const openMenu = () => {
         if (showMenu) return;
@@ -28,20 +32,35 @@ function ProfileButton({ user }) {
         dispatch(sessionActions.logout());
     };
 
+    let menu;
+    if (user) {
+        menu = <>
+            <li>{user.username}</li>
+            <li>{user.email}</li>
+            <li>
+                <button onClick={logout}>Log Out</button>
+            </li>
+        </>
+    } else {
+        menu = <>
+            <LoginFormModal />
+            <SignupFormModal />
+        </>
+    }
+
     return (
         <>
-            <button onClick={openMenu}>
+            <button onClick={openMenu} className="profileButton">
+                <i className="fa-solid fa-bars"></i>
                 <i className="fas fa-user-circle" />
             </button>
             {showMenu && (
                 <ul className="profile-dropdown">
-                    <li>{user.username}</li>
-                    <li>{user.email}</li>
-                    <li>
-                        <button onClick={logout}>Log Out</button>
-                    </li>
+                    {menu}
                 </ul>
             )}
+            {ui.showLoginModal && <LoginFormModal />}
+            {ui.showSignupModal && <SignupFormModal />}
         </>
     );
 }
