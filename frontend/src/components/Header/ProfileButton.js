@@ -49,7 +49,7 @@ function ProfileButton({ user }) {
     }
 
     return (
-        <>
+        <div className="profileButtonWrapper">
             <button onClick={openMenu} className="profileButton">
                 <i className="fa-solid fa-bars"></i>
                 <i className="fas fa-user-circle" />
@@ -61,7 +61,7 @@ function ProfileButton({ user }) {
             )}
             {ui.showLoginModal && <LoginFormModal />}
             {ui.showSignupModal && <SignupFormModal />}
-        </>
+        </ div>
     );
 }
 
