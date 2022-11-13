@@ -3,6 +3,10 @@
     flex-direction: column;
 }
 
+.profile-dropdown {
+    display: flex;
+    flex-direction: column;
+}
 
 .profileButton {
     display: flex;
