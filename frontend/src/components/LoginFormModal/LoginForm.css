@@ -1,0 +1,7 @@
+.logInButtons {
+    display: flex;
+}
+
+.logInButtons>button {
+    width: 50%;
+}

@@ -6,34 +6,34 @@ module.exports = {
     await queryInterface.bulkInsert('SpotImages', [
       {
         spotId: 1,
-        url: "preview-bad-review-image-url1",
+        url: "../images/00_0.webp",
         preview: true
       },
       {
         spotId: 1,
-        url: "no-preview-good-review-image-url1",
+        url: "../images/00_1.webp",
         preview: false
       },
       {
         spotId: 2,
-        url: "preview-bad-review-image-url2",
+        url: "./images/01_0.webp",
         preview: true
       },
       {
         spotId: 2,
-        url: "no-preview-good-review-image-url2",
+        url: "./images/01_0.webp",
         preview: false
       },
       {
         spotId: 2,
-        url: "no-preview-good-review-image-url23",
+        url: "./images/01_0.webp",
         preview: false
       },
       // Not owned by User 1
       {
         spotId: 3,
-        url: "no-preview-good-review-image-url23",
-        preview: false
+        url: "./images/02_0.webp",
+        preview: true
       }
     ], {});
   },
