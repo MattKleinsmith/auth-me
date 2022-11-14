@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Header from "./components/Header";
+import SpotGrid from "./components/SpotGrid/SpotGrid";
 
 function App() {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ function App() {
   return (
     <>
       <Header isLoaded={isLoaded} />
+      <SpotGrid />
     </>
   );
 }
