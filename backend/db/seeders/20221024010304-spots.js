@@ -13,7 +13,7 @@ module.exports = {
         "lat": 88.7645358,
         "lng": -122.4730329,
         "name": "GeoDome w/AC, Indoor Jetted Tub and Hilltop View's",
-        "description": "Adventure meets luxury with this one of a kind climate controlled glamping excursion. All the best of nature combined with the luxury of an upscale hotel room. Gaze up at the stars or out at the rolling Eureka forestry from the comfort of your 100% climate controlled dome. Soak in the jetted tub cookout on the deck and drink cocktails from the built in hammock. 15min to Eureka Springs downtown. NO WIFI and cell service is spotty.",
+        "description": "Sits on 40 wooded acres with a cabin and another dome on 3.5 cleared acres.",
         "price": 189
       },
       {
