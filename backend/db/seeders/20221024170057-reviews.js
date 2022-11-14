@@ -7,8 +7,8 @@ module.exports = {
       {
         userId: 1,
         spotId: 1,
-        "review": "This was a bad spot!",
-        "stars": 1
+        "review": "This was a great spot!",
+        "stars": 5
       },
       {
         userId: 2,
@@ -18,9 +18,15 @@ module.exports = {
       },
       {
         userId: 3,
-        spotId: 1,
-        "review": "This was a good spot! asdsada",
-        "stars": 5
+        spotId: 2,
+        "review": "This was a good spot!",
+        "stars": 4.94
+      },
+      {
+        userId: 1,
+        spotId: 3,
+        "review": "This was a good spot!",
+        "stars": 5.0
       }
 
     ], {});
