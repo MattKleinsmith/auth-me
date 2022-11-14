@@ -14,7 +14,7 @@ function LoginForm() {
         setErrors([]);
         return dispatch(sessionActions.login({ credential, password }))
             .then(() => dispatch(setLoginModal(false)))
-            .catch(error => setErrors([error]));
+            .catch(error => setErrors([error.message]));
     };
 
     return (
