@@ -6,12 +6,12 @@ module.exports = {
     await queryInterface.bulkInsert('SpotImages', [
       {
         spotId: 1,
-        url: "preview-bad-review-image-url1",
+        url: "../images/Eureka Springs0.webp",
         preview: true
       },
       {
         spotId: 1,
-        url: "no-preview-good-review-image-url1",
+        url: "../images/Eureka Springs1.webp",
         preview: false
       },
       {

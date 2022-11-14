@@ -6,15 +6,15 @@ module.exports = {
     return queryInterface.bulkInsert('Spots', [
       {
         "ownerId": 1,
-        "address": "987 Tracy",
-        "city": "San Francisco",
-        "state": "California",
-        "country": "United States of America",
+        "address": "987 Tracy St",
+        "city": "Eureka Springs",
+        "state": "Arkansas",
+        "country": "United States",
         "lat": 88.7645358,
         "lng": -122.4730329,
-        "name": "Tracy Haven",
-        "description": "Tracy description",
-        "price": 150
+        "name": "GeoDome w/AC, Indoor Jetted Tub and Hilltop View's",
+        "description": "Adventure meets luxury with this one of a kind climate controlled glamping excursion. All the best of nature combined with the luxury of an upscale hotel room. Gaze up at the stars or out at the rolling Eureka forestry from the comfort of your 100% climate controlled dome. Soak in the jetted tub cookout on the deck and drink cocktails from the built in hammock. 15min to Eureka Springs downtown. NO WIFI and cell service is spotty.",
+        "price": 189
       },
       {
         "ownerId": 1,
@@ -24,7 +24,7 @@ module.exports = {
         "country": "United States of America",
         "lat": 99.7645358,
         "lng": -122.4730329,
-        "name": "Troost Place",
+        "name": "NEW On Creek! HUGE Deck- Elegant Luxury! Sleeps 15",
         "description": "Troost description",
         "price": 100
       },
