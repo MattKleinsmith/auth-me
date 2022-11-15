@@ -1,12 +1,11 @@
 export default function SpotGridItem({ spot }) {
-    console.log(spot.previewImage);
     return (
         <div className="SpotGridItem">
-            <img src={spot.previewImage} alt="previewImage" />
+            <img src={spot.previewImage ? spot.previewImage : "/images/placeholder.png"} alt="previewImage" />
             <div className="SpotGridItemDescription">
                 <div className="SpotGridItemFirstRow">
                     <div><strong>{spot.city}, {spot.state}</strong></div>
-                    <div className="SpotGridItemStarRating"><i className="fa-solid fa-star SpotGridItemStar" /> {spot.avgRating}</div>
+                    {spot.avgRating && <div className="SpotGridItemStarRating"><i className="fa-solid fa-star SpotGridItemStar" /> {spot.avgRating}</div>}
                 </div>
                 <div className="SpotGridItemSubtext">
                     <div>185 miles away</div>

@@ -1,9 +1,23 @@
 .header {
     display: flex;
     justify-content: space-between;
-    padding-left: 70px;
-    padding-right: 57.5px;
-    padding-top: 10px;
+    padding-top: 8px;
+    padding-bottom: 20px;
+}
+
+.becomeAHost {
+    font-weight: bold;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 3px;
+}
+
+.rightHeader {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
 }
 
 #logo {
@@ -11,6 +25,7 @@
     color: #ff385c;
     font-size: 20px;
     padding-top: 2.5px;
+    font-weight: 600;
 }
 
 .leftHeader {

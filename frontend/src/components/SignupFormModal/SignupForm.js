@@ -31,6 +31,7 @@ export default function SignupForm() {
 
     return (
         <form onSubmit={handleSubmit}>
+            <h1>Sign up</h1>
             <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>

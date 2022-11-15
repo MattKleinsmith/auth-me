@@ -1,0 +1,24 @@
+.SpotDetailsHeader {
+    /* border: 1px solid; */
+}
+
+.SpotDetailsHeader>h1 {
+    font-size: 25px;
+    color: #222222;
+    font-family: 'Poppins-light', sans-serif;
+}
+
+.SpotsDetailsRatingLocation {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 15px;
+    padding-top: 0px;
+    margin-top: 0px;
+    margin-top: -10px;
+    /* font-family: 'Oxygen', sans-serif; */
+}
+
+.SpotsDetailsRatingLocation>i {
+    font-size: 13px;
+}

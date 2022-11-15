@@ -1,0 +1,92 @@
+.SpotDetails {
+    padding-top: 5px;
+}
+
+.SpotDetailsImageGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 8px;
+    grid-template-areas:
+        "a b c"
+        "a d e";
+    border-radius: 12.5px;
+    overflow: hidden;
+    margin-top: 25px;
+    height: 498px;
+}
+
+.previewImage {
+    grid-area: a;
+    width: 560px;
+    position: relative;
+    left: 50%;
+    top: 50.75%;
+    transform: translate(-50%, -51%);
+}
+
+.otherImageDiv {
+    height: 249px;
+    width: 272px;
+    overflow: hidden;
+}
+
+.div_0 {
+    grid-area: b;
+}
+
+.div_1 {
+    grid-area: c;
+}
+
+.div_2 {
+    grid-area: d;
+}
+
+.div_3 {
+    grid-area: e;
+}
+
+.otherImageImg {
+    position: relative;
+    left: 50%;
+    top: 50.75%;
+    transform: translate(-50%, -51%);
+}
+
+.img_0 {
+    height: 100%;
+}
+
+.img_1 {
+    height: 135%;
+}
+
+.img_2 {
+    height: 110%;
+}
+
+.img_3 {
+    height: 100%;
+}
+
+.SpotDetailsBody {
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+}
+
+.SpotDetailsDescription {
+    width: 650px;
+}
+
+.DescBook {
+    display: flex;
+    gap: 80px;
+}
+
+h2 {
+    font-size: 21px;
+    color: black;
+    font-family: 'Poppins-light', sans-serif;
+}
