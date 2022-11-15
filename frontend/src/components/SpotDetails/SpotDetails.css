@@ -80,6 +80,11 @@
     width: 650px;
 }
 
+.DescBook {
+    display: flex;
+    gap: 80px;
+}
+
 h2 {
     font-size: 21px;
     color: black;

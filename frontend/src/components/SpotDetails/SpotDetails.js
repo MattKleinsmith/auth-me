@@ -29,8 +29,10 @@ export default function SpotDetails() {
             </div>
             <div className="SpotDetailsBody">
                 <h2>Hosted by {spotDetails.Owner.firstName}</h2>
-                <div className="SpotDetailsDescription">{spotDetails.description}</div>
-                <BookingForm />
+                <div className="DescBook">
+                    <div className="SpotDetailsDescription">{spotDetails.description}</div>
+                    <BookingForm spot={spotDetails} />
+                </div>
             </div>
         </div>
     );
