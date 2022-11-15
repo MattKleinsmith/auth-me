@@ -27,8 +27,91 @@ module.exports = {
         spotId: 3,
         "review": "This was a good spot!",
         "stars": 5.0
-      }
-
+      },
+      {
+        userId: 2,
+        spotId: 3,
+        "review": "This was a good spot!",
+        "stars": 5.0
+      },
+      {
+        userId: 4,
+        spotId: 3,
+        "review": "This was a good spot!",
+        "stars": 5.0
+      },
+      {
+        userId: 5,
+        spotId: 3,
+        "review": "This was a good spot!",
+        "stars": 5.0
+      },
+      {
+        userId: 6,
+        spotId: 3,
+        "review": "This was a good spot!",
+        "stars": 4.0
+      },
+      {
+        userId: 1,
+        spotId: 4,
+        "review": "This was a good spot!",
+        "stars": 5
+      },
+      {
+        userId: 1,
+        spotId: 5,
+        "review": "This was a good spot!",
+        "stars": 5
+      },
+      {
+        userId: 1,
+        spotId: 6,
+        "review": "This was a good spot!",
+        "stars": 5
+      },
+      {
+        userId: 1,
+        spotId: 7,
+        "review": "This was a good spot!",
+        "stars": 5
+      },
+      {
+        userId: 1,
+        spotId: 8,
+        "review": "This was a good spot!",
+        "stars": 5
+      },
+      {
+        userId: 1,
+        spotId: 9,
+        "review": "This was a good spot!",
+        "stars": 5
+      },
+      {
+        userId: 1,
+        spotId: 10,
+        "review": "This was a good spot!",
+        "stars": 5
+      },
+      {
+        userId: 1,
+        spotId: 11,
+        "review": "This was a good spot!",
+        "stars": 5
+      },
+      {
+        userId: 1,
+        spotId: 12,
+        "review": "This was a good spot!",
+        "stars": 5
+      },
+      {
+        userId: 2,
+        spotId: 12,
+        "review": "This was a good spot!",
+        "stars": 4
+      },
     ], {});
   },
 
