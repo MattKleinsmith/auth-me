@@ -15,7 +15,7 @@ function Navigation({ isLoaded }) {
             <div style={{ paddingLeft: ui.padding.left, paddingRight: ui.padding.right }}>
                 <div className="header">
                     <Logo />
-                    <span>{isLoaded && <div className="rightHeader"><button className="becomeAHost" onClick={() => dispatch(setCreateSpotModal(true))}>Become a Host</button> <ProfileButton user={sessionUser} /></div>}</span>
+                    <span>{<div className="rightHeader">{sessionUser && <button className="becomeAHost" onClick={() => dispatch(setCreateSpotModal(true))}>Create a Spot</button>}<ProfileButton user={sessionUser} /></div>}</span>
                 </div>
             </div>
             {ui.showCreateSpotModal && <CreateSpotFormModal />}

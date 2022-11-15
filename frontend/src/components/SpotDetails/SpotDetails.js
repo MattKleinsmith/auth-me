@@ -21,15 +21,15 @@ export default function SpotDetails() {
         return;
     };
 
-    const previewImageUrl = spotDetails.SpotImages?.find(image => image.preview).url;
+    const previewImageUrl = spotDetails.SpotImages?.find(image => image.preview)?.url;
 
     return (
         <div className="SpotDetails" style={{ paddingLeft: padding.left, paddingRight: padding.right }}>
             <SpotDetailsHeader spot={spotDetails} />
-            <div className="SpotDetailsImageGrid">
+            {previewImageUrl && <div className="SpotDetailsImageGrid">
                 <img className="previewImage" src={previewImageUrl} alt={previewImageUrl} />
                 {spotDetails.SpotImages?.filter(image => !image.preview).map((image, i) => <div className={`otherImageDiv div_${i}`} key={i}><img className={`otherImageImg img_${i}`} src={image.url} alt={image.url} /></div>)}
-            </div>
+            </div>}
             <div className="SpotDetailsBody">
                 <h2>Hosted by {spotDetails.Owner?.firstName}</h2>
                 <div className="DescBook">
