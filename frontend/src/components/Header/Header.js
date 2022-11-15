@@ -7,12 +7,12 @@ import Logo from './Logo';
 function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
     return (
-        <>
+        <div className="standardPadding">
             <div className="header">
                 <Logo />
                 <span>{isLoaded && <ProfileButton user={sessionUser} />}</span>
             </div>
-        </>
+        </div>
     );
 }
 

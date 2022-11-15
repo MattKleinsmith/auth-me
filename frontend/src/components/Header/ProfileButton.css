@@ -12,7 +12,7 @@
     display: flex;
     gap: 10px;
     border-radius: 50px;
-    border: 1px solid rgb(213, 213, 213);
+    border: 1px solid rgb(217, 217, 217);
     background-color: white;
 
     padding-top: 6px;
@@ -21,7 +21,7 @@
     padding-left: 12.5px;
     padding-right: 7.5px;
 
-    width: 75px;
+    width: 80px;
 
     align-self: flex-end;
 }
@@ -34,5 +34,6 @@
 
 .fas.fa-user-circle {
     font-size: 30px;
+    padding-left: 5px;
     color: rgb(110, 110, 110);
 }

@@ -1,0 +1,13 @@
+.SpotDetailsImageGrid {
+    border: 1px solid red;
+    display: grid;
+}
+
+.SpotDetailsBody {
+    border: 1px solid green;
+    display: flex;
+}
+
+.SpotDetails {
+    padding-top: 20px;
+}
