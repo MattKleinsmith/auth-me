@@ -5,23 +5,26 @@ import BookingForm from "./BookingForm";
 import "./SpotDetails.css";
 import SpotDetailsHeader from "./SpotDetailsHeader";
 import { getSpotDetails } from "../../store/spotDetails";
-import { setRootWrapperPadding } from "../../utils";
+import { setPadding } from "../../store/ui";
 
 export default function SpotDetails() {
     const { spotId } = useParams();
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getSpotDetails(spotId));
-        setRootWrapperPadding(false);
+        dispatch(setPadding("384px", "380px"));
     }, [dispatch]);
 
+    const padding = useSelector(state => state.ui.padding);
     const spotDetails = useSelector(state => state.spotDetails);
-    if (!spotDetails) return;
+    if (Object.keys(spotDetails).length === 0) {
+        return;
+    };
 
     const previewImageUrl = spotDetails.SpotImages?.find(image => image.preview).url;
 
     return (
-        <div className="SpotDetails standardPadding">
+        <div className="SpotDetails" style={{ paddingLeft: padding.left, paddingRight: padding.right }}>
             <SpotDetailsHeader spot={spotDetails} />
             <div className="SpotDetailsImageGrid">
                 <img className="previewImage" src={previewImageUrl} alt={previewImageUrl} />

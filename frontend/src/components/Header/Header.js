@@ -6,8 +6,9 @@ import Logo from './Logo';
 
 function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
+    const padding = useSelector(state => state.ui.padding);
     return (
-        <div className="standardPadding">
+        <div style={{ paddingLeft: padding.left, paddingRight: padding.right }}>
             <div className="header">
                 <Logo />
                 <span>{isLoaded && <div className="rightHeader"><button className="becomeAHost">Become a Host</button> <ProfileButton user={sessionUser} /></div>}</span>
