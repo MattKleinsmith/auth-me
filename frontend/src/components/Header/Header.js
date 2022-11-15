@@ -1,19 +1,25 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Header.css';
 import Logo from './Logo';
+import { setCreateSpotModal } from '../../store/ui';
+import CreateSpotFormModal from '../CreateSpotModal';
 
 function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
-    const padding = useSelector(state => state.ui.padding);
+    const ui = useSelector(state => state.ui);
+    const dispatch = useDispatch();
     return (
-        <div style={{ paddingLeft: padding.left, paddingRight: padding.right }}>
-            <div className="header">
-                <Logo />
-                <span>{isLoaded && <div className="rightHeader"><button className="becomeAHost">Become a Host</button> <ProfileButton user={sessionUser} /></div>}</span>
+        <>
+            <div style={{ paddingLeft: ui.padding.left, paddingRight: ui.padding.right }}>
+                <div className="header">
+                    <Logo />
+                    <span>{isLoaded && <div className="rightHeader"><button className="becomeAHost" onClick={() => dispatch(setCreateSpotModal(true))}>Become a Host</button> <ProfileButton user={sessionUser} /></div>}</span>
+                </div>
             </div>
-        </div>
+            {ui.showCreateSpotModal && <CreateSpotFormModal />}
+        </>
     );
 }
 

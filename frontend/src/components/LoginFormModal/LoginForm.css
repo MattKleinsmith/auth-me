@@ -5,3 +5,7 @@
 .logInButtons>button {
     width: 50%;
 }
+
+form {
+    padding: 30px;
+}
