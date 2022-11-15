@@ -2,12 +2,6 @@
     font-family: 'Poppins-light';
 }
 
-.line {
-    height: 1px;
-    width: 100%;
-    background-color: #ebebeb;
-}
-
 /* devanagari */
 @font-face {
     font-family: 'Poppins-light';

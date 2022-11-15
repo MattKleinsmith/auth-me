@@ -8,16 +8,14 @@ import SpotDetails from "./components/SpotDetails";
 
 function App() {
   const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
-    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+    dispatch(sessionActions.restoreUser());
   }, [dispatch]);
 
   return (
     <div >
-      <Header isLoaded={isLoaded} />
-      <div className="line"></div>
-      <Switch  >
+      <Header />
+      <Switch>
         <Route exact path="/"><SpotGrid /></Route>
         <Route exact path="/spots/:spotId"><SpotDetails /></Route>
       </Switch>

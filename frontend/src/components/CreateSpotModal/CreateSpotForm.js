@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import { postSpot } from "../../store/spots";
 import { setCreateSpotModal } from "../../store/ui";
@@ -19,15 +19,20 @@ export default function SignupForm() {
 
     const dispatch = useDispatch();
 
-    // const sessionUser = useSelector((state) => state.session.user);
-    // if (sessionUser) return <Redirect to="/" />;
+    const history = useHistory();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors([]);
-        return dispatch(postSpot({ address, city, state, country, name, description, price }))
-            .then(() => dispatch(setCreateSpotModal(false)))
-            .catch(errors => setErrors(Object.values(errors.errors)));
+        try {
+            const spot = await dispatch(postSpot({ address, city, state, country, name, description, price }))
+            dispatch(setCreateSpotModal(false));
+            console.log("NEW SPOT", spot);
+            history.push("/spots/" + spot.id);
+        }
+        catch (errors) {
+            setErrors(Object.values(errors.errors))
+        }
     };
 
     return (

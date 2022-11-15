@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { getSpots } from "../../store/spots";
 import { NavLink } from "react-router-dom";
 import { clearSpotDetails } from "../../store/spotDetails";
-import { setPadding } from "../../store/ui";
+import { resetPadding } from "../../store/ui";
 
 export default function SpotGrid() {
     const dispatch = useDispatch();
@@ -14,7 +14,7 @@ export default function SpotGrid() {
     useEffect(() => {
         dispatch(getSpots());
         dispatch(clearSpotDetails());
-        dispatch(setPadding("70px", "70px"));
+        dispatch(resetPadding());
     }, [dispatch]);
 
     return <div className="SpotGrid" style={{ paddingLeft: padding.left, paddingRight: padding.right }}>{

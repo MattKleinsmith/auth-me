@@ -109,7 +109,9 @@ const validateSpot = [
         .withMessage('Description is required'),
     check('price')
         .exists({ checkFalsy: true })
-        .withMessage('Price per day is required'),
+        .withMessage('Price per day is required')
+        .isFloat()
+        .withMessage('Price must be a number')
 ];
 
 const validateSpotQuery = [
