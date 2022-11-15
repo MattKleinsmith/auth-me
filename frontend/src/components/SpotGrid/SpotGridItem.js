@@ -1,5 +1,4 @@
 export default function SpotGridItem({ spot }) {
-    console.log(spot.previewImage);
     return (
         <div className="SpotGridItem">
             <img src={spot.previewImage} alt="previewImage" />

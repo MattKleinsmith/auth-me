@@ -15,6 +15,6 @@ export default function SpotGrid() {
     }, [dispatch]);
 
     return <div className="SpotGrid standardPadding">{
-        spots.map((spot, i) => <NavLink to={`/spots/${spot.id}`} style={{ textDecoration: 'none' }}> <SpotGridItem key={i} spot={spot} /></NavLink>)
+        spots.map((spot, i) => <NavLink key={i} to={`/spots/${spot.id}`} style={{ textDecoration: 'none' }}> <SpotGridItem spot={spot} /></NavLink>)
     }</div >
 }

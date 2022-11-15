@@ -18,12 +18,17 @@ export default function SpotDetails() {
     const spotDetails = useSelector(state => state.spotDetails);
     if (!spotDetails) return;
 
+    const previewImageUrl = spotDetails.SpotImages?.find(image => image.preview).url;
+
     return (
         <div className="SpotDetails standardPadding">
             <SpotDetailsHeader spot={spotDetails} />
-            <div className="SpotDetailsImageGrid">images</div>
+            <div className="SpotDetailsImageGrid">
+                <img className="previewImage" src={previewImageUrl} alt={previewImageUrl} />
+                {spotDetails.SpotImages?.filter(image => !image.preview).map((image, i) => <div className={`otherImageDiv div_${i}`} key={i}><img className={`otherImageImg img_${i}`} src={image.url} alt={image.url} /></div>)}
+            </div>
             <div className="SpotDetailsBody">
-                <div>{spotDetails.description}</div>
+                <div className="SpotDetailsDescription">{spotDetails.description}</div>
                 <BookingForm />
             </div>
         </div>

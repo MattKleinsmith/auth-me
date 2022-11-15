@@ -15,6 +15,21 @@ module.exports = {
         preview: false
       },
       {
+        spotId: 1,
+        url: "../images/00_2.webp",
+        preview: false
+      },
+      {
+        spotId: 1,
+        url: "../images/00_3.webp",
+        preview: false
+      },
+      {
+        spotId: 1,
+        url: "../images/00_4.webp",
+        preview: false
+      },
+      {
         spotId: 2,
         url: "./images/01_0.webp",
         preview: true

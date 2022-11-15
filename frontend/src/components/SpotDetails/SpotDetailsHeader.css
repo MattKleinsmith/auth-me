@@ -1,5 +1,5 @@
 .SpotDetailsHeader {
-    border: 1px solid blue;
+    /* border: 1px solid; */
 }
 
 .SpotDetailsHeader>h1 {
@@ -13,6 +13,9 @@
     align-items: center;
     gap: 5px;
     font-size: 15px;
+    padding-top: 0px;
+    margin-top: 0px;
+    margin-top: -10px;
     /* font-family: 'Oxygen', sans-serif; */
 }
 
