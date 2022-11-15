@@ -17,7 +17,7 @@ module.exports = {
         "price": 189
       },
       {
-        "ownerId": 1,
+        "ownerId": 2,
         "address": "123 Troost",
         "city": "Broken Bow",
         "state": "Oklahoma",
@@ -25,11 +25,11 @@ module.exports = {
         "lat": 99.7645358,
         "lng": -122.4730329,
         "name": "NEW On Creek! HUGE Deck- Elegant Luxury! Sleeps 15",
-        "description": "Walkin' After Midnight is located in Timber Creek Trails South and is close to everything.",
+        "description": "Nestled on a 2 acre lot with a flowing creek and expansive deck, Walkin' After Midnight is a stunning, chic, modern and rustic cabin. Privately owned and operated by Almost Heaven Luxury Cabins, LLC, Walkin' After Midnight will sleep 15! It is located on a cul-de-sac street with 80' pine trees and a large circular driveway to pull your boat. You'll love the 1600sf deck w/ built in grill, bev fridge & outdoor games.",
         "price": 498
       },
       {
-        "ownerId": 2,
+        "ownerId": 3,
         "address": "456 Vivian",
         "city": "Lake Hamilton",
         "state": "Arkansas",
@@ -37,9 +37,117 @@ module.exports = {
         "lat": 111.7645358,
         "lng": -122.4730329,
         "name": "⭐️The Outlook Shipping Container Lakehouse⭐️ Amazing Views 🌅",
-        "description": "A modern shipping container home that is so close to the water you feel like you're on it.",
+        "description": "Welcome to the brand new Hygge Hideaway! As soon as you drive up, you'll see that that this lakefront cabin sits right next to our very own Pine Lake and is all about unplugging and getting back to the simple, enjoyable moments that make life grand. Hygge Hideaway greets you with an airy, open floor plan interspersed with nature-inspired design choices and whimsical decor––hinting that you should let out your inner \"cabin life\" state of mind and let yourself be charmed into instant vacation mode!",
         "price": 471
-      }
+      },
+      {
+        "ownerId": 4,
+        "address": "456 Vivian",
+        "city": "Granbury",
+        "state": "Texas",
+        "country": "United States",
+        "lat": 111.7645358,
+        "lng": -122.4730329,
+        "name": "Trails edge lake house, boat dock, & best views!!!",
+        "description": "Make memories to last a lifetime on lake Granbury, as well as having the best view in town. BRING YOUR BOAT!!!! Two story dock that is covered, has 2 boat slips, and plenty room for lake activities. Have a perfect view of the most beautiful sunrises and sunsets!! Centrally located between the Historic Granbury Square, Fossil Rim Wildlife Center and Dinosaur Valley State Park!",
+        "price": 300
+      },
+      {
+        "ownerId": 5,
+        "address": "456 Vivian",
+        "city": "Osage Beach",
+        "state": "Missouri",
+        "country": "United States",
+        "lat": 111.7645358,
+        "lng": -122.4730329,
+        "name": "Luxury Knolls Mansion, private pool and hot tub!",
+        "description": "What's not to love about this place! One of the most unique homes on the lake comes with the best views on the lake, private outdoor pool and hot tub, excellent location and gives you access to all of the fantastic Knolls amenities (shared indoor pool/hot tub, sauna, steam room, tennis courts and more). Not that you need to ever leave the house, but if you do you're a short drive or boat ride to Redhead Yacht Club, Margaritaville Landshark Bar, Shorty Pants and many other great spots!",
+        "price": 643
+      },
+      {
+        "ownerId": 6,
+        "address": "456 Vivian",
+        "city": "Cassopolis",
+        "state": "Michigan",
+        "country": "United States",
+        "lat": 111.7645358,
+        "lng": -122.4730329,
+        "name": "Gorgeous 4 BR Home on Peaceful Shavehead Lake",
+        "description": "Beautiful, newly renovated (2021) lakefront home on Shavehead Lake! Take out the kayaks or paddleboards for a morning ride on the calm, spring-fed lake.  Bring a boat or rent one for endless days in the sun! ",
+        "price": 645
+      },
+      {
+        "ownerId": 7,
+        "address": "456 Vivian",
+        "city": "Chicago",
+        "state": "Illinois",
+        "country": "United States",
+        "lat": 111.7645358,
+        "lng": -122.4730329,
+        "name": "55/56 Floor VIEW, Pool, Fireplace, Fitness Center.",
+        "description": "PH#1 is a magnificent unique rental in Chicago.  Towering 55 stories above the city, with dramatic living areas and exquisite fireplace, this Penthouse  gives you the ultimate in city living.  It's all about the views and location; nowhere in Chicago can you stay with view like these.  Bordered by the elegance and glamour of North Michigan Avenue to the east and the artsy sophistication of the River North District to the west, PH#1 is at the heart of one of Chicago most exciting neighborhoods.",
+        "price": 639
+      },
+      {
+        "ownerId": 8,
+        "address": "456 Vivian",
+        "city": "Wisconsin Dells",
+        "state": "Wisconsin",
+        "country": "United States",
+        "lat": 111.7645358,
+        "lng": -122.4730329,
+        "name": "The Lighthouse - cheerful Lake Blass five-bedroom",
+        "description": "The Lighthouse is a lakefront property close to downtown Wisconsin Dells. You’ll love our house because of the coziness, the location, and the views. Also the complimentary use of three kayaks, two row boats and one canoe!  Our house is good for couples, families (with kids), and groups up to 14.",
+        "price": 479
+      },
+      {
+        "ownerId": 9,
+        "address": "456 Vivian",
+        "city": "Hot Springs",
+        "state": "Arkansas",
+        "country": "United States",
+        "lat": 111.7645358,
+        "lng": -122.4730329,
+        "name": "Home w/Pool & Mtn Lake Views!",
+        "description": "Enjoy one of the best views that Lake Hamilton has to offer while spending afternoons relaxing in the pool or playing on the lake!  Waterfront property with swimming pool spans across 2 levels with tremendous mountain and lake views from both inside and outside the house.  The multi-level family home has 5 Bedrooms, a fully-stocked kitchen with two adjoining dining areas, and large living space.  A covered dock and pool are also available for your use!",
+        "price": 379
+      },
+      {
+        "ownerId": 10,
+        "address": "456 Vivian",
+        "city": "Branson",
+        "state": "Missouri",
+        "country": "United States",
+        "lat": 111.7645358,
+        "lng": -122.4730329,
+        "name": "LAKEFRONT Deck, All New Gorgeous 2 Bedroom",
+        "description": "All new modern condo with style and comfort in mind. This beautiful and serene space is on the third floor, featuring breathtaking views of Lake Taneycomo.\nConveniently located off the main drag (highway 76) and within 10-20 minutes of all Branson has to offer; shows, great food, shopping, and amazing views.",
+        "price": 126
+      },
+      {
+        "ownerId": 11,
+        "address": "456 Vivian",
+        "city": "Lindstrom",
+        "state": "Minnesota",
+        "country": "United States",
+        "lat": 111.7645358,
+        "lng": -122.4730329,
+        "name": "22 Oaks Spacious, secluded Lake House",
+        "description": "3.5 acre end of the road Custom built home, on a small lake perfect for kayaking or fishing. Within minutes to multiple larger lakes and beaches. This area is secluded, spacious and peaceful  with many different areas on the property to relax with friends and family. The large deck is a great place to grill out and to watch the spectacular sunsets. Perfect for a week long stay.  Five quaint river towns are within a half hour drive.",
+        "price": 480
+      },
+      {
+        "ownerId": 12,
+        "address": "456 Vivian",
+        "city": "Manistee",
+        "state": "Michigan",
+        "country": "United States",
+        "lat": 111.7645358,
+        "lng": -122.4730329,
+        "name": "Exquisite Private Lake Front Family Home",
+        "description": "2022 Boardwalk Vacation Rental Management COVID Update: Beautiful Northern Michigan is open for business and proper procedures have been implemented in order to ensure a safe and efficient clean between each rental.",
+        "price": 536
+      },
     ], {});
   },
 

@@ -28,7 +28,7 @@ export default function SpotDetails() {
                 {spotDetails.SpotImages?.filter(image => !image.preview).map((image, i) => <div className={`otherImageDiv div_${i}`} key={i}><img className={`otherImageImg img_${i}`} src={image.url} alt={image.url} /></div>)}
             </div>
             <div className="SpotDetailsBody">
-                <h2>Hosted by {spotDetails.Owner.firstName}</h2>
+                <h2>Hosted by {spotDetails.Owner?.firstName}</h2>
                 <div className="DescBook">
                     <div className="SpotDetailsDescription">{spotDetails.description}</div>
                     <BookingForm spot={spotDetails} />

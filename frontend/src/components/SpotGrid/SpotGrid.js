@@ -5,12 +5,14 @@ import { useEffect } from "react";
 import { getSpots } from "../../store/spots";
 import { setRootWrapperPadding } from "../../utils";
 import { NavLink } from "react-router-dom";
+import { clearSpotDetails } from "../../store/spotDetails";
 
 export default function SpotGrid() {
     const dispatch = useDispatch();
     const spots = useSelector(state => Object.values(state.spots));
     useEffect(() => {
         dispatch(getSpots());
+        dispatch(clearSpotDetails());
         setRootWrapperPadding(true);
     }, [dispatch]);
 
