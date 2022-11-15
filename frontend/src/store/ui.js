@@ -6,9 +6,12 @@ const SET_PADDING = 'ui/setPadding';
 export const setLoginModal = showLoginModal => { return { type: SET_LOGIN_MODAL, showLoginModal } };
 export const setSignupModal = showSignupModal => { return { type: SET_SIGNUP_MODAL, showSignupModal } };
 export const setCreateSpotModal = showCreateSpotModal => { return { type: SET_CREATE_SPOT_MODAL, showCreateSpotModal } };
-export const setPadding = (left, right) => { return { type: SET_PADDING, padding: { left, right } } };
 
-export default function uiReducer(state = { padding: { left: "70px", right: "70px" } }, action) {
+const padding = { left: "70px", right: "70px" };
+export const setPadding = (left, right) => { return { type: SET_PADDING, padding: { left, right } } };
+export const resetPadding = () => { return { type: SET_PADDING, padding } };
+
+export default function uiReducer(state = { padding }, action) {
     switch (action.type) {
         case SET_LOGIN_MODAL:
             return { ...state, showLoginModal: action.showLoginModal };
