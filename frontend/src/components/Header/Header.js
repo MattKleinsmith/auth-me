@@ -10,7 +10,7 @@ function Navigation({ isLoaded }) {
         <div className="standardPadding">
             <div className="header">
                 <Logo />
-                <span>{isLoaded && <ProfileButton user={sessionUser} />}</span>
+                <span>{isLoaded && <div className="rightHeader"><button className="becomeAHost">Become a Host</button> <ProfileButton user={sessionUser} /></div>}</span>
             </div>
         </div>
     );

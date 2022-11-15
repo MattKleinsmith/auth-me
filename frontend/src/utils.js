@@ -8,7 +8,7 @@ export function setRootWrapperPadding(isHomepage) {
     } else {
         elements.forEach(element => {
             element.style.marginLeft = "384px";
-            element.style.marginRight = "400px";
+            element.style.marginRight = "380px";
         })
     }
 }

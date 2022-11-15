@@ -16,13 +16,8 @@
     height: 498px;
 }
 
-.SpotDetailsImageGrid>img {}
-
 .previewImage {
     grid-area: a;
-    /* overflow: auto; */
-    /* height: 100%; */
-    /* min-width: 100%; */
     width: 560px;
     position: relative;
     left: 50%;
@@ -33,13 +28,7 @@
 .otherImageDiv {
     height: 249px;
     width: 272px;
-
     overflow: hidden;
-
-    /* position: relative; */
-    /* left: 50%;
-    top: 50.75%;
-    transform: translate(-50%, -51%); */
 }
 
 .div_0 {
@@ -83,8 +72,16 @@
 
 .SpotDetailsBody {
     display: flex;
+    flex-direction: column;
+    margin-top: 25px;
 }
 
 .SpotDetailsDescription {
     width: 650px;
+}
+
+h2 {
+    font-size: 21px;
+    color: black;
+    font-family: 'Poppins-light', sans-serif;
 }

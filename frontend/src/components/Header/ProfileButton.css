@@ -24,6 +24,8 @@
     width: 80px;
 
     align-self: flex-end;
+
+    cursor: pointer;
 }
 
 .fa-solid.fa-bars {
