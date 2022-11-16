@@ -5,33 +5,33 @@ const GET_SPOTS = 'spots/GET_SPOTS';
 export const getSpots = () => async dispatch => {
     const response = await csrfFetch('/api/spots');
 
-    if (response.ok) {
-        const data = await response.json();
-        const spots = data.Spots;
-        dispatch({ type: GET_SPOTS, spots });
-    }
+    const data = await response.json();
+    const spots = data.Spots;
+    dispatch({ type: GET_SPOTS, spots });
     return response;
 };
 
-export const postSpot = body => async () => {
+export const postSpot = (body, url) => async () => {
     body.lat = 100;
     body.lng = 100;
     const response = await csrfFetch('/api/spots', {
         method: "POST",
         body: JSON.stringify(body)
     });
+    const spot = await response.json();
 
-    if (response.ok) {
-        return await response.json();
-    }
-    return response;
+    await csrfFetch(`/api/spots/${spot.id}/images`, {
+        method: "POST",
+        body: JSON.stringify({ url, preview: true })
+    });
+
+    return spot;
 };
 
 export const deleteSpot = (spotId) => async () => {
     const response = await csrfFetch('/api/spots/' + spotId, { method: "DELETE", });
     return await response.json();
 };
-
 
 export const putSpot = (spotId, body) => async dispatch => {
     body.lat = 100;
@@ -40,11 +40,7 @@ export const putSpot = (spotId, body) => async dispatch => {
         method: "PUT",
         body: JSON.stringify(body)
     });
-
-    if (response.ok) {
-        return await response.json();
-    }
-    return response;
+    return await response.json();
 };
 
 export default function spotsReducer(state = {}, action) {
