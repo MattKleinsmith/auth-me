@@ -15,12 +15,12 @@ export const getSpotDetails = spotId => async dispatch => {
 
 export const clearSpotDetails = () => ({ type: CLEAR_SPOT_DETAILS });
 
-export default function spotDetailsReducer(state = {}, action) {
+export default function spotDetailsReducer(state = null, action) {
     switch (action.type) {
         case GET_SPOT_DETAILS:
             return action.spotDetails;
         case CLEAR_SPOT_DETAILS:
-            return {};
+            return null;
         default:
             return state;
     }

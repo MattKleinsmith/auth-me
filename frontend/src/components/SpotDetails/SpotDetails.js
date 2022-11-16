@@ -6,6 +6,7 @@ import "./SpotDetails.css";
 import SpotDetailsHeader from "./SpotDetailsHeader";
 import { getSpotDetails } from "../../store/spotDetails";
 import { setPadding } from "../../store/ui";
+import Reviews from "./Reviews";
 
 export default function SpotDetails() {
     const { spotId } = useParams();
@@ -17,7 +18,7 @@ export default function SpotDetails() {
 
     const padding = useSelector(state => state.ui.padding);
     const spotDetails = useSelector(state => state.spotDetails);
-    if (Object.keys(spotDetails).length === 0) {
+    if (!spotDetails) {
         return <div className="SpotDetails" style={{ paddingLeft: padding.left, paddingRight: padding.right }}>
             <h1>{!Number.isNaN(+spotId) ? "Spot" : "Resource"} not found</h1>
         </div>
@@ -39,6 +40,7 @@ export default function SpotDetails() {
                     <BookingForm spot={spotDetails} />
                 </div>
             </div>
+            <Reviews spot={spotDetails} />
         </div>
     );
 }
