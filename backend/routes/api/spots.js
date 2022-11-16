@@ -39,7 +39,7 @@ async function getSpots(req, filterByCurrentUser = false) {
     else {
         let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
         page = page ? +page : 1;
-        size = size ? +size : 20;
+        size = size ? +size : 100;
         req.query.page = page;
         req.query.size = size;
         options.limit = size;
