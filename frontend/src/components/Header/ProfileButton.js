@@ -35,6 +35,7 @@ function ProfileButton({ user }) {
     let menu;
     if (user) {
         menu = <>
+            <div>Hello, {user.firstName}!</div>
             <div>{user.username}</div>
             <div>{user.email}</div>
             <button onClick={logout}>Log Out</button>
