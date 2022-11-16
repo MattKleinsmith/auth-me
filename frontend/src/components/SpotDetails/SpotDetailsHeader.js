@@ -12,7 +12,7 @@ export default function SpotDetailsHeader({ spot }) {
     };
 
     const onDeleteClick = () => {
-        dispatch(setSpotForEditing(null));
+        dispatch(setDeleteSpotModal(true));
     };
 
     console.log("spot", spot);
