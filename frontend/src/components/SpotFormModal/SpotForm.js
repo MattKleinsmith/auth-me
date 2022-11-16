@@ -16,6 +16,8 @@ export default function SpotForm({ spot }) {
     const [description, setDescription] = useState(spot ? spot.description : "");
     const [price, setPrice] = useState(spot ? spot.price : "");
 
+    const [imageUrl, setImageUrl] = useState("");
+
     const [errors, setErrors] = useState([]);
 
     const dispatch = useDispatch();
@@ -32,7 +34,7 @@ export default function SpotForm({ spot }) {
                 dispatch(getSpotDetails(spot.id));
                 dispatch(setSpotForEditing(null));
             } else {
-                const spot = await dispatch(postSpot(body));
+                const spot = await dispatch(postSpot(body, imageUrl));
                 history.push("/");
                 history.push("/spots/" + spot.id);
             }
@@ -112,6 +114,16 @@ export default function SpotForm({ spot }) {
                     required
                 />
             </label>
+
+            {!spot && <label>
+                Image url{" "}
+                <input
+                    type="text"
+                    value={imageUrl}
+                    onChange={(e) => setImageUrl(e.target.value)}
+                    required
+                />
+            </label>}
             <button type="submit">{spot ? "Edit" : "Create"} spot</button>
         </form>
     );
