@@ -18,7 +18,9 @@ export default function SpotDetails() {
     const padding = useSelector(state => state.ui.padding);
     const spotDetails = useSelector(state => state.spotDetails);
     if (Object.keys(spotDetails).length === 0) {
-        return;
+        return <div className="SpotDetails" style={{ paddingLeft: padding.left, paddingRight: padding.right }}>
+            <h1>{!Number.isNaN(+spotId) ? "Spot" : "Resource"} not found</h1>
+        </div>
     };
 
     const previewImageUrl = spotDetails.SpotImages?.find(image => image.preview)?.url;

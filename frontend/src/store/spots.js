@@ -27,6 +27,12 @@ export const postSpot = body => async () => {
     return response;
 };
 
+export const deleteSpot = (spotId) => async () => {
+    const response = await csrfFetch('/api/spots/' + spotId, { method: "DELETE", });
+    return await response.json();
+};
+
+
 export const putSpot = (spotId, body) => async dispatch => {
     body.lat = 100;
     body.lng = 100;

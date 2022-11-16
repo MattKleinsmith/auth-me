@@ -17,7 +17,8 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/"><SpotGrid /></Route>
-        <Route exact path="/spots/:spotId"><SpotDetails /></Route>
+        <Route path="/spots/:spotId"><SpotDetails /></Route>
+        <Route path="*"><SpotDetails /></Route>
       </Switch>
     </div>
   );

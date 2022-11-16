@@ -4,7 +4,7 @@ import { Redirect, useHistory } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import { getSpotDetails } from "../../store/spotDetails";
 import { getSpots, postSpot, putSpot } from "../../store/spots";
-import { setSpotModal } from "../../store/ui";
+import { setSpotForEditing, setSpotModal } from "../../store/ui";
 import './SpotForm.css';
 
 export default function SpotForm({ spot }) {
@@ -30,9 +30,10 @@ export default function SpotForm({ spot }) {
             if (spot) {
                 await dispatch(putSpot(spot.id, body));
                 dispatch(getSpotDetails(spot.id));
-                // history.push("/spots/" + spot.id);
+                dispatch(setSpotForEditing(null));
             } else {
                 const spot = await dispatch(postSpot(body));
+                history.push("/");
                 history.push("/spots/" + spot.id);
             }
             dispatch(setSpotModal(false));
