@@ -1,7 +1,6 @@
 import { csrfFetch } from './csrf';
 
 const GET_SPOTS = 'spots/GET_SPOTS';
-const POST_SPOT = 'spots/POST_SPOT';
 
 export const getSpots = () => async dispatch => {
     const response = await csrfFetch('/api/spots');
@@ -14,7 +13,7 @@ export const getSpots = () => async dispatch => {
     return response;
 };
 
-export const postSpot = body => async dispatch => {
+export const postSpot = body => async () => {
     body.lat = 100;
     body.lng = 100;
     const response = await csrfFetch('/api/spots', {
@@ -23,9 +22,21 @@ export const postSpot = body => async dispatch => {
     });
 
     if (response.ok) {
-        const spot = await response.json();
-        dispatch({ type: POST_SPOT, spot });
-        return spot;
+        return await response.json();
+    }
+    return response;
+};
+
+export const putSpot = (spotId, body) => async dispatch => {
+    body.lat = 100;
+    body.lng = 100;
+    const response = await csrfFetch('/api/spots/' + spotId, {
+        method: "PUT",
+        body: JSON.stringify(body)
+    });
+
+    if (response.ok) {
+        return await response.json();
     }
     return response;
 };
@@ -37,9 +48,6 @@ export default function spotsReducer(state = {}, action) {
                 spots[spot.id] = spot;
                 return spots;
             }, {});
-        case POST_SPOT: {
-            return { ...state, [action.spot.id]: action.spot };
-        }
         default:
             return state;
     }

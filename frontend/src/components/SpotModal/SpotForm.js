@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import * as sessionActions from "../../store/session";
-import { postSpot } from "../../store/spots";
-import { setCreateSpotModal } from "../../store/ui";
+import { getSpots, postSpot } from "../../store/spots";
+import { setSpotModal } from "../../store/ui";
 import './CreateSpotForm.css';
 
-export default function SignupForm() {
+export default function SpotForm() {
     const [address, setAddress] = useState("");
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
@@ -26,8 +26,7 @@ export default function SignupForm() {
         setErrors([]);
         try {
             const spot = await dispatch(postSpot({ address, city, state, country, name, description, price }))
-            dispatch(setCreateSpotModal(false));
-            console.log("NEW SPOT", spot);
+            dispatch(setSpotModal(false));
             history.push("/spots/" + spot.id);
         }
         catch (errors) {
@@ -98,7 +97,7 @@ export default function SignupForm() {
             <label>
                 Price{" "}
                 <input
-                    type="text"
+                    type="number"
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
                     required
