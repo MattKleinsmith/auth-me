@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Header.css';
 import Logo from './Logo';
-import { setCreateSpotModal } from '../../store/ui';
-import CreateSpotFormModal from '../CreateSpotModal';
+import { setSpotModal } from '../../store/ui';
+import SpotFormModal from '../SpotFormModal';
 
 function Header() {
     const sessionUser = useSelector(state => state.session.user);
@@ -15,11 +15,11 @@ function Header() {
             <div style={{ paddingLeft: ui.padding.left, paddingRight: ui.padding.right }}>
                 <div className="header">
                     <Logo />
-                    <span>{<div className="rightHeader">{sessionUser && <button className="becomeAHost" onClick={() => dispatch(setCreateSpotModal(true))}>Create a Spot</button>}<ProfileButton user={sessionUser} /></div>}</span>
+                    <span>{<div className="rightHeader">{sessionUser && <button className="becomeAHost" onClick={() => dispatch(setSpotModal(true))}>Create a Spot</button>}<ProfileButton user={sessionUser} /></div>}</span>
                 </div>
             </div>
             <div className="line"></div>
-            {ui.showCreateSpotModal && <CreateSpotFormModal />}
+            {ui.showSpotModal && <SpotFormModal spot={ui.spot} />}
         </div>
     );
 }

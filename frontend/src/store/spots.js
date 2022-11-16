@@ -13,11 +13,25 @@ export const getSpots = () => async dispatch => {
     return response;
 };
 
-export const postSpot = body => async dispatch => {
+export const postSpot = body => async () => {
     body.lat = 100;
     body.lng = 100;
     const response = await csrfFetch('/api/spots', {
         method: "POST",
+        body: JSON.stringify(body)
+    });
+
+    if (response.ok) {
+        return await response.json();
+    }
+    return response;
+};
+
+export const putSpot = (spotId, body) => async dispatch => {
+    body.lat = 100;
+    body.lng = 100;
+    const response = await csrfFetch('/api/spots/' + spotId, {
+        method: "PUT",
         body: JSON.stringify(body)
     });
 

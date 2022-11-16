@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import { getSpots, postSpot } from "../../store/spots";
-import { setCreateSpotModal } from "../../store/ui";
+import { setSpotModal } from "../../store/ui";
 import './CreateSpotForm.css';
 
-export default function SignupForm() {
+export default function SpotForm() {
     const [address, setAddress] = useState("");
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
@@ -26,7 +26,7 @@ export default function SignupForm() {
         setErrors([]);
         try {
             const spot = await dispatch(postSpot({ address, city, state, country, name, description, price }))
-            dispatch(setCreateSpotModal(false));
+            dispatch(setSpotModal(false));
             history.push("/spots/" + spot.id);
         }
         catch (errors) {
