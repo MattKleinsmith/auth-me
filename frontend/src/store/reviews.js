@@ -10,19 +10,12 @@ export const getReviews = (spotId) => async dispatch => {
     return response;
 };
 
-export const postReview = (body, url, spotId) => async () => {
+export const postReview = (spotId, body) => async () => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: "POST",
         body: JSON.stringify(body)
     });
-    const review = await response.json();
-
-    await csrfFetch(`/api/reviews/${review.id}/images`, {
-        method: "POST",
-        body: JSON.stringify({ url })
-    });
-
-    return review;
+    return await response.json();
 };
 
 export const deleteReview = (review) => async (dispatch) => {

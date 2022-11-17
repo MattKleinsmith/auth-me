@@ -1,6 +1,7 @@
 const SET_LOGIN_MODAL = 'ui/setLoginModal';
 const SET_SIGNUP_MODAL = 'ui/setSignupModal';
 const SET_SPOT_MODAL = 'ui/setSpotModal';
+const SET_REVIEW_MODAL = 'ui/setReviewModal';
 const SET_EDIT_SPOT = 'ui/setSpotForEditing';
 const SET_DELETE_SPOT_MODAL = 'ui/setDeleteSpotModal';
 const SET_PADDING = 'ui/setPadding';
@@ -9,6 +10,7 @@ const SET_HEADER_POSITION = 'ui/setHeaderPosition';
 export const setLoginModal = showLoginModal => { return { type: SET_LOGIN_MODAL, showLoginModal } };
 export const setSignupModal = showSignupModal => { return { type: SET_SIGNUP_MODAL, showSignupModal } };
 export const setSpotModal = showSpotModal => { return { type: SET_SPOT_MODAL, showSpotModal } };
+export const setReviewModal = showReviewModal => { return { type: SET_REVIEW_MODAL, showReviewModal } };
 export const setSpotForEditing = spot => { return { type: SET_EDIT_SPOT, spot } };
 export const setDeleteSpotModal = showDeleteSpotModal => { return { type: SET_DELETE_SPOT_MODAL, showDeleteSpotModal } };
 
@@ -25,6 +27,8 @@ export default function uiReducer(state = { padding }, action) {
             return { ...state, showSignupModal: action.showSignupModal };
         case SET_SPOT_MODAL:
             return { ...state, showSpotModal: action.showSpotModal };
+        case SET_REVIEW_MODAL:
+            return { ...state, showReviewModal: action.showReviewModal };
         case SET_EDIT_SPOT:
             return { ...state, spot: action.spot };
         case SET_DELETE_SPOT_MODAL:

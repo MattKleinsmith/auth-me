@@ -1,9 +1,26 @@
 .star {
     font-size: 15px;
+    align-self: center;
 }
 
 .reviews {
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 20px;
+}
+
+
+.reviewHeader {
+    display: flex;
+}
+
+.createReviewButton {
+    align-self: center;
+    cursor: pointer;
+    background-color: white;
+    font-weight: bold;
+    border: none;
+    padding-left: 570px;
+    padding-top: 5px;
+    font-size: 16px;
 }

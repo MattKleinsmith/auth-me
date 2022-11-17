@@ -3,8 +3,7 @@ import "./Review.css";
 import { deleteReview } from "../../store/reviews";
 import { useHistory } from "react-router-dom";
 
-export default function Review({ review }) {
-    const user = useSelector(state => state.session.user);
+export default function Review({ user, review }) {
     const dispatch = useDispatch();
     const history = useHistory();
     const onDeleteClick = async () => {

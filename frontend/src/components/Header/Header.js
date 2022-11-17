@@ -6,6 +6,7 @@ import Logo from './Logo';
 import { setSpotModal } from '../../store/ui';
 import SpotFormModal from '../SpotFormModal';
 import DeleteSpotForm from '../DeleteSpotFormModal';
+import ReviewFormModal from '../ReviewFormModal';
 
 function Header() {
     const sessionUser = useSelector(state => state.session.user);
@@ -21,6 +22,7 @@ function Header() {
             </div>
             <div className="line"></div>
             {ui.showSpotModal && <SpotFormModal spot={ui.spot} />}
+            {ui.showReviewModal && <ReviewFormModal />}
             {ui.showDeleteSpotModal && <DeleteSpotForm />}
         </div>
     );

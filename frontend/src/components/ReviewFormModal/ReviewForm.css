@@ -1,0 +1,11 @@
+.reviewButtons {
+    display: flex;
+}
+
+.reviewButtons>button {
+    width: 50%;
+}
+
+form {
+    padding: 30px;
+}
