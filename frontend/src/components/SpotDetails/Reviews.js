@@ -6,8 +6,9 @@ import "./Reviews.css";
 export default function Reviews({ spot, reviews }) {
     const user = useSelector(state => state.session.user);
     if (!reviews) return;
+    const userReviewed = reviews.some(review => review.User.id === user.id);
     return <div>
-        <ReviewHeader spot={spot} />
+        <ReviewHeader spot={spot} userReviewed={userReviewed} />
         <div className="reviews">
             {reviews.map((review, i) => <Review key={i} review={review} user={user} />)}
         </div>
