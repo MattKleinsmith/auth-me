@@ -28,7 +28,7 @@ export default function DeleteSpotForm() {
             <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
-            <button type="submit">Delete spot</button>
+            <button className="deleteFormButton" type="submit">Delete spot</button>
         </form >
     );
 }
