@@ -6,8 +6,8 @@ import "./Reviews.css";
 export default function Reviews({ spot, reviews }) {
     const user = useSelector(state => state.session.user);
     if (!reviews) return;
-    const userReviewed = reviews.some(review => review.User.id === user.id);
-    const userOwnsSpot = spot.ownerId === user.id;
+    const userReviewed = user && reviews.some(review => review.User.id === user.id);
+    const userOwnsSpot = user && spot.ownerId === user.id;
     return <div>
         <ReviewHeader reviews={reviews} spot={spot} userReviewed={userReviewed} userOwnsSpot={userOwnsSpot} />
         <div className="reviews">

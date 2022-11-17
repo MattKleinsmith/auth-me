@@ -23,7 +23,7 @@ export default function DeleteSpotForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="deleteForm" onSubmit={handleSubmit}>
             <h1 style={{ width: "300px" }}>Are you sure you want to delete this spot?</h1>
             <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
