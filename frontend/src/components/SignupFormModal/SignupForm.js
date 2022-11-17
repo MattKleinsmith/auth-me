@@ -31,65 +31,64 @@ export default function SignupForm() {
 
     return (
         <form className="signupForm" onSubmit={handleSubmit}>
-            <h1>Sign up</h1>
+            <div className="signupHeader">
+                <img src="/images/x.png" onClick={() => dispatch(setSignupModal(false))} />
+                <div>Sign up</div>
+            </div>
+            <div className="line"></div>
+            <div className="loginTitle">Welcome to BedNoBreakfast</div>
             <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
-            <label>
-                First name{" "}
-                <input
-                    type="text"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Last name{" "}
-                <input
-                    type="text"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Email{" "}
-                <input
-                    type="text"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Username{" "}
-                <input
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Password{" "}
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Confirm Password{" "}
-                <input
-                    type="password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    required
-                />
-            </label>
-            <button type="submit">Sign Up</button>
+            <input
+                className="field firstField"
+                type="text"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                required
+                placeholder="First name"
+            />
+            <input
+                className="field"
+                type="text"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                required
+                placeholder="Last name"
+            />
+            <input
+                className="field"
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                placeholder="Email"
+            />
+            <input
+                className="field"
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+                placeholder="Username"
+            />
+            <input
+                className="field"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                placeholder="Password"
+            />
+            <input
+                className="field lastField"
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="Confirm password"
+                required
+            />
+            <button type="submit" className="signupButton">Continue</button>
         </form>
     );
 }
