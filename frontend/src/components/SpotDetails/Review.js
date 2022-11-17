@@ -10,8 +10,8 @@ export default function Review({ user, review }) {
         await dispatch(deleteReview(review));
 
         // TODO: Debug useSelector's lack of re-render instead of forcing it like this
-        history.push("/");
-        history.push(`/spots/${review.spotId}`);
+        // history.push("/");
+        // history.push(`/spots/${review.spotId}`);
     }
     return <div className="review">
         <div className="user">

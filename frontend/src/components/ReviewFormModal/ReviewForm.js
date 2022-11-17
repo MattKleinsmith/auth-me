@@ -21,9 +21,6 @@ export default function ReviewForm() {
         try {
             const body = { review, stars };
             await dispatch(postReview(spot.id, body));
-            dispatch(setReviewModal(false))
-            history.push("/");
-            history.push("/spots/" + spot.id);
         }
         catch (errors) {
             console.log(errors);

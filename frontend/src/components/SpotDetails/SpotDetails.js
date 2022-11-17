@@ -32,7 +32,6 @@ export default function SpotDetails() {
 
     const previewImageUrl = spotDetails.SpotImages?.find(image => image.preview)?.url;
 
-
     return (
         <div className="SpotDetails" style={{ paddingLeft: padding.left, paddingRight: padding.right }}>
             <SpotDetailsHeader spot={spotDetails} />
