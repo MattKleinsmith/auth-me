@@ -46,7 +46,7 @@ export default function SpotForm({ spot }) {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="spotForm" onSubmit={handleSubmit}>
             <h1>{spot ? "Edit" : "Create"} a spot</h1>
             <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}

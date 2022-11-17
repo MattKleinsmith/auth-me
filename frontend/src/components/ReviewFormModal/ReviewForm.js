@@ -29,7 +29,7 @@ export default function ReviewForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="reviewForm" onSubmit={handleSubmit}>
             <h4>Leave a review</h4>
             {errors.length > 0 && <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
