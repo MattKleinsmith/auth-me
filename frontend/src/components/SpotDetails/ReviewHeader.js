@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux"
 import { setReviewModal } from "../../store/ui";
 
-export default function ReviewHeader({ spot, userReviewed, userOwnsSpot }) {
+export default function ReviewHeader({ user, spot, userReviewed, userOwnsSpot }) {
     const dispatch = useDispatch();
 
     const onReviewButtonClick = () => {
@@ -10,6 +10,6 @@ export default function ReviewHeader({ spot, userReviewed, userOwnsSpot }) {
 
     return <div className="reviewHeader">
         <h2>{spot.avgStarRating && <i className="fa-solid fa-star star" />} {spot.avgStarRating} {spot.avgStarRating && "·"} {spot.numReviews} review{spot.numReviews === 1 ? "" : "s"}</h2>
-        {!userReviewed && !userOwnsSpot && <button className="createReviewButton" onClick={onReviewButtonClick}>Leave a review</button>}
+        {user && !userReviewed && !userOwnsSpot && <button className="createReviewButton" onClick={onReviewButtonClick}>Leave a review</button>}
     </div>
 }

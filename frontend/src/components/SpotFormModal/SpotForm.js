@@ -47,83 +47,82 @@ export default function SpotForm({ spot }) {
 
     return (
         <form className="spotForm" onSubmit={handleSubmit}>
-            <h1>{spot ? "Edit" : "Create"} a spot</h1>
+            <div className="spotHeader">
+                <img src="/images/x.png" onClick={() => dispatch(setSpotModal(false))} />
+                <div>{spot ? "Edit" : "Create"} a spot</div>
+            </div>
+            <div className="line"></div>
+
             <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
-            <label>
-                Address{" "}
-                <input
-                    type="text"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                City{" "}
-                <input
-                    type="text"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                State{" "}
-                <input
-                    type="text"
-                    value={state}
-                    onChange={(e) => setState(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Country{" "}
-                <input
-                    type="text"
-                    value={country}
-                    onChange={(e) => setCountry(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Name{" "}
-                <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Description{" "}
-                <textarea
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Price{" "}
-                <input
-                    type="number"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    required
-                />
-            </label>
+            <input
+                className="field firstField"
+                type="text"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                required
+                placeholder="Address"
+            />
+            <input
+                className="field"
+                type="text"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                required
+                placeholder="City"
+            />
+            <input
+                className="field"
+                type="text"
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+                required
+                placeholder="State"
+            />
+            <input
+                className="field"
+                type="text"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+                required
+                placeholder="Country"
+            />
+            <input
+                className="field"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                placeholder="Name"
+            />
+            <textarea
+                className="field"
+                style={{ height: "125px" }}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                required
+                placeholder="Description"
+            />
+            <input
+                className={`field ${spot && "lastField"}`}
+                type="number"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                required
+                placeholder="Price"
+            />
 
-            {!spot && <label>
-                Image url{" "}
-                <input
+            {!spot &&
+                < input
+                    className="field lastField"
                     type="text"
                     value={imageUrl}
                     onChange={(e) => setImageUrl(e.target.value)}
                     required
-                />
-            </label>}
-            <button type="submit">{spot ? "Edit" : "Create"} spot</button>
+                    placeholder="Image url"
+                />}
+            <button type="submit" className="spotButton">{spot ? "Edit" : "Create"} spot</button>
         </form>
     );
 }
