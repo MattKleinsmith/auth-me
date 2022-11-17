@@ -6,13 +6,14 @@ import Logo from './Logo';
 import { setSpotModal } from '../../store/ui';
 import SpotFormModal from '../SpotFormModal';
 import DeleteSpotForm from '../DeleteSpotFormModal';
+import ReviewFormModal from '../ReviewFormModal';
 
 function Header() {
     const sessionUser = useSelector(state => state.session.user);
     const ui = useSelector(state => state.ui);
     const dispatch = useDispatch();
     return (
-        <div className="headerWrapper">
+        <div className="headerWrapper" style={{ position: ui.headerPosition }}>
             <div style={{ paddingLeft: ui.padding.left, paddingRight: ui.padding.right }}>
                 <div className="header">
                     <Logo />
@@ -21,6 +22,7 @@ function Header() {
             </div>
             <div className="line"></div>
             {ui.showSpotModal && <SpotFormModal spot={ui.spot} />}
+            {ui.showReviewModal && <ReviewFormModal />}
             {ui.showDeleteSpotModal && <DeleteSpotForm />}
         </div>
     );

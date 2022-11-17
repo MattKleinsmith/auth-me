@@ -98,8 +98,7 @@ export default function SpotForm({ spot }) {
             </label>
             <label>
                 Description{" "}
-                <input
-                    type="text"
+                <textarea
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     required
