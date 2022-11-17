@@ -52,7 +52,6 @@ export default function SpotForm({ spot }) {
                 <div>{spot ? "Edit" : "Create"} a spot</div>
             </div>
             <div className="line"></div>
-
             <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
