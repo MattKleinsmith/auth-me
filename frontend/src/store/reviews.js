@@ -25,9 +25,10 @@ export const postReview = (body, url, spotId) => async () => {
     return review;
 };
 
-export const deleteReview = (reviewId) => async () => {
-    const response = await csrfFetch(`/api/reviews/${reviewId}`, { method: "DELETE", });
-    return await response.json();
+export const deleteReview = (review) => async (dispatch) => {
+    const response = await csrfFetch(`/api/reviews/${review.id}`, { method: "DELETE", });
+    await response.json()
+    dispatch(getReviews(review.spotId));
 };
 
 export default function reviewsReducer(state = null, action) {

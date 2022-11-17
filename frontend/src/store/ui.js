@@ -4,6 +4,7 @@ const SET_SPOT_MODAL = 'ui/setSpotModal';
 const SET_EDIT_SPOT = 'ui/setSpotForEditing';
 const SET_DELETE_SPOT_MODAL = 'ui/setDeleteSpotModal';
 const SET_PADDING = 'ui/setPadding';
+const SET_HEADER_POSITION = 'ui/setHeaderPosition';
 
 export const setLoginModal = showLoginModal => { return { type: SET_LOGIN_MODAL, showLoginModal } };
 export const setSignupModal = showSignupModal => { return { type: SET_SIGNUP_MODAL, showSignupModal } };
@@ -14,6 +15,7 @@ export const setDeleteSpotModal = showDeleteSpotModal => { return { type: SET_DE
 const padding = { left: "70px", right: "70px" };
 export const setPadding = (left, right) => { return { type: SET_PADDING, padding: { left, right } } };
 export const resetPadding = () => { return { type: SET_PADDING, padding } };
+export const setHeaderPosition = (headerPosition) => { return { type: SET_HEADER_POSITION, headerPosition } };
 
 export default function uiReducer(state = { padding }, action) {
     switch (action.type) {
@@ -29,6 +31,8 @@ export default function uiReducer(state = { padding }, action) {
             return { ...state, showDeleteSpotModal: action.showDeleteSpotModal };
         case SET_PADDING:
             return { ...state, padding: action.padding };
+        case SET_HEADER_POSITION:
+            return { ...state, headerPosition: action.headerPosition };
         default:
             return state;
     }

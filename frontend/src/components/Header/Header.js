@@ -12,7 +12,7 @@ function Header() {
     const ui = useSelector(state => state.ui);
     const dispatch = useDispatch();
     return (
-        <div className="headerWrapper">
+        <div className="headerWrapper" style={{ position: ui.headerPosition }}>
             <div style={{ paddingLeft: ui.padding.left, paddingRight: ui.padding.right }}>
                 <div className="header">
                     <Logo />

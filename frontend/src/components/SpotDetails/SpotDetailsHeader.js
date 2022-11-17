@@ -15,8 +15,6 @@ export default function SpotDetailsHeader({ spot }) {
         dispatch(setDeleteSpotModal(true));
     };
 
-    console.log("spot", spot);
-
     return (
         <div className="SpotDetailsHeader">
             <h1>{spot.name}</h1>
