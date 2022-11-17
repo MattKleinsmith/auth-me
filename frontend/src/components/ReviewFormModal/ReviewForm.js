@@ -36,7 +36,7 @@ export default function ReviewForm() {
             </ul>}
             <label>
                 Stars{" "}
-                <select name='rating' onChange={e => setStars(e.target.value)} value={stars}>
+                <select name='rating' onChange={e => setStars(e.target.value)} value={stars} required>
                     <option value='' disabled>Select a rating</option>
                     <option>1</option>
                     <option>2</option>

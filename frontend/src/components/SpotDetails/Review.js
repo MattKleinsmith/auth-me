@@ -1,5 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
-import "./Review.css";
+import { useDispatch } from "react-redux";
 import { deleteReview } from "../../store/reviews";
 import { useHistory } from "react-router-dom";
 

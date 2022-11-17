@@ -20,7 +20,8 @@ export const postReview = (spotId, body) => async (dispatch) => {
     const review = await response.json();
     dispatch(getSpotDetails(review.spotId));
     dispatch(setReviewModal(false));
-    dispatch(getReviews(spotId));  // TODO: Instead of hitting the backend, just insert the new review into the Redux store.
+    await dispatch(getReviews(spotId));  // TODO: Instead of hitting the backend, just insert the new review into the Redux store.
+    window.scrollTo(0, document.body.scrollHeight);
     return review;
 };
 
