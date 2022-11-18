@@ -37,9 +37,9 @@ export default function SignupForm() {
             </div>
             <div className="line"></div>
             <div className="loginTitle">Welcome to BedNoBreakfast</div>
-            <ul>
+            {errors.length > 0 && <ul className="formErrors">
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-            </ul>
+            </ul>}
             <input
                 className="field firstField"
                 type="text"

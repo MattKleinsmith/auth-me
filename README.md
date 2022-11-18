@@ -23,19 +23,20 @@ It was built using this stack:
 
 ### Features
 
+https://github.com/MattKleinsmith/auth-me/wiki/Features
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Roadmap
 
-- [ ] Structure wiki
-- [ ] Create kanban cards
-- [ ] Reformat API docs
+- [ ] Target more resolutions
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Getting started
 
 From within the project folder: <code>sh ./setup.sh</code>
+And then navigate to http://localhost:8000.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

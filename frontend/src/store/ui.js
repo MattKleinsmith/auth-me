@@ -16,10 +16,10 @@ export const setDeleteSpotModal = showDeleteSpotModal => { return { type: SET_DE
 
 const padding = { left: "40px", right: "40px" };
 export const setPadding = (left, right) => {
-    if (window.innerWidth < 1000) {
+    if (window.innerWidth < 1920) {
         console.log("Applying small padding");
-        left = "40px";
-        right = "40px";
+        left = padding.left;
+        right = padding.right;
     }
     return { type: SET_PADDING, padding: { left, right } }
 };

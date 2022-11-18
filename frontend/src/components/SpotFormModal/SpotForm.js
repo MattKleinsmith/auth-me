@@ -52,9 +52,9 @@ export default function SpotForm({ spot }) {
                 <div>{spot ? "Edit" : "Create"} a spot</div>
             </div>
             <div className="line"></div>
-            <ul>
+            {errors.length > 0 && <ul className="spotErrors">
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-            </ul>
+            </ul>}
             <input
                 className="field firstField"
                 type="text"

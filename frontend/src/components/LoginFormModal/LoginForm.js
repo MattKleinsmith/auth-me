@@ -26,11 +26,9 @@ function LoginForm() {
             </div>
             <div className="line"></div>
             <div className="loginTitle">Welcome to BedNoBreakfast</div>
-            <ul>
-                {errors.map((error, idx) => (
-                    <li key={idx}>{error}</li>
-                ))}
-            </ul>
+            {errors.length > 0 && <ul className="formErrors">
+                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+            </ul>}
             <input
                 className="field firstField"
                 type="text"
