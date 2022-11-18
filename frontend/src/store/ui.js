@@ -15,7 +15,14 @@ export const setSpotForEditing = spot => { return { type: SET_EDIT_SPOT, spot } 
 export const setDeleteSpotModal = showDeleteSpotModal => { return { type: SET_DELETE_SPOT_MODAL, showDeleteSpotModal } };
 
 const padding = { left: "70px", right: "70px" };
-export const setPadding = (left, right) => { return { type: SET_PADDING, padding: { left, right } } };
+export const setPadding = (left, right) => {
+    if (window.innerWidth < 1000) {
+        console.log("Applying small padding");
+        left = "70px";
+        right = "70px";
+    }
+    return { type: SET_PADDING, padding: { left, right } }
+};
 export const resetPadding = () => { return { type: SET_PADDING, padding } };
 export const setHeaderPosition = (headerPosition) => { return { type: SET_HEADER_POSITION, headerPosition } };
 

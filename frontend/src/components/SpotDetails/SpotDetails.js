@@ -22,6 +22,14 @@ export default function SpotDetails() {
         dispatch(setPadding("384px", "380px"));
         dispatch(setHeaderPosition("static"));
         dispatch(getReviews(spotId));
+
+        const resize = () => {
+            dispatch(setPadding("384px", "380px"));
+        }
+        window.addEventListener('resize', resize);
+        return () => {
+            window.removeEventListener('resize', resize)
+        }
     }, [dispatch]);
 
     if (!spotDetails) {
