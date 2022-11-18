@@ -32,13 +32,6 @@ function ProfileButton({ user }) {
         dispatch(sessionActions.logout());
     };
 
-    // let menu;
-    // if (user) {
-    //     menu =
-    // } else {
-    //     menu =
-    // }
-
     return (
         <div className="profileButtonWrapper">
             <button onClick={openMenu} className="profileButton" >
@@ -50,15 +43,15 @@ function ProfileButton({ user }) {
                     {user
                         ?
                         <>
-                            <div className="flexboxToCenter"><div className="loggedInEleInfo">Hello, {user.firstName}!</div></div>
-                            <div className="flexboxToCenter"><div className="loggedInEleInfo">{user.username}</div></div>
-                            <div className="flexboxToCenter"><div className="loggedInEleInfo">{user.email}</div></div>
-                            <div className="flexboxToCenter" onClick={logout}><div className="loggedInEle">Log Out</div></div>
+                            <div className="loggedInEleInfo">Hello, {user.firstName}!</div>
+                            <div className="loggedInEleInfo">{user.username}</div>
+                            <div className="loggedInEleInfo">{user.email}</div>
+                            <div className="loggedInEle highlightOnHover" onClick={logout}><div>Log Out</div></div>
                         </>
                         :
                         <>
-                            <div className="flexboxToCenter"><LoginFormModal /></div>
-                            <div className="flexboxToCenter"><SignupFormModal /></div>
+                            <div className="flexboxToCenter highlightOnHover"><LoginFormModal /></div>
+                            <div className="signUpButton highlightOnHover"><SignupFormModal /></div>
                         </>
                     }
                 </div>

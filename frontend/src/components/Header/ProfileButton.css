@@ -19,6 +19,7 @@
 
     width: 240px;
     padding-top: 10px;
+    padding-bottom: 10px;
 
     border-radius: 10px;
     background-color: white;
@@ -37,6 +38,33 @@
 
 .loggedInEle {
     font-weight: bold;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.loggedInEleInfo {
+    cursor: default;
+    height: 100%;
+    padding-left: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.signUpButton {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.highlightOnHover:hover {
+    background-color: #f7f7f7;
+    cursor: pointer;
 }
 
 .profile-dropdown>div {
@@ -45,26 +73,10 @@
     font-size: 13px;
     height: 40px;
     width: 100%;
-    cursor: pointer;
-    /* border-radius: 10px; */
-}
-
-.loggedInEleInfo {
-    cursor: default;
-    height: 100%;
 }
 
 .profile-dropdown>div>div {
     padding-left: 15px;
-    /* border-radius: 10px; */
-}
-
-.profile-dropdown>div:hover {
-    background-color: #f7f7f7;
-}
-
-.loggedInEleInfo:hover {
-    background-color: white;
 }
 
 .dropdownLoginButton {
