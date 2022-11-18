@@ -115,7 +115,7 @@ export default function SpotForm({ spot }) {
             {!spot &&
                 < input
                     className="field lastField"
-                    type="text"
+                    type="url"
                     value={imageUrl}
                     onChange={(e) => setImageUrl(e.target.value)}
                     required

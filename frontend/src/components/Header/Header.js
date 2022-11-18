@@ -17,7 +17,16 @@ function Header() {
             <div style={{ paddingLeft: ui.padding.left, paddingRight: ui.padding.right }}>
                 <div className="header">
                     <Logo />
-                    <span>{<div className="rightHeader">{sessionUser && <button className="becomeAHost" onClick={() => dispatch(setSpotModal(true))}>Create a Spot</button>}<ProfileButton user={sessionUser} /></div>}</span>
+                    <span>
+                        {<div className="rightHeader">
+                            {sessionUser &&
+                                <button
+                                    className="becomeAHost"
+                                    onClick={() => dispatch(setSpotModal(true))}>Create a Spot
+                                </button>}
+                            <ProfileButton user={sessionUser} />
+                        </div>}
+                    </span>
                 </div>
             </div>
             <div className="line"></div>

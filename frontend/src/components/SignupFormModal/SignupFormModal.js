@@ -13,7 +13,7 @@ function SignupFormModal() {
             </Modal>
         ) :
         (
-            <button onClick={() => dispatch(setSignupModal(true))}>Sign up</button>
+            <div onClick={() => dispatch(setSignupModal(true))}>Sign up</div>
         );
 }
 
