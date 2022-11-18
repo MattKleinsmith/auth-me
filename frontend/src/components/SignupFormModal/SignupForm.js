@@ -24,7 +24,10 @@ export default function SignupForm() {
             setErrors([]);
             return dispatch(sessionActions.signup({ email, username, password, lastName, firstName }))
                 .then(() => dispatch(setSignupModal(false)))
-                .catch(errors => setErrors(Object.values(errors.errors)));
+                .catch(errors => {
+                    console.log("sign up errors", errors);
+                    setErrors(Object.values(errors.errors))
+                });
         }
         return setErrors(['Confirm Password field must be the same as the Password field']);
     };

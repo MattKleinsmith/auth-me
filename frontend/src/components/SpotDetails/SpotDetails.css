@@ -17,73 +17,44 @@
     margin-top: 24px;
 }
 
-.SpotDetailsImageGrid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+/* ---------------------Spot images------------------------------ */
+
+.SpotImages {
+    display: flex;
+
+    height: 51vh;
+    width: 100%;
+
+    margin-top: 18px;
     gap: 8px;
-    grid-template-areas:
-        "a b c"
-        "a d e";
     border-radius: 12.5px;
     overflow: hidden;
-    margin-top: 18px;
-    height: 396px;
 }
 
-.previewImage {
-    grid-area: a;
-    width: 463px;
-    position: relative;
-    left: 50%;
-    top: 50.75%;
-    transform: translate(-50%, -51%);
+.SpotImagesLeft {
+    object-fit: cover;
+    width: 50%;
 }
 
-.otherImageDiv {
-    height: 198.391px;
-    width: 223.75px;
-    overflow: hidden;
+.SpotImagesRight {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    gap: 8px;
 }
 
-.div_0 {
-    grid-area: b;
+.SpotImagesRightRow {
+    display: flex;
+    height: 50%;
+    gap: 8px;
 }
 
-.div_1 {
-    grid-area: c;
+.SpotImagesRightRow>img {
+    object-fit: cover;
+    width: 50%;
 }
 
-.div_2 {
-    grid-area: d;
-}
-
-.div_3 {
-    grid-area: e;
-}
-
-.otherImageImg {
-    position: relative;
-    left: 50%;
-    top: 50.75%;
-    transform: translate(-50%, -51%);
-}
-
-.img_0 {
-    height: 100%;
-}
-
-.img_1 {
-    height: 145%;
-}
-
-.img_2 {
-    height: 115%;
-}
-
-.img_3 {
-    height: 100%;
-}
+/* ---------------------Spot details------------------------------ */
 
 .SpotDetailsBody {
     display: flex;

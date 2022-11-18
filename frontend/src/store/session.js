@@ -40,10 +40,8 @@ export const signup = user => async (dispatch) => {
         method: "POST",
         body: JSON.stringify(user)
     });
-    if (response.ok) {
-        const data = await response.json();
-        dispatch(setUser(data));
-    }
+    const data = await response.json();
+    dispatch(setUser(data));
     return response;
 };
 

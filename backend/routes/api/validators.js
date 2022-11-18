@@ -35,7 +35,9 @@ const validateSignup = [
         })
         .exists({ checkFalsy: true })
         .isEmail()
-        .withMessage('Invalid email'),
+        .withMessage('Invalid email')
+        .isLength({ min: 3, max: 256 })
+        .withMessage('Email length must be at least 3 characters and no more than 256.'),
     check('username')
         .custom(async (username, { req }) => {
             const user = await User.findOne({ where: { username } });
@@ -51,19 +53,26 @@ const validateSignup = [
         .withMessage('Username is required')
         .not()
         .isEmail()
-        .withMessage('Username cannot be an email.'),
+        .withMessage('Username cannot be an email.')
+        .isLength({ min: 4, max: 30 })
+        .withMessage('Username length must be at least 4 characters and no more than 30')
+    ,
     check('firstName')
         .exists()
         .withMessage("First Name is required")
         .not()
         .isEmail()
-        .withMessage('First name cannot be an email.'),
+        .withMessage('First name cannot be an email.')
+        .isLength({ max: 30 })
+        .withMessage('firstName length can be no more than 30'),
     check('lastName')
         .exists()
         .withMessage("Last Name is required")
         .not()
         .isEmail()
-        .withMessage('Last name cannot be an email.'),
+        .withMessage('Last name cannot be an email.')
+        .isLength({ max: 30 })
+        .withMessage('lastName length can be no more than 30'),
     check('password')
         .exists({ checkFalsy: true })
         .isLength({ min: 6 })

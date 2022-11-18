@@ -39,14 +39,32 @@ export default function SpotDetails() {
     };
 
     const previewImageUrl = spotDetails.SpotImages?.find(image => image.preview)?.url;
+    const nonPreviwImages = spotDetails.SpotImages.filter((image, i) => !image.preview);
 
     return (
         <div className="SpotDetails" style={{ paddingLeft: padding.left, paddingRight: padding.right }}>
             <SpotDetailsHeader spot={spotDetails} />
-            {previewImageUrl && <div className="SpotDetailsImageGrid">
-                <img className="previewImage" src={previewImageUrl} alt={previewImageUrl} />
-                {spotDetails.SpotImages?.filter(image => !image.preview).map((image, i) => <div className={`otherImageDiv div_${i}`} key={i}><img className={`otherImageImg img_${i}`} src={image.url} alt={image.url} /></div>)}
-            </div>}
+
+            <div className="SpotImages">
+
+                <img className="SpotImagesLeft" src={previewImageUrl} alt={previewImageUrl} />
+
+                <div className="SpotImagesRight">
+
+                    <div className="SpotImagesRightRow">
+                        {nonPreviwImages.filter((image, i) => i <= 1)
+                            .map((image, i) => <img src={image.url} alt={image.url} />)}
+                    </div>
+
+                    <div className="SpotImagesRightRow">
+                        {nonPreviwImages.filter((image, i) => i >= 2)
+                            .map((image, i) => <img src={image.url} alt={image.url} />)}
+                    </div>
+
+                </div>
+
+            </div>
+
             <div className="SpotDetailsBody">
                 <h2>Hosted by {spotDetails.Owner?.firstName}</h2>
                 <div className="SpotDetailsLine"></div>
