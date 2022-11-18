@@ -32,30 +32,35 @@ function ProfileButton({ user }) {
         dispatch(sessionActions.logout());
     };
 
-    let menu;
-    if (user) {
-        menu = <>
-            <div>Hello, {user.firstName}!</div>
-            <div>{user.username}</div>
-            <div>{user.email}</div>
-            <button onClick={logout}>Log Out</button>
-        </>
-    } else {
-        menu = <>
-            <LoginFormModal />
-            <SignupFormModal />
-        </>
-    }
+    // let menu;
+    // if (user) {
+    //     menu =
+    // } else {
+    //     menu =
+    // }
 
     return (
         <div className="profileButtonWrapper">
-            <button onClick={openMenu} className="profileButton">
+            <button onClick={openMenu} className="profileButton" >
                 <i className="fa-solid fa-bars" />
                 <i className="fas fa-user-circle" />
             </button>
             {showMenu && (
-                <div className="profile-dropdown">
-                    {menu}
+                <div className={`profile-dropdown ${user ? "loggedIn" : "notLoggedIn"}`} style={{ marginRight: (+ui.padding.right.split('px')[0] - 66) + "px" }}>
+                    {user
+                        ?
+                        <>
+                            <div className="flexboxToCenter"><div className="loggedInEleInfo">Hello, {user.firstName}!</div></div>
+                            <div className="flexboxToCenter"><div className="loggedInEleInfo">{user.username}</div></div>
+                            <div className="flexboxToCenter"><div className="loggedInEleInfo">{user.email}</div></div>
+                            <div className="flexboxToCenter" onClick={logout}><div className="loggedInEle">Log Out</div></div>
+                        </>
+                        :
+                        <>
+                            <div className="flexboxToCenter"><LoginFormModal /></div>
+                            <div className="flexboxToCenter"><SignupFormModal /></div>
+                        </>
+                    }
                 </div>
             )}
             {ui.showLoginModal && <LoginFormModal />}

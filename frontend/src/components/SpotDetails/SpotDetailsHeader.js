@@ -24,7 +24,7 @@ export default function SpotDetailsHeader({ spot }) {
                 </div>
                 {user && user.id === spot.ownerId && <div className="spotButtons">
                     <button onClick={onEditClick}>Edit spot</button>
-                    <button onClick={onDeleteClick}>Delete spot</button>
+                    <button className="spotDetailsDelete" onClick={onDeleteClick}>Delete spot</button>
                 </div>}
             </div>
         </div>

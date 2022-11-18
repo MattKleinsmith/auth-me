@@ -30,3 +30,7 @@
     font-weight: bold;
     border: none;
 }
+
+.spotDetailsDelete {
+    width: 100px;
+}

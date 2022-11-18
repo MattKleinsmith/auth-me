@@ -1,5 +1,51 @@
-form {
+.spotForm {
+    /* height: 618px; */
+    width: 568px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+}
+
+.spotForm>.spotHeader {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    height: 64px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.spotForm>.spotHeader img {
+    margin-left: 25px;
+    cursor: pointer;
+}
+
+.spotForm>.spotHeader div {
+    font-size: 20px;
+    margin-left: 190px;
+}
+
+.spotTitle {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-left: 25px;
+}
+
+.spotButton {
+    height: 50px;
+    width: 520px;
+    cursor: pointer;
+    margin-bottom: 30px;
+    margin-top: 30px;
+
+    border-style: none;
+    border-radius: 10px;
+
+    font-weight: bold;
+    font-size: 16px;
+
+    color: rgb(255, 255, 255);
+    background: linear-gradient(90deg, rgb(229, 30, 78), rgb(214, 4, 101));
+
+    align-self: center;
 }
