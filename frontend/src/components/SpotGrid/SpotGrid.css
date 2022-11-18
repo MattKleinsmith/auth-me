@@ -1,20 +1,20 @@
 .SpotGrid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    /* grid-template-rows: 1fr 1fr 1fr 1fr; */
-    gap: 40px 24px;
-    padding-top: 95px;
+    padding-top: 125px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 .SpotGridItem {
     /* background-color: rgb(220, 219, 219); */
     /* width: 270.5px; */
-    height: 356.97px;
+    width: 293px;
+    height: 386.97px;
 }
 
 .SpotGridItem>img {
     width: 100%;
-    height: 257px;
+    height: 278.344px;
     object-fit: cover;
     border-radius: 12px;
 }

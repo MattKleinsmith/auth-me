@@ -22,6 +22,14 @@ export default function SpotDetails() {
         dispatch(setPadding("384px", "380px"));
         dispatch(setHeaderPosition("static"));
         dispatch(getReviews(spotId));
+
+        const resize = () => {
+            dispatch(setPadding("384px", "380px"));
+        }
+        window.addEventListener('resize', resize);
+        return () => {
+            window.removeEventListener('resize', resize)
+        }
     }, [dispatch]);
 
     if (!spotDetails) {
@@ -41,10 +49,12 @@ export default function SpotDetails() {
             </div>}
             <div className="SpotDetailsBody">
                 <h2>Hosted by {spotDetails.Owner?.firstName}</h2>
+                <div className="SpotDetailsLine"></div>
                 <div className="DescBook">
                     <div className="SpotDetailsDescription">{spotDetails.description}</div>
                     <BookingForm spot={spotDetails} />
                 </div>
+                <div className="SpotDetailsLine2"></div>
             </div>
             <Reviews spot={spotDetails} reviews={reviews} />
         </div>

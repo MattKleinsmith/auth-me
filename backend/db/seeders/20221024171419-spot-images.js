@@ -83,7 +83,37 @@ module.exports = {
         spotId: 12,
         url: "/images/12_0.webp",
         preview: true
-      }
+      },
+      {
+        spotId: 13,
+        url: "/images/13_0.webp",
+        preview: true
+      },
+      {
+        spotId: 14,
+        url: "/images/14_0.webp",
+        preview: true
+      },
+      {
+        spotId: 15,
+        url: "/images/15_0.webp",
+        preview: true
+      },
+      {
+        spotId: 16,
+        url: "/images/16_0.webp",
+        preview: true
+      },
+      {
+        spotId: 17,
+        url: "/images/17_0.webp",
+        preview: true
+      },
+      {
+        spotId: 18,
+        url: "/images/18_0.webp",
+        preview: true
+      },
     ], {});
   },
   down: async (queryInterface, Sequelize) => {
