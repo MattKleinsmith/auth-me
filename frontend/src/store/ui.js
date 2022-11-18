@@ -14,12 +14,12 @@ export const setReviewModal = showReviewModal => { return { type: SET_REVIEW_MOD
 export const setSpotForEditing = spot => { return { type: SET_EDIT_SPOT, spot } };
 export const setDeleteSpotModal = showDeleteSpotModal => { return { type: SET_DELETE_SPOT_MODAL, showDeleteSpotModal } };
 
-const padding = { left: "70px", right: "70px" };
+const padding = { left: "40px", right: "40px" };
 export const setPadding = (left, right) => {
     if (window.innerWidth < 1000) {
         console.log("Applying small padding");
-        left = "70px";
-        right = "70px";
+        left = "40px";
+        right = "40px";
     }
     return { type: SET_PADDING, padding: { left, right } }
 };
