@@ -8,6 +8,7 @@
     flex-wrap: wrap;
     column-gap: 0px;
     overflow-wrap: break-word;
+    margin-bottom: 20px;
 }
 
 .review {
@@ -22,14 +23,13 @@
 }
 
 .createReviewButton {
-    align-self: center;
     cursor: pointer;
     background-color: white;
     font-weight: bold;
     border: none;
     margin-left: 570px;
-    padding-left: 0px;
-    padding-top: 5px;
+    padding-left: 15px;
+    padding-top: 8px;
     font-size: 16px;
 }
 

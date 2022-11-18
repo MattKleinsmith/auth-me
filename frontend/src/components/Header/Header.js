@@ -21,7 +21,7 @@ function Header() {
                         {<div className="rightHeader">
                             {sessionUser &&
                                 <button
-                                    className="becomeAHost"
+                                    className="becomeAHost button"
                                     onClick={() => dispatch(setSpotModal(true))}>Create a Spot
                                 </button>}
                             <ProfileButton user={sessionUser} />

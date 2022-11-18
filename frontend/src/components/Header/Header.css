@@ -28,6 +28,16 @@
     margin-top: 3px;
 }
 
+.button {
+    padding: 10px 15px;
+}
+
+.button:hover,
+.buttonShort:hover {
+    background-color: #f7f7f7;
+    border-radius: 20px;
+}
+
 .rightHeader {
     display: flex;
     align-items: center;
