@@ -1,9 +1,9 @@
+import './DeleteSpotForm.css';
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { deleteSpot } from "../../store/spots";
-import { setDeleteSpotModal } from "../../store/ui";
-import './DeleteSpotForm.css';
+import { deleteSpot } from "../../../store/spots";
+import { setDeleteSpotModal } from "../../../store/ui";
 
 export default function DeleteSpotForm() {
     const dispatch = useDispatch();

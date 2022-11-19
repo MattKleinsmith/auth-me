@@ -1,11 +1,10 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from "react-router-dom";
-import * as sessionActions from "../../store/session";
-import { getSpotDetails } from "../../store/spotDetails";
-import { getSpots, postSpot, putSpot } from "../../store/spots";
-import { setSpotForEditing, setSpotModal } from "../../store/ui";
 import './SpotForm.css';
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { getSpotDetails } from "../../../store/spotDetails";
+import { postSpot, putSpot } from "../../../store/spots";
+import { setSpotForEditing, setSpotModal } from "../../../store/ui";
 
 export default function SpotForm({ spot }) {
     const [address, setAddress] = useState(spot ? spot.address : "");

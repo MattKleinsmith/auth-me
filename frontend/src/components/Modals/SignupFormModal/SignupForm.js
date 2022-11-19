@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import './SignupForm.css';
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import * as sessionActions from "../../store/session";
-import { setSignupModal } from "../../store/ui";
-import './SignupForm.css';
+import * as sessionActions from "../../../store/session";
+import { setSignupModal } from "../../../store/ui";
 
 export default function SignupForm() {
     const dispatch = useDispatch();

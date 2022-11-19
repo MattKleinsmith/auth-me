@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import * as sessionActions from "../../store/session";
-import { useDispatch } from "react-redux";
-import { setLoginModal } from "../../store/ui";
 import "./LoginForm.css";
+import { useState } from "react";
+import * as sessionActions from "../../../store/session";
+import { useDispatch } from "react-redux";
+import { setLoginModal } from "../../../store/ui";
 
 function LoginForm() {
     const dispatch = useDispatch();

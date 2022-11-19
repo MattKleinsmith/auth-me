@@ -1,14 +1,12 @@
 import './Header.css';
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import ProfileButton from './ProfileButton';
-import Logo from './Logo';
-import { setSpotModal } from '../../store/ui';
-import SpotFormModal from '../SpotFormModal';
-import DeleteSpotForm from '../DeleteSpotFormModal';
-import ReviewFormModal from '../ReviewFormModal';
 
-function Header() {
+import { useDispatch, useSelector } from 'react-redux';
+import { setSpotModal } from '../../store/ui';
+
+import Logo from './Logo';
+import ProfileButton from './ProfileButton';
+
+export default function Header() {
     const sessionUser = useSelector(state => state.session.user);
     const ui = useSelector(state => state.ui);
     const dispatch = useDispatch();
@@ -30,11 +28,6 @@ function Header() {
                 </div>
             </div>
             <div className="line"></div>
-            {ui.showSpotModal && <SpotFormModal spot={ui.spot} />}
-            {ui.showReviewModal && <ReviewFormModal />}
-            {ui.showDeleteSpotModal && <DeleteSpotForm />}
         </div>
     );
 }
-
-export default Header;
