@@ -1,29 +1,161 @@
 .SpotGrid {
-    padding-top: 125px;
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
+    display: grid;
+    column-gap: 24px;
+    row-gap: 40px;
 }
 
 .SpotGridItem {
-    /* background-color: rgb(220, 219, 219); */
-    /* width: 270.5px; */
-    width: 293px;
-    height: 386.97px;
+    width: 100%;
 }
 
 .SpotGridItem>img {
-    width: 100%;
-    height: 278.344px;
     object-fit: cover;
     border-radius: 12px;
+    width: 100%;
+}
+
+@media screen and (min-width: 1880px) {
+    .SpotGrid {
+        padding-top: 104px;
+        padding-left: 80px;
+        padding-right: 80px;
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    .SpotGridItem {
+        height: 18.6vw;
+    }
+
+    .SpotGridItem>img {
+        height: 72%;
+    }
+}
+
+@media screen and (min-width: 1640px) and (max-width: 1879px) {
+    .SpotGrid {
+        padding-top: 104px;
+        padding-left: 80px;
+        padding-right: 80px;
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .SpotGridItem {
+        height: 22.0vw;
+    }
+
+    .SpotGridItem>img {
+        height: 72.0%;
+    }
+}
+
+@media screen and (min-width: 1440px) and (max-width: 1639px) {
+    .SpotGrid {
+        padding-top: 104px;
+        padding-left: 80px;
+        padding-right: 80px;
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .SpotGridItem {
+        height: 26.9vw;
+    }
+
+    .SpotGridItem>img {
+        height: 73.5%;
+    }
+}
+
+@media screen and (min-width: 1128px) and (max-width: 1439px) {
+    .SpotGrid {
+        padding-top: 104px;
+        padding-left: 40px;
+        padding-right: 40px;
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .SpotGridItem {
+        height: 28.0vw;
+    }
+
+    .SpotGridItem>img {
+        height: 75.0%;
+    }
+}
+
+@media screen and (min-width: 950px) and (max-width: 1127px) {
+    .SpotGrid {
+        padding-top: 120px;
+        padding-left: 40px;
+        padding-right: 40px;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .SpotGridItem {
+        height: 36.5vw;
+    }
+
+    .SpotGridItem>img {
+        height: 75.6%;
+    }
+}
+
+@media screen and (min-width: 744px) and (max-width: 949px) {
+    .SpotGrid {
+        padding-top: 120px;
+        padding-left: 40px;
+        padding-right: 40px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .SpotGridItem {
+        height: 54.0vw;
+    }
+
+    .SpotGridItem>img {
+        height: 75.5%;
+    }
+}
+
+@media screen and (min-width: 550px) and (max-width: 744px) {
+    .SpotGrid {
+        padding-top: 120px;
+        padding-left: 24px;
+        padding-right: 24px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .SpotGridItem {
+        height: 54.0vw;
+    }
+
+    .SpotGridItem>img {
+        height: 75.5%;
+    }
+}
+
+@media screen and (max-width: 549px) {
+    .SpotGrid {
+        padding-top: 120px;
+        padding-left: 24px;
+        padding-right: 24px;
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .SpotGridItem {
+        height: 110.0vw;
+    }
+
+    .SpotGridItem>img {
+        height: 75.5%;
+    }
 }
 
 .SpotGridItemDescription {
+    height: 100px;
+
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    height: 100px;
     font-size: 15px;
     color: #222222;
 }
