@@ -23,8 +23,8 @@ export default function SpotDetailsHeader({ spot }) {
                     {spot.avgStarRating && <i className="fa-solid fa-star SpotGridItemStar" />} {spot.avgStarRating} {spot.avgStarRating && "·"} {spot.numReviews} review{spot.numReviews === 1 ? "" : "s"} · {spot.city}, {spot.state}, {spot.country}
                 </div>
                 {user && user.id === spot.ownerId && <div className="spotButtons">
-                    <button onClick={onEditClick}>Edit spot</button>
-                    <button className="spotDetailsDelete" onClick={onDeleteClick}>Delete spot</button>
+                    <button className="button" onClick={onEditClick}>Edit spot</button>
+                    <button className="button" onClick={onDeleteClick}>Delete spot</button>
                 </div>}
             </div>
         </div>

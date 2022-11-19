@@ -20,19 +20,6 @@
     background-color: #ebebeb;
 }
 
-.becomeAHost {
-    font-weight: bold;
-    background-color: white;
-    border: none;
-    cursor: pointer;
-    margin-top: 3px;
-}
-
-.rightHeader {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
 
 #logo {
     font-family: 'Poppins', sans-serif;

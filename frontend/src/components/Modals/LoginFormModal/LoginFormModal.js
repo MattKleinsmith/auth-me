@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Modal } from '../../context/Modal';
-import { setLoginModal } from '../../store/ui';
+import { Modal } from '../../../context/Modal';
+import { setLoginModal } from '../../../store/ui';
 import LoginForm from './LoginForm';
 
 function LoginFormModal() {
@@ -13,7 +13,7 @@ function LoginFormModal() {
             </Modal>
         ) :
         (
-            <div className="dropdownLoginButton" onClick={() => dispatch(setLoginModal(true))}>Log In</div>
+            <div className="bold" onClick={() => dispatch(setLoginModal(true))}>Log In</div>
         );
 }
 

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Modal } from '../../context/Modal';
-import { setReviewModal } from '../../store/ui';
+import { Modal } from '../../../context/Modal';
+import { setReviewModal } from '../../../store/ui';
 import ReviewForm from './ReviewForm';
 
 function ReviewFormModal() {

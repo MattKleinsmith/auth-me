@@ -53,12 +53,12 @@ export default function SpotDetails() {
 
                     <div className="SpotImagesRightRow">
                         {nonPreviwImages.filter((image, i) => i <= 1)
-                            .map((image, i) => <img src={image.url} alt={image.url} />)}
+                            .map((image, i) => <img src={image.url} alt={image.url} key={i} />)}
                     </div>
 
                     <div className="SpotImagesRightRow">
                         {nonPreviwImages.filter((image, i) => i >= 2)
-                            .map((image, i) => <img src={image.url} alt={image.url} />)}
+                            .map((image, i) => <img src={image.url} alt={image.url} key={i} />)}
                     </div>
 
                 </div>

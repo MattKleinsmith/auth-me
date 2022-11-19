@@ -1,20 +1,21 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Route, Switch, NavLink } from "react-router-dom";
-import * as sessionActions from "./store/session";
-import Header from "./components/Header";
-import SpotGrid from "./components/SpotGrid/SpotGrid";
-import SpotDetails from "./components/SpotDetails";
+import { Route, Switch } from "react-router-dom";
 
-function App() {
+import { restoreUser } from "./store/session";
+import Header from "./components/Header/Header";
+import SpotGrid from "./components/SpotGrid/SpotGrid";
+import SpotDetails from "./components/SpotDetails/SpotDetails";
+import Modals from './components/Modals';
+
+export default function App() {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(sessionActions.restoreUser());
-  }, [dispatch]);
+  useEffect(() => { dispatch(restoreUser()) }, [dispatch]);
 
   return (
     <div >
       <Header />
+      <Modals />
       <Switch>
         <Route exact path="/"><SpotGrid /></Route>
         <Route path="/spots/:spotId"><SpotDetails /></Route>
@@ -23,5 +24,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

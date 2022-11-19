@@ -15,7 +15,8 @@
     gap: 5px;
     font-size: 15px;
     padding-top: 0px;
-    margin-top: 10px;
+    margin-bottom: -10px;
+    margin-top: 0px;
 }
 
 .SpotsDetailsRatingLocation>i {
@@ -32,8 +33,4 @@
     background-color: white;
     font-weight: bold;
     border: none;
-}
-
-.spotDetailsDelete {
-    width: 100px;
 }

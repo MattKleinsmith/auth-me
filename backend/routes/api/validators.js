@@ -119,8 +119,8 @@ const validateSpot = [
     check('price')
         .exists({ checkFalsy: true })
         .withMessage('Price per day is required')
-        .isFloat()
-        .withMessage('Price must be a number')
+        .isFloat({ min: 0 })
+        .withMessage('Price must be a non-negative number')
 ];
 
 const validateSpotQuery = [

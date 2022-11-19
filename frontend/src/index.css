@@ -5,6 +5,19 @@
     box-sizing: border-box;
 }
 
+.button {
+    padding: 10px 15px;
+}
+
+.button:hover {
+    background-color: #f7f7f7;
+    border-radius: 20px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
 /* devanagari */
 @font-face {
     font-family: 'Poppins-light';

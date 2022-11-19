@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Modal } from '../../context/Modal';
+import { Modal } from '../../../context/Modal';
 import DeleteSpotForm from './DeleteSpotForm';
-import { setDeleteSpotModal } from '../../store/ui';
+import { setDeleteSpotModal } from '../../../store/ui';
 
 function DeleteSpotFormModal() {
     const dispatch = useDispatch();

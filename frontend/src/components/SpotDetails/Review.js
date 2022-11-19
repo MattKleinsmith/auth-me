@@ -9,7 +9,7 @@ export default function Review({ user, review }) {
     return <div className="review">
         <div className="user">
             <h4>{review.User.firstName}</h4>
-            {(user && user.id === review.User.id) && <button onClick={onDeleteClick}>Delete review</button>}
+            {(user && user.id === review.User.id) && <button className="button" onClick={onDeleteClick}>Delete review</button>}
         </div>
         <p>{review.review}</p>
     </div>
