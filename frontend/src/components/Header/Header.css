@@ -20,29 +20,6 @@
     background-color: #ebebeb;
 }
 
-.becomeAHost {
-    font-weight: bold;
-    background-color: white;
-    border: none;
-    cursor: pointer;
-    margin-top: 3px;
-}
-
-.button {
-    padding: 10px 15px;
-}
-
-.button:hover,
-.buttonShort:hover {
-    background-color: #f7f7f7;
-    border-radius: 20px;
-}
-
-.rightHeader {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
 
 #logo {
     font-family: 'Poppins', sans-serif;

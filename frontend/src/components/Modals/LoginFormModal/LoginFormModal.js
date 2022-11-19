@@ -13,7 +13,7 @@ function LoginFormModal() {
             </Modal>
         ) :
         (
-            <div className="dropdownLoginButton" onClick={() => dispatch(setLoginModal(true))}>Log In</div>
+            <div className="bold" onClick={() => dispatch(setLoginModal(true))}>Log In</div>
         );
 }
 
