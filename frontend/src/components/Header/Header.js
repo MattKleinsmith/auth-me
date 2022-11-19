@@ -1,7 +1,7 @@
+import './Header.css';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
-import './Header.css';
 import Logo from './Logo';
 import { setSpotModal } from '../../store/ui';
 import SpotFormModal from '../SpotFormModal';
