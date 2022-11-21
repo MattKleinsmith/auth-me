@@ -8,11 +8,10 @@ export default function RightHeader() {
     const dispatch = useDispatch();
     return <span>
         {<div className="rightHeader">
-            {sessionUser &&
-                <button
-                    className="becomeAHost button"
-                    onClick={() => dispatch(setSpotModal(true))}>Create a Spot
-                </button>}
+            {sessionUser && <button
+                className="createASpot button"
+                onClick={() => dispatch(setSpotModal(true))}>Create a Spot
+            </button>}
             <ProfileButton user={sessionUser} />
         </div>}
     </span>

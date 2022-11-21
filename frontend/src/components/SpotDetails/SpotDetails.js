@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import BookingForm from "./BookingForm";
+
 import "./SpotDetails.css";
+import BookingForm from "./BookingForm";
 import SpotDetailsHeader from "./SpotDetailsHeader";
 import { getSpotDetails } from "../../store/spotDetails";
 import { setHeaderPosition, setPadding } from "../../store/ui";
 import Reviews from "./Reviews";
 import { getReviews } from "../../store/reviews";
+import Header from "../Header/Header";
 
 export default function SpotDetails() {
     const { spotId } = useParams();
@@ -41,40 +43,48 @@ export default function SpotDetails() {
     const previewImageUrl = spotDetails.SpotImages?.find(image => image.preview)?.url;
     const nonPreviwImages = spotDetails.SpotImages.filter((image, i) => !image.preview);
 
-    return (
-        <div className="SpotDetails" style={{ paddingLeft: padding.left, paddingRight: padding.right }}>
-            <SpotDetailsHeader spot={spotDetails} />
-
-            <div className="SpotImages">
-
-                <img className="SpotImagesLeft" src={previewImageUrl} alt={previewImageUrl} />
-
-                <div className="SpotImagesRight">
-
-                    <div className="SpotImagesRightRow">
-                        {nonPreviwImages.filter((image, i) => i <= 1)
-                            .map((image, i) => <img src={image.url} alt={image.url} key={i} />)}
-                    </div>
-
-                    <div className="SpotImagesRightRow">
-                        {nonPreviwImages.filter((image, i) => i >= 2)
-                            .map((image, i) => <img src={image.url} alt={image.url} key={i} />)}
-                    </div>
-
-                </div>
-
+    return <>
+        <div className="SpotDetailsHeaderWrapper">
+            <div className="SpotDetailsHeaderWrapperNext spotDetailsPadding" >
+                <Header />
             </div>
-
-            <div className="SpotDetailsBody">
-                <h2>Hosted by {spotDetails.Owner?.firstName}</h2>
-                <div className="SpotDetailsLine"></div>
-                <div className="DescBook">
-                    <div className="SpotDetailsDescription">{spotDetails.description}</div>
-                    <BookingForm spot={spotDetails} />
-                </div>
-                <div className="SpotDetailsLine2"></div>
-            </div>
-            <Reviews spot={spotDetails} reviews={reviews} />
         </div>
-    );
+        <div className="line"></div>
+        <div className="SpotDetailsWrapper">
+            <div className="SpotDetails spotDetailsPadding" >
+                <SpotDetailsHeader spot={spotDetails} />
+
+                <div className="SpotImages">
+
+                    <img className="SpotImagesLeft" src={previewImageUrl} alt={previewImageUrl} />
+
+                    <div className="SpotImagesRight">
+
+                        <div className="SpotImagesRightRow">
+                            {nonPreviwImages.filter((image, i) => i <= 1)
+                                .map((image, i) => <img src={image.url} alt={image.url} key={i} />)}
+                        </div>
+
+                        <div className="SpotImagesRightRow">
+                            {nonPreviwImages.filter((image, i) => i >= 2)
+                                .map((image, i) => <img src={image.url} alt={image.url} key={i} />)}
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div className="SpotDetailsBody">
+                    <h2>Hosted by {spotDetails.Owner?.firstName}</h2>
+                    <div className="SpotDetailsLine"></div>
+                    <div className="DescBook">
+                        <div className="SpotDetailsDescription">{spotDetails.description}</div>
+                        <BookingForm spot={spotDetails} />
+                    </div>
+                    <div className="SpotDetailsLine2"></div>
+                </div>
+                <Reviews spot={spotDetails} reviews={reviews} />
+            </div>
+        </div>
+    </>;
 }

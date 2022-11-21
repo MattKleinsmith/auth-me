@@ -1,11 +1,28 @@
+.SpotDetailsHeaderWrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.SpotDetailsHeaderWrapperNext {
+    max-width: 1120px;
+    box-sizing: content-box;
+    width: 100%
+}
+
+.SpotDetailsWrapper {
+    display: flex;
+    justify-content: center;
+}
+
 .SpotDetails {
     padding-top: 5px;
+    max-width: 1120px;
+    box-sizing: content-box;
 }
 
 .SpotDetailsLine {
     height: 1px;
     background-color: #dddddd;
-    width: 650px;
     margin-bottom: 24px;
     margin-top: 24px;
 }
@@ -15,6 +32,32 @@
     background-color: #dddddd;
     margin-bottom: 24px;
     margin-top: 24px;
+}
+
+.spotDetailsHeader {
+    max-width: 1120px;
+    box-sizing: content-box;
+}
+
+@media screen and (min-width: 1128px) {
+    .spotDetailsPadding {
+        padding-left: 80px;
+        padding-right: 80px;
+    }
+}
+
+@media screen and (min-width: 744px) and (max-width: 1127px) {
+    .spotDetailsPadding {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+}
+
+@media screen and (max-width: 743px) {
+    .spotDetailsPadding {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
 }
 
 /* ---------------------Spot images------------------------------ */
@@ -60,10 +103,6 @@
     display: flex;
     flex-direction: column;
     margin-top: 48px;
-}
-
-.SpotDetailsDescription {
-    width: 650px;
 }
 
 .DescBook {

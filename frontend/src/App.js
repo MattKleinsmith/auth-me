@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 
 import { restoreUser } from "./store/session";
-import Header from "./components/Header/Header";
 import SpotGrid from "./components/SpotGrid/SpotGrid";
 import SpotDetails from "./components/SpotDetails/SpotDetails";
 import Modals from './components/Modals';
@@ -14,7 +13,6 @@ export default function App() {
 
   return (
     <div >
-      <Header />
       <Modals />
       <Switch>
         <Route exact path="/"><SpotGrid /></Route>

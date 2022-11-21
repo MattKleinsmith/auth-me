@@ -14,7 +14,7 @@ export const setReviewModal = showReviewModal => { return { type: SET_REVIEW_MOD
 export const setSpotForEditing = spot => { return { type: SET_EDIT_SPOT, spot } };
 export const setDeleteSpotModal = showDeleteSpotModal => { return { type: SET_DELETE_SPOT_MODAL, showDeleteSpotModal } };
 
-const padding = { left: "40px", right: "40px" };
+const padding = { left: "80px", right: "80px" };
 export const setPadding = (left, right) => {
     if (window.innerWidth < 1920) {
         left = padding.left;
