@@ -21,15 +21,48 @@ It was built using this stack:
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)<br/>
 ![Heroku](https://img.shields.io/badge/heroku⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)
 
-### Features
+## Features
 
-https://github.com/MattKleinsmith/auth-me/wiki/Features
+### Spot features
+
+#### Create
+
+<img src="https://user-images.githubusercontent.com/8968171/202769966-a383b583-53ad-4d36-b4e4-529987c1b81f.png" width="500px">
+
+#### Read
+
+<img src="https://user-images.githubusercontent.com/8968171/202770004-5f44ce9e-fae8-43bd-b33b-9e86cb43dc81.png" width="500px">
+
+#### Update
+
+<img src="https://user-images.githubusercontent.com/8968171/202770026-9ac36fba-e7b6-4a42-97c6-232067259d91.png" width="500px">
+
+#### Delete
+
+<img src="https://user-images.githubusercontent.com/8968171/202770046-e866a3aa-e1e0-459e-a3c0-03c972d65482.png" width="500px">
+
+### Review features
+
+#### Create
+
+<img src="https://user-images.githubusercontent.com/8968171/202770096-470ef5a7-dce8-4775-8225-4054e1a4a060.png" width="500px">
+
+#### Read
+
+<img src="https://user-images.githubusercontent.com/8968171/202770228-bfc8e31b-0ce4-4c0c-bf6d-6ed2207c8d1c.png" width="500px">
+
+#### Delete
+
+<img src="https://user-images.githubusercontent.com/8968171/202770285-91ffdfb1-f761-410f-9357-4e4428e9a7f9.png" width="500px">
+
+<img src="https://user-images.githubusercontent.com/8968171/202770717-395e298b-45d5-4a63-a592-add082173dac.png" width="500px">
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Roadmap
 
-- [ ] Target more resolutions
+- [ ] Refactor app into tiny components
+- [ ] Add booking feature
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
