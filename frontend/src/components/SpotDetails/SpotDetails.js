@@ -9,6 +9,7 @@ import { getSpotDetails } from "../../store/spotDetails";
 import { setHeaderPosition, setPadding } from "../../store/ui";
 import Reviews from "./Reviews";
 import { getReviews } from "../../store/reviews";
+import Header from "../Header/Header";
 
 export default function SpotDetails() {
     const { spotId } = useParams();
@@ -42,10 +43,15 @@ export default function SpotDetails() {
     const previewImageUrl = spotDetails.SpotImages?.find(image => image.preview)?.url;
     const nonPreviwImages = spotDetails.SpotImages.filter((image, i) => !image.preview);
 
-    return (
+    return <>
+        <div className="SpotDetailsHeaderWrapper">
+            <div className="SpotDetailsHeaderWrapperNext spotDetailsPadding" >
+                <Header />
+            </div>
+        </div>
+        <div className="line"></div>
         <div className="SpotDetailsWrapper">
             <div className="SpotDetails spotDetailsPadding" >
-                {/* <div className="SpotDetails" style={{ paddingLeft: padding.left, paddingRight: padding.right }}> */}
                 <SpotDetailsHeader spot={spotDetails} />
 
                 <div className="SpotImages">
@@ -80,5 +86,5 @@ export default function SpotDetails() {
                 <Reviews spot={spotDetails} reviews={reviews} />
             </div>
         </div>
-    );
+    </>;
 }

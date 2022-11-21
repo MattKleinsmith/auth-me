@@ -1,3 +1,14 @@
+.SpotDetailsHeaderWrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.SpotDetailsHeaderWrapperNext {
+    max-width: 1120px;
+    box-sizing: content-box;
+    width: 100%
+}
+
 .SpotDetailsWrapper {
     display: flex;
     justify-content: center;
@@ -21,6 +32,11 @@
     background-color: #dddddd;
     margin-bottom: 24px;
     margin-top: 24px;
+}
+
+.spotDetailsHeader {
+    max-width: 1120px;
+    box-sizing: content-box;
 }
 
 @media screen and (min-width: 1128px) {

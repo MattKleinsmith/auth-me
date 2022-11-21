@@ -7,6 +7,7 @@ import { getSpots } from "../../store/spots";
 import SpotGridItem from "./SpotGridItem";
 import { clearSpotDetails } from "../../store/spotDetails";
 import { resetPadding, setHeaderPosition } from "../../store/ui";
+import Header from "../Header/Header";
 
 export default function SpotGrid() {
     const dispatch = useDispatch();
@@ -19,11 +20,14 @@ export default function SpotGrid() {
         dispatch(setHeaderPosition("fixed"));
     }, [dispatch]);
 
-    // return <div className="SpotGrid" style={{ paddingLeft: padding.left, paddingRight: padding.right }}>{
-    return <div className="SpotGrid">
-        {spots.map((spot, i) =>
-            <NavLink key={i} to={`/spots/${spot.id}`} style={{ textDecoration: 'none' }}>
-                <SpotGridItem spot={spot} />
-            </NavLink>)
-        }</div >
+    return <>
+        <Header className="homepageHeader" />
+        <div className="SpotGrid">
+            {spots.map((spot, i) =>
+                <NavLink key={i} to={`/spots/${spot.id}`} style={{ textDecoration: 'none' }}>
+                    <SpotGridItem spot={spot} />
+                </NavLink>)
+            }</div >
+    </>
+
 }
